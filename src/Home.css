@@ -1,0 +1,174 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .home-container h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .home-container button {
+    font-size: 14px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .home-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Sol üstte kullanıcı adı ve çıkış yap butonu için stil */
+  .welcome-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+  
+  .welcome-container h2 {
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .welcome-container button {
+    margin-top: 5px;
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .welcome-container button:hover {
+    background-color: #e53935;
+  }
+  
+  .three-panel-layout {
+    display: flex;
+    flex: 1;
+    margin-top: 50px; /* Welcome-container'ın altında kalması için boşluk bırakıyoruz */
+  }
+  
+  .left-panel,
+  .middle-panel,
+  .right-panel {
+    padding: 20px;
+  }
+  
+  .left-panel {
+    width: 25%;
+    background-color: #FEF105; /* Sol panelin arka plan rengi */
+    color: #000; /* Sol panel yazı rengi */
+  }
+  
+  .middle-panel {
+    width: 50%;
+    background-color: #0C1C35; /* Orta panelin arka plan rengi */
+    color: #ffffff; /* Orta panel yazı rengi */
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+  
+  .right-panel {
+    width: 25%;
+    background-color: #FEF105; /* Sağ panelin arka plan rengi */
+    color: #000; /* Sağ panel yazı rengi */
+  }
+  
+  /* Stilleme detayları */
+  .subreddit-name {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .menu-container {
+    position: relative;
+  }
+  
+  .menu-icon button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #0C1C35;
+  }
+  
+  .menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .menu button {
+    font-size: 12px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: #0C1C35;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .menu button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup input {
+    padding: 8px;
+    margin-right: 10px;
+  }
+  
+  .add-button {
+    font-size: 24px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .close {
+    background-color: #f44336;
+    color: rgba(255, 255, 255, 0.247);
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    background-color: #e53935;
+  }
+  

@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel, .middle-panel, .right-panel {
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.left-panel {
+  background-color: #FEF105; /* Sol panelin arka plan rengi */
+  width: 25%; /* Sol panelin genişliği */
+  color: #000; /* Sol panel yazı rengi */
+}
+
+.middle-panel {
+  background-color: #0C1C35; /* Orta panelin arka plan rengi */
+  color: #ffffff; /* Orta panel yazı rengi */
+  flex: 1; /* Orta panelin genişliği, geri kalan alanı alacak şekilde */
+}
+
+.right-panel {
+  background-color: #FEF105; /* Sağ panelin arka plan rengi */
+  width: 25%; /* Sağ panelin genişliği */
+  color: #000; /* Sağ panel yazı rengi */
+}
+
+.panel-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.5em; /* Başlık font boyutunu büyüttüm */
+}
+
+.subreddit {
+  margin-bottom: 15px;
+}
+
+.subreddit-name {
+  cursor: pointer;
+  font-size: 1.2em; /* Subreddit isimlerinin font boyutunu büyüttüm */
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  font-size: 1.1em; /* Menü butonlarının font boyutunu büyüttüm */
+}
+
+.menu-icon {
+  position: relative;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 2em; /* Buton font boyutunu büyüttüm */
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 20px; /* Buton ve popup arasına boşluk ekledim */
+}
+
+.popup {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.1em; /* Popup font boyutunu büyüttüm */
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 1.1em; /* Input font boyutunu büyüttüm */
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 1.2em; /* Buton font boyutunu büyüttüm */
+}
+
+button.close {
+  background-color: red;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.menu button:hover {
+  background-color: #ddd;
+}

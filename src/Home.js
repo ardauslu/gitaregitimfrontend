@@ -12,7 +12,7 @@ const Home = () => {
     // Subreddit listesini API'den çek
     const fetchSubreddits = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/api/reddit/subreddits');
+        const response = await fetch('http://192.168.1.20:8080/api/v1/api/reddit/subreddits');
         if (response.ok) {
           const data = await response.json();
           setSubreddits(data); // Subreddit listesini state'e kaydet
@@ -26,11 +26,11 @@ const Home = () => {
 
     fetchSubreddits();
   }, []);
-
+ 
   const handleSubredditClick = async (subreddit) => {
     setSelectedSubreddit(subreddit); // Seçilen subreddit'i kaydet
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/api/reddit/posts/${subreddit}`);
+      const response = await fetch(`http://192.168.1.20:8080/api/v1/api/reddit/posts/${subreddit}`);
       if (response.ok) {
         const data = await response.json();
         setPosts(data); // Gönderileri state'e kaydet
@@ -76,23 +76,23 @@ const Home = () => {
           )}
         </div>
         <div className="middle-panel">
-          <div className="panel-header">
-            {selectedSubreddit ? `Posts in r/${selectedSubreddit}` : 'Select a Subreddit'}
-          </div>
-          {posts.length > 0 ? (
-            posts.map((post, index) => (
-              <div className="post" key={index} style={{ marginBottom: '10px' }}>
-                <h3>{post.title}</h3>
-                <p><strong>Author:</strong> {post.author}</p>
-                <p><strong>Subreddit:</strong> r/{post.subreddit}</p>
-                <p><strong>Ups:</strong> {post.ups}</p>
-                <a href={post.url} target="_blank" rel="noopener noreferrer">Read more</a>
-              </div>
-            ))
-          ) : (
-            selectedSubreddit && <div>No posts available for this subreddit</div>
-          )}
-        </div>
+  <div className="panel-header">
+    {selectedSubreddit ? `Posts in r/${selectedSubreddit}` : 'Select a Subreddit'}
+  </div>
+  {posts.length > 0 ? (
+    posts.map((post) => (
+      <div className="post" key={post.id} style={{ marginBottom: '10px' }}>
+        <h3>{post.title}</h3>
+        <p><strong>Author:</strong> {post.author}</p>
+        <p><strong>Subreddit:</strong> r/{post.subreddit}</p>
+        <p><strong>Ups:</strong> {post.ups}</p>
+        <a href={post.url} target="_blank" rel="noopener noreferrer">Read more</a>
+      </div>
+    ))
+  ) : (
+    selectedSubreddit && <div>No posts available for this subreddit</div>
+  )}
+</div>
         <div className="right-panel">
           <div className="add-subreddit-container">
             <button className="add-button">+</button>

@@ -1,326 +1,178 @@
-.home-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 20px;
-  }
-  
-  .home-container h2 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .home-container button {
-    font-size: 14px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .home-container button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Sol üstte kullanıcı adı ve çıkış yap butonu için stil */
-  .welcome-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 14px;
-  }
-  
-  .welcome-container h2 {
-    font-size: 14px;
-    margin: 0;
-  }
-  
-  .welcome-container button {
-    margin-top: 5px;
-    font-size: 12px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .welcome-container button:hover {
-    background-color: #e53935;
-  }
-  
-  .three-panel-layout {
-    display: flex;
-    flex: 1;
-    margin-top: 50px; /* Welcome-container'ın altında kalması için boşluk bırakıyoruz */
-  }
-  
-  .left-panel,
-  .middle-panel,
-  .right-panel {
-    padding: 20px;
-  }
-  
-  .left-panel {
-    width: 25%;
-    background-color: #FEF105; /* Sol panelin arka plan rengi */
-    color: #000; /* Sol panel yazı rengi */
-  }
-  
-  .middle-panel {
-    width: 50%;
-    background-color: #0C1C35; /* Orta panelin arka plan rengi */
-    color: #ffffff; /* Orta panel yazı rengi */
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
-  
-  .right-panel {
-    width: 25%;
-    background-color: #FEF105; /* Sağ panelin arka plan rengi */
-    color: #000; /* Sağ panel yazı rengi */
-  }
-  
-  /* Stilleme detayları */
-  .subreddit-name {
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .menu-container {
-    position: relative;
-  }
-  
-  .menu-icon button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #0C1C35;
-  }
-  
-  .menu {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
-  
-  .menu button {
-    font-size: 12px;
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
-    color: #0C1C35;
-    border: none;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .menu button:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .popup {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .popup input {
-    padding: 8px;
-    margin-right: 10px;
-  }
-  
-  .add-button {
-    font-size: 24px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .add-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .close {
-    background-color: #f44336;
-    color: rgba(255, 255, 255, 0.247);
-    border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .close:hover {
-    background-color: #e53935;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-    height: 60px; /* Header yüksekliği küçültüldü */
-  }
-  
-  .header h1 {
-    font-size: 20px; /* Başlık boyutu küçültüldü */
-    margin: 0;
-  }
-  
-  .header h2 {
-    font-size: 14px; /* Alt başlık boyutu küçültüldü */
-    margin: 0;
-  }
-  
-  .header button {
-    font-size: 12px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .header button:hover {
-    background-color: #e53935;
-  }
-  
-  .three-panel-layout {
-    display: flex;
-    flex: 1;
-    height: calc(100vh - 60px); /* Header yüksekliği çıkarıldı */
-  }
-  
-  .left-panel,
-  .middle-panel,
-  .right-panel {
-    padding: 20px;
-  }
-  
-  .left-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-  }
-  
-  .middle-panel {
-    width: 50%;
-    background-color: #0C1C35;
-    color: #ffffff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
-  
-  .right-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .three-panel-layout {
-    display: flex;
-    height: calc(100vh - 60px); /* Header yüksekliği çıkarıldı */
-    margin-top: 0; /* Üst boşluk kaldırıldı */
-  }
-  
-  .left-panel,
-  .middle-panel,
-  .right-panel {
-    padding: 20px;
-  }
-  
-  .left-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-  }
-  
-  .middle-panel {
-    width: 50%;
-    background-color: #0C1C35;
-    color: #ffffff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
-  
-  .right-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ddd;
-    height: 60px; /* Header yüksekliği */
-  }
+/* Genel Ayarlar */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
 
-  .three-panel-layout {
-    display: flex;
-    flex: 1;
-    height: auto; /* Yükseklik dinamik hale getirildi */
-    min-height: 100vh; /* Minimum yüksekliği ekranın tamamı olacak şekilde ayarlandı */
-  }
-  
-  .left-panel,
-  .middle-panel,
-  .right-panel {
-    padding: 20px;
-    flex-grow: 1; /* Panellerin içeriklerine göre esnek büyümesi sağlandı */
-  }
-  
-  .left-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-  }
-  
-  .middle-panel {
-    width: 50%;
-    background-color: #0C1C35;
-    color: #ffffff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
-  
-  .right-panel {
-    width: 25%;
-    background-color: #FEF105;
-    color: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  height: 60px;
+  border-radius: 10px;
+  margin-bottom: 2px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-left h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.header-middle {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-input {
+  width: 200px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Three Panel Layout */
+.three-panel-layout {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.left-panel,
+.middle-panel,
+.right-panel {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: auto;
+}
+
+.left-panel {
+  width: 25%;
+  background-color: #FEF105;
+  color: #000;
+}
+
+.middle-panel {
+  width: 50%;
+  background-color: #0C1C35;
+  color: #ffffff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.right-panel {
+  width: 25%;
+  background-color: #FEF105;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Subreddit Baloncukları */
+.subreddit-bubble {
+  background-color: #ffffff;
+  color: #333;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.subreddit-bubble:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+/* Panel Başlıkları */
+.panel-header {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #332;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #333;
+}

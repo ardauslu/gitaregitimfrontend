@@ -43,16 +43,16 @@ const Home = () => {
   };
 
   return (
-    <div className='home-container'>
-      <div className="welcome-container">
+    <div>
+      <div className="header">
+        <h1>Reddit API</h1>
         <h2>Hoşgeldiniz, {localStorage.getItem('username')}</h2>
         <button onClick={() => {
           localStorage.removeItem('username');
           localStorage.removeItem('password');
           navigate('/');
-        }}>Çıkış Yap</button>
+        }}>Logout</button>
       </div>
-
       <div className="three-panel-layout">
         <div className="left-panel">
           <div className="panel-header">Subreddits</div>
@@ -61,7 +61,7 @@ const Home = () => {
               <div
                 className="subreddit"
                 key={index}
-                onClick={() => handleSubredditClick(subreddit)} // Tıklama işlevi
+                onClick={() => handleSubredditClick(subreddit)}
                 style={{ cursor: 'pointer' }}
               >
                 <div className="subreddit-name">
@@ -76,27 +76,25 @@ const Home = () => {
           )}
         </div>
         <div className="middle-panel">
-  <div className="panel-header">
-    {selectedSubreddit ? `Posts in r/${selectedSubreddit}` : 'Select a Subreddit'}
-  </div>
-  {posts.length > 0 ? (
-    posts.map((post) => (
-      <div className="post" key={post.id} style={{ marginBottom: '10px' }}>
-        <h3>{post.title}</h3>
-        <p><strong>Author:</strong> {post.author}</p>
-        <p><strong>Subreddit:</strong> r/{post.subreddit}</p>
-        <p><strong>Ups:</strong> {post.ups}</p>
-        <a href={post.url} target="_blank" rel="noopener noreferrer">Read more</a>
-      </div>
-    ))
-  ) : (
-    selectedSubreddit && <div>No posts available for this subreddit</div>
-  )}
-</div>
-        <div className="right-panel">
-          <div className="add-subreddit-container">
-            <button className="add-button">+</button>
+          <div className="panel-header">
+            {selectedSubreddit ? `Posts in r/${selectedSubreddit}` : 'Select a Subreddit'}
           </div>
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <div className="post" key={post.id} style={{ marginBottom: '10px' }}>
+                <h3>{post.title}</h3>
+                <p><strong>Author:</strong> {post.author}</p>
+                <p><strong>Subreddit:</strong> r/{post.subreddit}</p>
+                <p><strong>Ups:</strong> {post.ups}</p>
+                <a href={post.url} target="_blank" rel="noopener noreferrer">Read more</a>
+              </div>
+            ))
+          ) : (
+            selectedSubreddit && <div>No posts available for this subreddit</div>
+          )}
+        </div>
+        <div className="right-panel">
+        
         </div>
       </div>
     </div>

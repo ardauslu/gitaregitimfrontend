@@ -13,7 +13,7 @@ const Home = () => {
 
   const fetchSubreddits = async () => {
     try {
-      const response = await fetch('http://192.168.1.20:8080/api/v1/api/reddit/subreddits');
+      const response = await fetch('http://localhost:8080/api/reddit/subreddits');
       if (response.ok) {
         const data = await response.json();
         setSubreddits(data);
@@ -32,11 +32,11 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://192.168.1.20:8080/api/v1/api/reddit/fetch/${searchTerm}`);
+      const response = await fetch(`http://localhost:8080/api/reddit/fetch/${searchTerm}`);
       if (response.ok) {
         const data = await response.json();
         if (data.message === "Veriler MongoDB'ye kaydedildi!") {
-          const postsResponse = await fetch(`http://192.168.1.20:8080/api/v1/api/reddit/posts/${searchTerm}`);
+          const postsResponse = await fetch(`http://localhost:8080/api/reddit/posts/${searchTerm}`);
           if (postsResponse.ok) {
             const postsData = await postsResponse.json();
             setPosts(postsData || []);
@@ -62,7 +62,7 @@ const Home = () => {
     setSelectedSubreddit(subreddit);
     setCurrentPage(1);
     try {
-      const response = await fetch(`http://192.168.1.20:8080/api/v1/api/reddit/posts/${subreddit}`);
+      const response = await fetch(`http://localhost:8080/api/reddit/posts/${subreddit}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
@@ -78,6 +78,23 @@ const Home = () => {
     } catch (error) {
       console.error("Bir hata oluştu:", error);
       setPosts([]);
+    }
+  };
+  const handleDeleteSubreddit = async (subreddit) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/reddit/posts/${subreddit}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        alert(`r/${subreddit} başarıyla silindi.`);
+        setSubreddits(subreddits.filter((item) => item !== subreddit)); // Silinen subreddit'i listeden çıkar
+      } else {
+        console.error("Subreddit silinemedi.");
+        alert(`r/${subreddit} silinirken bir hata oluştu.`);
+      }
+    } catch (error) {
+      console.error("Bir hata oluştu:", error);
+      alert("Subreddit silinirken bir hata oluştu.");
     }
   };
 
@@ -107,79 +124,105 @@ const Home = () => {
   return (
     <div>
       <div className="header">
-        <div className="header-left">
-          <h1>Reddit API</h1>
-        </div>
-        <div className="header-middle">
-          Hoşgeldiniz, {localStorage.getItem("username")}
-        </div>
-        <div className="header-right">
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Subreddit ara..."
-              className="search-input"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Arama terimini güncelle
-            />
-            <button className="search-button" onClick={handleSearch}>
-              Ara
-            </button>
-          </div>
-          <button
-            onClick={() => {
-              localStorage.removeItem("username");
-              localStorage.removeItem("password");
-              navigate("/");
-            }}
-          >
-            Logout
-          </button>
-        </div>
+  <div className="header-left">
+    <h1>Reddit API</h1>
+  </div>
+  <div className="header-middle">
+  <div className="welcome-container">
+    <img
+      src="https://tr.shafaqna.com/wp-content/uploads/2022/07/01.png"
+      alt="User Avatar"
+      className="avatar"
+    />
+    <span className="username">Hoşgeldiniz, {localStorage.getItem("username")}</span>
+  </div>
+  <button
+    className="logout-button"
+    onClick={() => {
+      localStorage.removeItem("username");
+      localStorage.removeItem("password");
+      navigate("/");
+    }}
+  >
+    Logout
+  </button>
+</div>
+  <div className="header-right">
+    <div className="search-container">
+      <input
+        type="text"
+        placeholder="Subreddit ara..."
+        className="search-input"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button className="search-button" onClick={handleSearch}>
+        Ara
+      </button>
+    </div>
+  </div>
+
       </div>
       <div className="three-panel-layout">
         <div className="left-panel">
-          <div className="panel-header">Subreddits</div>
-          {subreddits.length > 0 ? (
-            subreddits.map((subreddit, index) => (
-              <div
-                className="subreddit-bubble"
-                key={index}
-                onClick={() => handleSubredditClick(subreddit)}
-                style={{ cursor: "pointer" }}
-              >
-                r/{subreddit}
-              </div>
-            ))
-          ) : (
-            <div>No subreddits available</div>
-          )}
-        </div>
+  <div className="panel-header">Subreddits</div>
+  {subreddits.length > 0 ? (
+    subreddits.map((subreddit, index) => (
+      <div
+        className="subreddit-bubble"
+        key={index}
+        style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+      >
+        <span
+          onClick={() => handleSubredditClick(subreddit)}
+          style={{ cursor: "pointer", flex: 1 }}
+        >
+          r/{subreddit}
+        </span>
+        <button
+          className="delete-button"
+          onClick={() => handleDeleteSubreddit(subreddit)}
+        >
+          Sil
+        </button>
+      </div>
+    ))
+  ) : (
+    <div>No subreddits available</div>
+  )}
+</div>
         <div className="middle-panel">
           <div className="panel-header">
             {selectedSubreddit ? `Posts in r/${selectedSubreddit}` : "Select a Subreddit"}
           </div>
           {currentPosts.length > 0 ? (
-            currentPosts.map((post, index) => (
-              <div className="post" key={index} style={{ marginBottom: "10px" }}>
-                <h3>{post.title}</h3>
-                <p>
-                  <strong>Author:</strong> {post.author}
-                </p>
-                <p>
-                  <strong>Subreddit:</strong> r/{post.subreddit}
-                </p>
-                <p>
-                  <strong>Ups:</strong> {post.ups}
-                </p>
-                <a href={post.url} target="_blank" rel="noopener noreferrer">
-                  Read more
-                </a>
-              </div>
-            ))
-          ) : (
-            selectedSubreddit && <div>No posts available for this subreddit</div>
-          )}
+  currentPosts.map((post, index) => (
+    <div className="post" key={index} style={{ marginBottom: "10px" }}>
+      {post.thumbnail && post.thumbnail !== "self" && post.thumbnail !== "default" && (
+        <img
+          src={post.thumbnail}
+          alt="Post Thumbnail"
+          className="post-thumbnail"
+        />
+      )}
+      <h3>{post.title}</h3>
+      <p>
+        <strong>Author:</strong> {post.author}
+      </p>
+      <p>
+        <strong>Subreddit:</strong> r/{post.subreddit}
+      </p>
+      <p>
+        <strong>Ups:</strong> {post.ups}
+      </p>
+      <a href={post.url} target="_blank" rel="noopener noreferrer">
+        Read more
+      </a>
+    </div>
+  ))
+) : (
+  selectedSubreddit && <div>No posts available for this subreddit</div>
+)}
           {posts.length > 0 && (
             <div className="pagination">
               <button onClick={handlePreviousPage} disabled={currentPage === 1}>

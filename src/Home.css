@@ -1,8 +1,10 @@
-/* Genel Ayarlar */
+/* Genel Stil */
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 /* Header */
@@ -10,142 +12,168 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  height: 60px;
-  border-radius: 10px;
-  margin-bottom: 2px;
-}
-
-.header-left {
-  flex: 1;
+  padding: 30px 50px;
+  background: linear-gradient(45deg, 
+  #0f0725, #0d1d36);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
+  position: relative;
+  height: 120px;
+  border-bottom-left-radius: 20px; /* Modern bir görünüm için yuvarlatılmış köşe */
+  border-bottom-right-radius: 20px;
 }
 
 .header-left h1 {
-  font-size: 20px;
+  font-size: 28px;
+  font-weight: bold;
   margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Hafif bir metin gölgesi */
 }
 
 .header-middle {
-  font-size: 16px;
-  color: #333;
-  text-align: center;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.search-input {
-  width: 200px;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.search-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.search-button:hover {
-  background-color: #0056b3;
-}
-
-/* Three Panel Layout */
-.three-panel-layout {
-  display: flex;
-  align-items: stretch;
-  gap: 5px;
-  padding: 10px;
-  background-color: #f0f0f0;
-}
-
-.left-panel,
-.middle-panel,
-.right-panel {
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: auto;
-}
-
-.left-panel {
-  width: 25%;
-  background-color: #FEF105;
-  color: #000;
-}
-
-.middle-panel {
-  width: 50%;
-  background-color: #0C1C35;
-  color: #ffffff;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-}
-
-.right-panel {
-  width: 25%;
-  background-color: #FEF105;
-  color: #000;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  text-align: center;
 }
 
-/* Subreddit Baloncukları */
-.subreddit-bubble {
-  background-color: #ffffff;
-  color: #333;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px 0;
+  border: 3px solid white;
+  transition: transform 0.3s ease; /* Hover animasyonu için */
+}
+
+.avatar:hover {
+  transform: scale(1.1); /* Hover sırasında avatar büyür */
+}
+
+.username {
+  font-size: 20px;
   font-weight: bold;
-  text-align: center;
+  color: white;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  margin-right: 10px;
+  outline: none;
+  width: 250px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Odaklanıldığında daha belirgin gölge */
+}
+
+.search-button {
+  padding: 12px 25px;
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05); /* Hover sırasında buton büyür */
+}
+
+/* Panel Tasarımı */
+.three-panel-layout {
+  display: flex;
+  margin: 30px;
+  gap: 30px;
+}
+
+.left-panel,
+.middle-panel {
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Daha belirgin gölge */
+  flex: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.left-panel:hover,
+.middle-panel:hover {
+  transform: translateY(-5px); /* Hover sırasında panel yukarı hareket eder */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover sırasında daha belirgin gölge */
+}
+
+.panel-header {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 10px;
+}
+
+/* Subreddit Bubble */
+.subreddit-bubble {
+  padding: 12px;
+  background-color: #f1f1f1;
+  border-radius: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .subreddit-bubble:hover {
-  background-color: #f0f0f0;
-  transform: translateY(-2px);
-  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05); /* Hover sırasında büyür */
 }
 
-/* Panel Başlıkları */
-.panel-header {
-  font-size: 18px;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-bottom: 15px;
-  color: #332;
+/* Post Tasarımı */
+.post {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post:hover {
+  transform: translateY(-5px); /* Hover sırasında yukarı hareket eder */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover sırasında daha belirgin gölge */
+}
+
+.post h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.post p {
+  margin: 5px 0;
+  font-size: 16px;
 }
 
 /* Pagination */
@@ -154,25 +182,88 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  gap: 10px;
 }
 
 .pagination button {
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 12px 25px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 25px;
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .pagination button:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.pagination span {
-  font-size: 14px;
-  color: #333;
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Hover sırasında büyür */
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .three-panel-layout {
+    flex-direction: column;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+
+.logout-button {
+  padding: 12px 25px;
+  background-color: #067a56;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button:hover {
+  background-color: #421236;
+  transform: scale(1.05);
+}
+
+.logout-button:active {
+  transform: scale(0.95);
+}
+
+.post-thumbnail {
+  width: 100px; /* Thumbnail genişliği */
+  height: 100px; /* Thumbnail yüksekliği */
+  object-fit: cover; /* Görselin düzgün bir şekilde sığmasını sağlar */
+  border-radius: 10px; /* Yuvarlatılmış köşeler */
+  margin-bottom: 10px; /* Thumbnail ile diğer içerik arasında boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */
+}
+.delete-button {
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #e60000;
+  transform: scale(1.05); /* Hover sırasında buton büyür */
+}
+
+.delete-button:active {
+  transform: scale(0.95); /* Tıklama sırasında buton küçülür */
 }

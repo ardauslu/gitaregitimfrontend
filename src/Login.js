@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate'i ekledik
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+
+const API_URL = "/api"; // API URL sabiti
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // useNavigate'i tanımladık
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.classList.add("login-body");
     return () => {
-      document.body.classList.remove("login-body"); // Login ekranından çıkıldığında sınıfı kaldır
+      document.body.classList.remove("login-body");
     };
   }, []);
 
@@ -18,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     if (username && password) {
       try {
-        const response = await fetch("https://redditbackend2.onrender.com/api/auth/login", {
+        const response = await fetch(`${API_URL}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -29,9 +31,9 @@ const Login = () => {
         if (response.ok) {
           const data = await response.json();
           localStorage.setItem("username", username);
-          localStorage.setItem("token", data.token); // Token'ı localStorage'a kaydediyoruz
+          localStorage.setItem("token", data.token);
           alert("Başarıyla giriş yaptınız!");
-          navigate("/home"); // Home ekranına yönlendir
+          navigate("/home");
         } else {
           alert("Giriş başarısız! Lütfen kullanıcı adı ve şifrenizi kontrol edin.");
         }

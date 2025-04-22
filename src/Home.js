@@ -13,10 +13,9 @@ const Home = () => {
 
   const fetchSubreddits = async () => {
     try {
-      const response = await fetch('https://88b0-188-3-166-247.ngrok-free.app/api/reddit/subreddits');
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/reddit/subreddits`);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setSubreddits(data);
       } else {
         console.error('Subreddit verileri alınamadı.');
@@ -33,12 +32,12 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/fetch/${searchTerm}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/reddit/fetch/${searchTerm}`);
       if (response.ok) {
         const data = await response.json();
         console.log(data);
         if (data.message === "Veriler MongoDB'ye kaydedildi!") {
-          const postsResponse = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/${searchTerm}`);
+          const postsResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/reddit/posts/${searchTerm}`);
           if (postsResponse.ok) {
             const postsData = await postsResponse.json();
             setPosts(postsData || []);
@@ -65,7 +64,7 @@ const Home = () => {
     setSelectedSubreddit(subreddit);
     setCurrentPage(1);
     try {
-      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/${subreddit}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/reddit/posts/${subreddit}`);
       if (response.ok) {
         const data = await response.json();
         console.log(data);

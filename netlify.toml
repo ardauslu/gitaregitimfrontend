@@ -1,6 +1,9 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://redditbackend4.onrender.com/api/:splat"  # 8081 portunu kullanın
+  to = "https://redditbackend4.onrender.com/api/:splat"
   status = 200
   force = true
-  headers = {X-Forwarded-Host = "auuu.netlify.app"}
+  headers = { 
+    X-Forwarded-Host = "auuu.netlify.app",
+    Access-Control-Allow-Origin = "*"
+  }

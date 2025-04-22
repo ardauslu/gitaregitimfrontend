@@ -16,6 +16,7 @@ const Home = () => {
       const response = await fetch('https://88b0-188-3-166-247.ngrok-free.app/api/reddit/subreddits');
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setSubreddits(data);
       } else {
         console.error('Subreddit verileri alınamadı.');
@@ -32,11 +33,12 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/fetch/?subreddit=${searchTerm}`);
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/fetch/${searchTerm}`);
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         if (data.message === "Veriler MongoDB'ye kaydedildi!") {
-          const postsResponse = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`);
+          const postsResponse = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/${searchTerm}`);
           if (postsResponse.ok) {
             const postsData = await postsResponse.json();
             setPosts(postsData || []);
@@ -51,6 +53,7 @@ const Home = () => {
           alert(`r/${searchTerm} için gönderi bulunamadı.`);
         }
       } else {
+        const errorText = await response.text();
         console.error("Arama sonuçları alınamadı.");
       }
     } catch (error) {
@@ -62,9 +65,10 @@ const Home = () => {
     setSelectedSubreddit(subreddit);
     setCurrentPage(1);
     try {
-      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`);
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/${subreddit}`);
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         if (Array.isArray(data)) {
           setPosts(data);
         } else {
@@ -72,6 +76,7 @@ const Home = () => {
           setPosts([]);
         }
       } else {
+        const errorText = await response.text();
         console.error("Subreddit gönderileri alınamadı.");
         setPosts([]);
       }
@@ -82,7 +87,7 @@ const Home = () => {
   };
   const handleDeleteSubreddit = async (subreddit) => {
     try {
-      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`, {
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/${subreddit}`, {
         method: "DELETE",
       });
       if (response.ok) {

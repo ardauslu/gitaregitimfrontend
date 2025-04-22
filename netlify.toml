@@ -14,15 +14,15 @@
   headers = {X-Forwarded-Host = "auuu.netlify.app"}
 
   [[redirects]]
-  from = "/api/fetch/:subreddit"  # Dinamik segment yakalama
-  to = "https://redditbackend4.onrender.com/api/fetch/:subreddit"
+  from = "/api/fetch/*"  # Dinamik segment yakalama
+  to = "https://redditbackend4.onrender.com/api/reddit/fetch/:splat"
   status = 200
   force = true
   headers = {X-Forwarded-Host = "auuu.netlify.app"}
 
 [[redirects]]
-  from = "/api/posts/:subreddit"  # Diğer dinamik route
-  to = "https://redditbackend4.onrender.com/api/posts/:subreddit"
+  from = "/api/posts/*"  # Diğer dinamik route
+  to = "https://redditbackend4.onrender.com/api/posts/:splat"
   status = 200
   force = true
   headers = {X-Forwarded-Host = "auuu.netlify.app"}

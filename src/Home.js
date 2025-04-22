@@ -52,7 +52,6 @@ const Home = () => {
           alert(`r/${searchTerm} için gönderi bulunamadı.`);
         }
       } else {
-        const errorText = await response.text();
         console.error("Arama sonuçları alınamadı.");
       }
     } catch (error) {
@@ -75,7 +74,6 @@ const Home = () => {
           setPosts([]);
         }
       } else {
-        const errorText = await response.text();
         console.error("Subreddit gönderileri alınamadı.");
         setPosts([]);
       }

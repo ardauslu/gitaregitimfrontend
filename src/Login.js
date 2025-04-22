@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     if (username && password) {
       try {
-        const response = await fetch("http://redditbackend4.onrender.com:8081/api/auth/login", {
+        const response = await fetch("https://redditbackend4.onrender.com/api/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

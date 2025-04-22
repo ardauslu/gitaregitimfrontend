@@ -13,7 +13,7 @@ const Home = () => {
 
   const fetchSubreddits = async () => {
     try {
-      const response = await fetch('https://redditbackend4.onrender.com/api/reddit/subreddits');
+      const response = await fetch('https://88b0-188-3-166-247.ngrok-free.app/api/reddit/subreddits');
       if (response.ok) {
         const data = await response.json();
         setSubreddits(data);
@@ -32,11 +32,11 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`https://redditbackend4.onrender.com/api/reddit/fetch/?subreddit=${searchTerm}`);
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/fetch/?subreddit=${searchTerm}`);
       if (response.ok) {
         const data = await response.json();
         if (data.message === "Veriler MongoDB'ye kaydedildi!") {
-          const postsResponse = await fetch(`https://redditbackend4.onrender.com/api/reddit/posts/?subreddit=${searchTerm}`);
+          const postsResponse = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`);
           if (postsResponse.ok) {
             const postsData = await postsResponse.json();
             setPosts(postsData || []);
@@ -62,7 +62,7 @@ const Home = () => {
     setSelectedSubreddit(subreddit);
     setCurrentPage(1);
     try {
-      const response = await fetch(`https://redditbackend4.onrender.com/api/reddit/posts/?subreddit=${searchTerm}`);
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
@@ -82,7 +82,7 @@ const Home = () => {
   };
   const handleDeleteSubreddit = async (subreddit) => {
     try {
-      const response = await fetch(`https://redditbackend4.onrender.com/api/reddit/posts/?subreddit=${searchTerm}`, {
+      const response = await fetch(`https://88b0-188-3-166-247.ngrok-free.app/api/reddit/posts/?subreddit=${searchTerm}`, {
         method: "DELETE",
       });
       if (response.ok) {

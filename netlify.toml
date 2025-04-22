@@ -22,7 +22,7 @@
 
 [[redirects]]
   from = "/api/posts/*"  # Diğer dinamik route
-  to = "https://redditbackend4.onrender.com/api/posts/:splat"
+  to = "https://redditbackend4.onrender.com/api/reddit/posts/:splat"
   status = 200
   force = true
   headers = {X-Forwarded-Host = "auuu.netlify.app"}

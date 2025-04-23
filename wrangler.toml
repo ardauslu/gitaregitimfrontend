@@ -1,0 +1,7 @@
+# wrangler.toml
+name = "fullstack-app"
+main = "api/index.js"  # Backend Worker girişi
+pages_build_output_dir = "dist"  # Frontend build klasörü
+
+[build]
+command = "npm run build"

@@ -1,3 +1,8 @@
-name = "redditfrontend"
-main = "src/index.js"  # Veya "src/index.ts"
-compatibility_date = "2023-05-18"
+name = "myworker4"
+type = "javascript"
+
+[site]
+bucket = "./worker/build"
+entry-point = "worker"
+
+account_id = "c8873cf019c06bcf5c29989af1671d1d"

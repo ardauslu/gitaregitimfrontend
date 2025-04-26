@@ -3,6 +3,7 @@ import Soundfont from 'soundfont-player';
 import { Chord , Scale } from 'tonal';
 import './AdvancedRiffGenerator.css';
 import Layout from './Layout';
+import notesImage from '../assets/notes.png'; // Görseli içe aktarın
 
 class RiffGenerator {
   constructor() {
@@ -14,6 +15,24 @@ class RiffGenerator {
       "persian", "japanese", "arabic", "byzantine", "flamenco"
     ];
     
+    this.guitarVoicings = {
+      major: [
+        [0, 0, 2, 2, 2, 0],  // C major
+        [-1, 3, 2, 0, 1, 0],  // C major alt
+        [3, 3, 2, 0, 1, 0]    // C major root 5
+      ],
+      minor: [
+        [0, 0, 2, 2, 1, 0],   // C minor
+        [-1, 3, 1, 0, 1, 0],   // C minor alt
+        [3, 3, 1, 0, 1, 0]     // C minor root 5
+      ],
+      seventh: [
+        [0, 0, 2, 0, 2, 0],    // C7
+        [-1, 3, 2, 3, 1, 0],    // C7 alt
+        [3, 3, 2, 3, 1, 0]      // C7 root 5
+      ]
+    };
+
     this.rhythmPatterns = [
       [1, 0.5, 0.5, 1], 
       [0.5, 0.5, 0.5, 0.5],
@@ -100,7 +119,50 @@ class RiffGenerator {
     const noteName = notes[midiNote % 12];
     return noteName + octave;
   }
+  getGuitarVoicing(rootNote, chordType) {
+    const voicings = this.guitarVoicings[chordType] || this.guitarVoicings.major;
+    return voicings[Math.floor(Math.random() * voicings.length)];
+  }
+  
+  generateGuitarRiff(rootNote, scaleName, tempo) {
+    const scaleNotes = this.generateScaleNotes(rootNote, scaleName);
+    const chords = [
+      { type: 'major', duration: 2 },
+      { type: 'seventh', duration: 1 },
+      { type: 'minor', duration: 1 }
+    ];
+    
+    const riff = [];
+    let time = 0;
+    
+    chords.forEach(chord => {
+      const voicing = this.getGuitarVoicing(rootNote, chord.type);
+      const notes = voicing.map((fret, string) => {
+        const openStringMidi = 40 + (5 * string); // E2=40, A2=45, D3=50, etc.
+        return fret >= 0 ? openStringMidi + fret : null;
+      }).filter(note => note !== null);
+      
+      // Add strum pattern
+      const strumOffset = [0, 0.1, 0.2, 0.05]; // Simulate strumming
+      notes.forEach((note, i) => {
+        riff.push({
+          midiNote: note,
+          duration: chord.duration * (60 / tempo),
+          velocity: 0.8 - (i * 0.1),
+          strumDelay: strumOffset[i % strumOffset.length]
+        });
+      });
+      
+      time += chord.duration;
+    });
+    
+    return riff;
+  }
 }
+
+
+
+
 
 const AdvancedRiffGenerator = () => {
   const [selectedKey, setSelectedKey] = useState('C');
@@ -113,11 +175,13 @@ const AdvancedRiffGenerator = () => {
   const [instrument, setInstrument] = useState('acoustic_grand_piano');
   const [riffNotes, setRiffNotes] = useState([]);
   const [activeChords, setActiveChords] = useState([]);
-  
+  const [activeNotes, setActiveNotes] = useState([]);
   const audioContextRef = useRef(null);
   const instrumentRef = useRef(null);
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
+
+ 
 
    // Safe note transposition
    const safeTranspose = (note, semitones) => {
@@ -628,32 +692,38 @@ const AdvancedRiffGenerator = () => {
 
   // Play riff
   const playRiff = () => {
-    if (!instrumentRef.current || riff.length === 0) return;
+    if (!instrumentRef.current) return;
   
-    activeTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
-    activeTimeoutsRef.current = [];
-    
-    setIsPlaying(true);
+    const isGuitar = instrument.includes('guitar');
     const startTime = audioContextRef.current.currentTime;
   
     riff.forEach((note, index) => {
       const noteStartTime = startTime + getRiffDuration(riff.slice(0, index));
-      const noteName = riffGeneratorRef.current.midiToNoteName(note.midiNote);
-      instrumentRef.current.play(
-        noteName, // Now includes octave (e.g. "E4")
-        noteStartTime,
-        { 
-          duration: note.duration * 0.8,
-          gain: note.velocity
-        }
-      );
+      
+      if (isGuitar && note.strumDelay !== undefined) {
+        // Guitar strum effect
+        instrumentRef.current.play(
+          midiToNoteName(note.midiNote),
+          noteStartTime + note.strumDelay,
+          {
+            duration: note.duration * 0.9,
+            gain: note.velocity,
+            attack: 0.05,
+            release: 0.3
+          }
+        );
+      } else {
+        // Regular playback
+        instrumentRef.current.play(
+          midiToNoteName(note.midiNote),
+          noteStartTime,
+          { 
+            duration: note.duration * 0.8,
+            gain: note.velocity
+          }
+        );
+      }
     });
-    
-    const totalDuration = getRiffDuration(riff);
-    const endTimeout = setTimeout(() => {
-      setIsPlaying(false);
-    }, totalDuration * 1000);
-    activeTimeoutsRef.current.push(endTimeout);
   };
 
   const getRiffDuration = (riffSegment) => {
@@ -830,34 +900,11 @@ const AdvancedRiffGenerator = () => {
   </div>
 </div>
           </div>
+          
         </div>
-
-        <div className="circle-of-fifths-panel">
-          <h2>Circle of Fifths</h2>
-          <div className="circle-container">
-            <div className="circle-visualization">
-              {circleOfFifths.map((item, index) => (
-                <div
-                  key={item.key}
-                  className={`circle-key ${item.isCurrent ? 'current' : ''}`}
-                  style={{
-                    transform: `rotate(${index * 30}deg) translate(12em) rotate(${-index * 30}deg)`
-                  }}
-                >
-                  <div className="key-info">
-                    <div className="key-degree">{item.degree}</div>
-                    <div className="key-name">{item.key}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="circle-center">
-              <div className="current-scale-info">
-                <div className="current-key">{selectedKey}</div>
-                <div className="current-scale">{scaleType.charAt(0).toUpperCase() + scaleType.slice(1)}</div>
-              </div>
-            </div>
-          </div>
+        
+        <div className="notes-image-container">
+          <img src={notesImage} alt="Notes" className="notes-image" />
         </div>
       </div>
     </Layout>

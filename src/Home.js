@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { auth } from "./Firebase"; 
 import logo from "./assets/logo.png";
 import unnamed1 from "./assets/unnamed (1).png";
 import unnamed2 from "./assets/unnamed (2).png";
 import Subheader from "./components/Subheader";
-
+import { signOut } from "firebase/auth"; // Bunu import et, Home.js içinde
 const Home = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
 
-  const handleLogout = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Firebase'den çıkış yap
+      localStorage.removeItem("username");
+      localStorage.removeItem("password");
+      navigate("/login");
+    } catch (error) {
+      console.error("Çıkış yaparken hata:", error);
+    }
   };
   const menuItems = [
     {

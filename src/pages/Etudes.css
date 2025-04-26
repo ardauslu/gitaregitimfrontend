@@ -1,0 +1,126 @@
+/* Genel Sayfa Stili */
+.etudes-title {
+    color: #fff;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .etudes-description {
+    color: #d1d1d1;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Etüdler Listesi */
+  .etude-container {
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #333, #444);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .etude-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Etüd Başlıkları */
+  .etude-title {
+    padding: 1.8rem;
+    background-color: #222;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
+    border: 1px solid #444;
+    text-transform: capitalize;
+  }
+  
+  .etude-title:hover {
+    background-color: #1e0b25;
+    transform: scale(1.05);
+    color: #f1c40f;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Etüd Videoları */
+  .etude-videos {
+    margin-top: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .video-container {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background: #000;
+  }
+  
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .video-container:hover {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    transform: scale(1.03);
+  }
+  
+  /* Akordeon Etkileşimi */
+  .etude-title {
+    cursor: pointer;
+  }
+  
+  .etude-videos {
+    display: block;
+  }
+  
+  .etude-videos > .video-container {
+    display: block;
+  }
+  
+  /* Mobil Uyumluluk */
+  @media (max-width: 768px) {
+    .etudes-title {
+      font-size: 2.5rem;
+      color: #fff;
+    }
+  
+    .etudes-description {
+      font-size: 1.1rem;
+      color: #fff;
+    }
+  
+    .etude-title {
+      font-size: 1.6rem;
+      padding: 1.4rem;
+      color: #fff;
+    }
+  
+    .react-player {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

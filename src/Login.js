@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"; // Firebase Authentication
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "./Login.css";
-import unnamed3 from "./assets/unnamed (3).png"; // Görseli içe aktarın
-
+import chatgpt from "./assets/chatgpt.png";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -12,8 +13,19 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Email:", email, "Password:", password);
-    navigate("/home"); // Başarılı girişten sonra yönlendirme
+    navigate("/home");
   };
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        navigate("/home"); // Kullanıcı zaten giriş yaptıysa direkt home'a
+      }
+    });
+  
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleGoogleLogin = async () => {
     const auth = getAuth();
@@ -22,7 +34,13 @@ const Login = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log("Google User:", result.user);
-      navigate("/home"); // Başarılı girişten sonra yönlendirme
+
+      if (result.user) {
+        console.log("Navigating to /home");
+        navigate("/home");
+      } else {
+        console.error("Google Login Error: User not found");
+      }
     } catch (error) {
       console.error("Google Login Error:", error);
     }
@@ -31,7 +49,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-image">
-        <img src={unnamed3} alt="Login Illustration" />
+        <img src={chatgpt} alt="Login Illustration" />
       </div>
       <div className="login-form">
         <h2>Welcome Back!</h2>

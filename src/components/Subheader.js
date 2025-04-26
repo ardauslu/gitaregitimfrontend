@@ -1,20 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Yönlendirme için useNavigate'i içe aktarın
-import "./Home.css";
-import logo from "./assets/logo.png";
-import Subheader from "./components/Subheader";
-const Home = () => {
-  const navigate = useNavigate(); // Yönlendirme için hook
-  const [language, setLanguage] = useState("tr");
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./Subheader.css";
 
-  const handleLogout = () => {
-    // Kullanıcı bilgilerini temizle
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
+const Subheader = ({ language }) => {
+  const navigate = useNavigate();
 
-    // Login sayfasına yönlendir
-    navigate("/login");
-  };
+  // Menü öğeleri
   const menuItems = [
     {
       title: language === "tr" ? "Elektro Gitar Dersleri" : "Electric Guitar Lessons",
@@ -89,39 +80,36 @@ const Home = () => {
         { name: language === "tr" ? "Haritayı Düzenle" : "Edit Map", path: "/edit-map" },
       ],
     },
+    {
+      title: language === "tr" ? "Ayarlar" : "Settings",
+      options: [
+        { name: language === "tr" ? "Profil" : "Profile", path: "/profile" },
+        { name: language === "tr" ? "Dil Seçimi" : "Language", path: "/language" },
+        { name: language === "tr" ? "Güvenlik" : "Security", path: "/security" },
+      ],
+    },
   ];
 
   return (
-    <div>
-      {/* Ana Header */}
-      <div className="header">
-        <div className="header-left">
-          <img src={logo} alt="Logo" className="header-logo" />
-        </div>
-        <div className="header-middle">
-          <div className="welcome-container">
-            <span className="username">
-              {language === "tr" ? "Hoşgeldiniz" : "Welcome"}, {localStorage.getItem("username")}
-            </span>
+    <div className="sub-header">
+      {menuItems.map((menu, index) => (
+        <div className="sub-header-item" key={index}>
+          <span>{menu.title}</span>
+          <div className="sub-header-dropdown">
+            {menu.options.map((option, subIndex) => (
+              <a
+                key={subIndex}
+                onClick={() => navigate(option.path)}
+                style={{ cursor: "pointer" }}
+              >
+                {option.name}
+              </a>
+            ))}
           </div>
-          <button
-            className="language-toggle"
-            onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
-          >
-            {language === "tr" ? "EN" : "TR"}
-          </button>
         </div>
-        <div className="header-right">
-          <button className="logout-button" onClick={handleLogout}>
-            {language === "tr" ? "Çıkış Yap" : "Logout"}
-          </button>
-        </div>
-      </div>
-
-      {/* Alt Header */}
-      <Subheader menuItems={menuItems} />
+      ))}
     </div>
   );
 };
 
-export default Home;
+export default Subheader;

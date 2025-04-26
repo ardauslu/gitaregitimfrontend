@@ -1,0 +1,277 @@
+/* Genel Ayarlar */
+:root {
+  --primary-color: #4a90e2; /* Modern mavi ton */
+  --secondary-color: #f5f5f5; /* Hafif gri arka plan */
+  --text-color: #333333; /* Koyu gri metin */
+  --border-color: #e0e0e0; /* Hafif gri kenarlık */
+  --hover-color: #3a78c2; /* Hover için daha koyu mavi */
+  --background-color: #ffffff; /* Beyaz arka plan */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Advanced Riff Generator Ana Yapısı */
+.advanced-riff-generator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: var(--secondary-color);
+}
+
+.main-panel {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Başlık */
+.main-panel h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Kontroller */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.control-group select,
+.control-group input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.control-group select:focus,
+.control-group input[type="range"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-color);
+  outline: none;
+}
+
+/* Butonlar */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+.action-buttons button:disabled {
+  background-color: var(--border-color);
+  color: #999999;
+  cursor: not-allowed;
+}
+
+/* Çıktı Bölümü */
+.output-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.riff-output,
+.chord-progression {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.riff-output h2,
+.chord-progression h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.notes,
+.chords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.note,
+.chord {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.note:hover,
+.chord:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+/* Circle of Fifths Panel */
+.circle-of-fifths-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  margin-top: 20px;
+}
+
+.circle-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.circle-item {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.circle-item.current {
+  background-color: var(--hover-color);
+  transform: scale(1.2);
+  box-shadow: 0 0 10px var(--hover-color);
+}
+
+.circle-center {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+/* Ölçek Bilgisi */
+.scale-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.scale-info h3 {
+  font-size: 16px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.scale-info .scale-notes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scale-info .scale-notes .note {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--primary-color);
+  padding: 5px 8px;
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .circle-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .circle-item {
+    width: 50px;
+    height: 50px;
+    font-size: 10px;
+  }
+
+  .circle-center {
+    width: 80px;
+    height: 80px;
+    font-size: 12px;
+  }
+}

@@ -1,10 +1,29 @@
 /* Genel Stil */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
   color: #333;
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 24px; /* Daha küçük başlık boyutu */
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
 }
 
 /* Header */
@@ -12,258 +31,156 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 50px;
-  background: linear-gradient(45deg, 
-  #0f0725, #0d1d36);
+  padding: 15px 30px; /* Daha küçük padding */
+  background: linear-gradient(45deg, #000, #333);
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Daha belirgin gölge */
-  position: relative;
-  height: 120px;
-  border-bottom-left-radius: 20px; /* Modern bir görünüm için yuvarlatılmış köşe */
-  border-bottom-right-radius: 20px;
+  height: 80px; /* Daha küçük yükseklik */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-.header-left h1 {
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Hafif bir metin gölgesi */
+.header-logo {
+  width: 100px; /* Daha küçük logo boyutu */
+  height: auto;
 }
 
 .header-middle {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-}
-
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin: 10px 0;
-  border: 3px solid white;
-  transition: transform 0.3s ease; /* Hover animasyonu için */
-}
-
-.avatar:hover {
-  transform: scale(1.1); /* Hover sırasında avatar büyür */
 }
 
 .username {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
+  font-size: 14px; /* Daha küçük yazı boyutu */
 }
 
-/* Search Bar */
-.search-container {
+.language-toggle {
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* Sub Header */
+.sub-header {
   display: flex;
+  justify-content: space-around;
   align-items: center;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  height: 50px; /* Daha küçük yükseklik */
+  border-bottom: 1px solid #ddd;
 }
 
-.search-input {
-  padding: 12px;
-  border: none;
-  border-radius: 25px;
-  margin-right: 10px;
-  outline: none;
-  width: 250px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.search-input:focus {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Odaklanıldığında daha belirgin gölge */
-}
-
-.search-button {
-  padding: 12px 25px;
-  background-color: white;
-  color: #007bff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
+.sub-header-item {
+  position: relative;
+  font-size: 14px; /* Daha küçük yazı boyutu */
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.search-button:hover {
+.sub-header-item:hover {
+  color: #007bff;
+}
+
+.sub-header-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 10;
+  min-width: 150px;
+  padding: 10px 0;
+}
+
+.sub-header-dropdown a {
+  display: block;
+  padding: 5px 10px; /* Daha küçük padding */
+  text-decoration: none;
+  color: black;
+  font-size: 12px; /* Daha küçük yazı boyutu */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sub-header-dropdown a:hover {
   background-color: #007bff;
   color: white;
-  transform: scale(1.05); /* Hover sırasında buton büyür */
 }
 
-/* Panel Tasarımı */
+.sub-header-item:hover .sub-header-dropdown {
+  display: block;
+}
+
+/* İçerik */
 .three-panel-layout {
   display: flex;
-  margin: 30px;
-  gap: 30px;
+  gap: 20px;
+  padding: 20px;
 }
 
-.left-panel,
-.middle-panel {
-  background-color: white;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Daha belirgin gölge */
+.left-panel, .middle-panel {
   flex: 1;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.left-panel:hover,
-.middle-panel:hover {
-  transform: translateY(-5px); /* Hover sırasında panel yukarı hareket eder */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover sırasında daha belirgin gölge */
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 400px; /* İçerik alanını sınırlayın */
 }
 
 .panel-header {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #f1f1f1;
-  padding-bottom: 10px;
+  font-size: 16px; /* Daha küçük başlık boyutu */
+  margin-bottom: 10px;
 }
 
-/* Subreddit Bubble */
-.subreddit-bubble {
-  padding: 12px;
-  background-color: #f1f1f1;
-  border-radius: 25px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.subreddit-bubble:hover {
+/* Butonlar */
+button {
   background-color: #007bff;
   color: white;
-  transform: scale(1.05); /* Hover sırasında büyür */
-}
-
-/* Post Tasarımı */
-.post {
-  background-color: #f9f9f9;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.post:hover {
-  transform: translateY(-5px); /* Hover sırasında yukarı hareket eder */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover sırasında daha belirgin gölge */
-}
-
-.post h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
-}
-
-.post p {
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-/* Pagination */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.pagination button {
-  padding: 12px 25px;
-  margin: 0 5px;
   border: none;
-  border-radius: 25px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.pagination button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: scale(1.05); /* Hover sırasında büyür */
-}
-
-/* Responsive Tasarım */
-@media (max-width: 768px) {
-  .three-panel-layout {
-    flex-direction: column;
-  }
-
-  .search-input {
-    width: 100%;
-  }
-}
-
-.logout-button {
-  padding: 12px 25px;
-  background-color: #067a56;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logout-button:hover {
-  background-color: #421236;
-  transform: scale(1.05);
-}
-
-.logout-button:active {
-  transform: scale(0.95);
-}
-
-.post-thumbnail {
-  width: 100px; /* Thumbnail genişliği */
-  height: 100px; /* Thumbnail yüksekliği */
-  object-fit: cover; /* Görselin düzgün bir şekilde sığmasını sağlar */
-  border-radius: 10px; /* Yuvarlatılmış köşeler */
-  margin-bottom: 10px; /* Thumbnail ile diğer içerik arasında boşluk */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */
-}
-.delete-button {
-  padding: 5px 10px;
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
+  padding: 8px 12px; /* Daha küçük padding */
   border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px; /* Daha küçük yazı boyutu */
 }
 
-.delete-button:hover {
-  background-color: #e60000;
-  transform: scale(1.05); /* Hover sırasında buton büyür */
+button:hover {
+  background-color: #0056b3;
 }
 
-.delete-button:active {
-  transform: scale(0.95); /* Tıklama sırasında buton küçülür */
+/* Pedallar */
+.pedals {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pedal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.pedal img {
+  width: 80px; /* Daha küçük pedal boyutu */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.pedal img:hover {
+  transform: scale(1.1); /* Hover sırasında pedal büyür */
+}
+
+.pedal label {
+  font-size: 12px; /* Daha küçük yazı boyutu */
+}
+
+.pedal input[type="range"] {
+  width: 80px; /* Daha küçük genişlik */
 }

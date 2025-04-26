@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Soundfont from 'soundfont-player';
-import { Key, Scale, Chord } from 'tonal';
+import { Scale, Chord } from 'tonal';
 import './AdvancedRiffGenerator.css';
 import Layout from './Layout';
 
@@ -34,9 +34,9 @@ class RiffGenerator {
       "locrian": [1, 2, 2, 1, 2, 2, 2],
       "harmonic minor": [2, 1, 2, 2, 1, 3, 1],
       "melodic minor": [2, 1, 2, 2, 2, 2, 1],
-      "pentatonic major": [2, 2, 3, 2, 3],
-      "pentatonic minor": [3, 2, 2, 3, 2],
-      "blues": [3, 2, 1, 1, 3, 2],
+      "pentatonic major": [2, 2, 3, 2],
+      "pentatonic minor": [3, 2, 2, 3],
+      "blues": [3, 2, 1, 1, 3],
       "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       "whole tone": [2, 2, 2, 2, 2],
       "augmented": [3, 1, 3, 1, 3],
@@ -100,36 +100,13 @@ class RiffGenerator {
     const noteName = notes[midiNote % 12];
     return noteName + octave;
   }
-
-  getChordForRiffNote(riffNote, scaleChords) {
-    if (!scaleChords || scaleChords.length === 0) {
-      return { symbol: 'I', name: riffNote.name.replace(/\d/g, '') + 'maj', notes: [] };
-    }
-
-    // Find the chord that contains this note
-    for (const chord of scaleChords) {
-      if (chord.notes && chord.notes.some(note => 
-        note.replace(/\d/g, '') === riffNote.name.replace(/\d/g, ''))) {
-        return chord;
-      }
-    }
-    return scaleChords[0]; // Default to first chord if not found
-  }
-
-  getFallbackChords(rootKey) {
-    return [
-      { symbol: 'I', name: rootKey + 'maj', notes: [rootKey + '3', rootKey + '5', rootKey + '7'] },
-      { symbol: 'IV', name: rootKey + 'maj', notes: [rootKey + '4', rootKey + '6', rootKey + '8'] },
-      { symbol: 'V', name: rootKey + 'maj', notes: [rootKey + '5', rootKey + '7', rootKey + '9'] }
-    ];
-  }
 }
-
 
 const AdvancedRiffGenerator = () => {
   const [selectedKey, setSelectedKey] = useState('C');
   const [scaleType, setScaleType] = useState('major');
   const [tempo, setTempo] = useState(120);
+  const [riffLength, setRiffLength] = useState(8);
   const [riff, setRiff] = useState([]);
   const [chordProgression, setChordProgression] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -142,7 +119,6 @@ const AdvancedRiffGenerator = () => {
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
 
-  // Audio context ve enstrümanı başlat
   useEffect(() => {
     audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
     loadInstrument();
@@ -151,9 +127,7 @@ const AdvancedRiffGenerator = () => {
       if (audioContextRef.current) {
         audioContextRef.current.close();
       }
-      // Clear all timeouts on unmount
       activeTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
-      activeTimeoutsRef.current = [];
     };
   }, [instrument]);
 
@@ -161,7 +135,8 @@ const AdvancedRiffGenerator = () => {
     try {
       instrumentRef.current = await Soundfont.instrument(
         audioContextRef.current,
-        instrument
+        instrument,
+        { soundfont: 'MusyngKite' }
       );
     } catch (error) {
       console.error('Error loading instrument:', error);
@@ -177,10 +152,159 @@ const AdvancedRiffGenerator = () => {
     return keyToMidi[key] || 60;
   };
 
-  // Riff üretme fonksiyonu
+  const progressionPatterns = {
+    major: [
+      ['I', 'V', 'vi', 'IV'],
+      ['I', 'vi', 'IV', 'V'],
+      ['vi', 'IV', 'I', 'V'],
+      ['I', 'IV', 'vi', 'V'],
+      ['I', 'iii', 'IV', 'V'],
+      ['ii', 'V', 'I', 'vi'],
+      ['I', 'V', 'IV', 'V'],
+      ['I', 'vi', 'ii', 'V']
+    ],
+    minor: [
+      ['i', 'VII', 'VI', 'V'],
+      ['i', 'iv', 'VII', 'III'],
+      ['i', 'VI', 'III', 'VII'],
+      ['i', 'iv', 'v', 'i'],
+      ['i', 'VII', 'VI', 'v'],
+      ['i', 'bIII', 'bVII', 'iv'],
+      ['i', 'bVI', 'bIII', 'bVII'],
+      ['i', 'iv', 'VII', 'III']
+    ]
+  };
+
+  const getProgressionPatterns = () => {
+    if (scaleType.includes('major')) return progressionPatterns.major;
+    if (scaleType.includes('minor')) return progressionPatterns.minor;
+    return progressionPatterns.major;
+  };
+
+  const getChordType = (scaleType, degree) => {
+    scaleType = scaleType.toLowerCase();
+    if (scaleType.includes('major')) {
+      return degree === 6 ? 'dim' : degree === 0 ? 'maj' : [2, 3, 6].includes(degree) ? 'min' : 'maj';
+    } else if (scaleType.includes('minor')) {
+      return degree === 1 ? 'dim' : [0, 3, 4].includes(degree) ? 'min' : 'maj';
+    } else {
+      return 'maj';
+    }
+  };
+
+  const getRomanNumeral = (degree, scaleType) => {
+    const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+    scaleType = scaleType.toLowerCase();
+    
+    if (scaleType.includes('major')) {
+      return [0, 3, 4].includes(degree) ? numerals[degree] : numerals[degree].toLowerCase();
+    } else if (scaleType.includes('minor')) {
+      return [0, 3, 4].includes(degree) ? numerals[degree].toLowerCase() : numerals[degree];
+    } else {
+      return numerals[degree];
+    }
+  };
+
+  const getChordsForScale = (rootKey, type) => {
+    try {
+      const scale = Scale.get(`${rootKey} ${type}`);
+      if (!scale.intervals) return [];
+      
+      const chords = [];
+      const chordQualities = {
+        maj: ['', '6', '7', 'maj7', '9', 'maj9', 'add9', '6/9'],
+        min: ['m', 'm7', 'm9', 'm6', 'm11'],
+        dim: ['dim', 'dim7'],
+        aug: ['aug', 'maj7#5']
+      };
+
+      scale.intervals.forEach((interval, i) => {
+        const note = scale.tonic + interval;
+        const chordType = getChordType(type, i);
+        const qualities = chordQualities[chordType] || chordQualities.maj;
+        
+        qualities.forEach(quality => {
+          try {
+            const chord = Chord.get(note + quality);
+            if (chord.notes) {
+              chords.push({
+                symbol: getRomanNumeral(i, type),
+                name: chord.symbol,
+                notes: chord.notes
+              });
+            }
+          } catch (e) {
+            console.warn(`Couldn't create chord ${note}${quality}`);
+          }
+        });
+      });
+      
+      return chords.length > 0 ? chords : [
+        {
+          symbol: 'I',
+          name: rootKey + 'maj',
+          notes: [rootKey + '3', rootKey + '5', rootKey + '7']
+        }
+      ];
+    } catch (error) {
+      console.error('Error generating chords:', error);
+      return [
+        {
+          symbol: 'I',
+          name: selectedKey + 'maj',
+          notes: [selectedKey + '3', selectedKey + '5', selectedKey + '7']
+        }
+      ];
+    }
+  };
+
+  const generateExtendedChord = (baseChord) => {
+    if (!baseChord) return null;
+    
+    const extensions = ['', '7', 'maj7', '9', 'm9', 'add9', '6', 'm7', 'maj9'];
+    const randomExtension = extensions[Math.floor(Math.random() * extensions.length)];
+    
+    try {
+      const chordName = baseChord.name.replace(/\d+$/, '') + randomExtension;
+      const extendedChord = Chord.get(chordName);
+      
+      if (extendedChord && extendedChord.notes) {
+        return {
+          ...baseChord,
+          name: extendedChord.symbol,
+          notes: extendedChord.notes
+        };
+      }
+    } catch (e) {
+      console.error('Error extending chord:', e);
+    }
+    
+    return baseChord;
+  };
+
+  const generateChordProgression = (scaleChords) => {
+    const patterns = getProgressionPatterns();
+    const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    
+    const progression = selectedPattern.map(degree => {
+      const chord = scaleChords.find(c => 
+        c.symbol.toLowerCase() === degree.toLowerCase()
+      ) || scaleChords[0];
+      
+      return generateExtendedChord(chord);
+    }).filter(Boolean);
+
+    return progression.length > 0 ? progression : [generateExtendedChord(scaleChords[0])].filter(Boolean);
+  };
+
   const generateRiff = () => {
     const rootMidiNote = getKeyMidiNote(selectedKey);
-    const generatedRiff = riffGeneratorRef.current.generateRiff(rootMidiNote, scaleType, tempo);
+    const generatedRiff = riffGeneratorRef.current.generateRiff(
+      rootMidiNote, 
+      scaleType, 
+      tempo,
+      riffLength // Use the user-selected riff length
+    );
     
     const notesWithNames = generatedRiff.map(note => ({
       ...note,
@@ -190,121 +314,14 @@ const AdvancedRiffGenerator = () => {
     setRiff(generatedRiff);
     setRiffNotes(notesWithNames.map(note => note.name));
     
-    // Generate chord progression that matches the riff
-    let scaleChords = getChordsForScale(selectedKey, scaleType);
-    
-    // Use fallback chords if we couldn't generate proper ones
-    if (scaleChords.length === 0) {
-      scaleChords = riffGeneratorRef.current.getFallbackChords(selectedKey);
-    }
-    
-    const riffChords = notesWithNames.map(note => 
-      riffGeneratorRef.current.getChordForRiffNote(note, scaleChords)
-    );
-    
-    // Get unique chords maintaining order
-    const uniqueChords = [];
-    const seen = new Set();
-    for (const chord of riffChords) {
-      if (chord && !seen.has(chord.symbol)) {
-        seen.add(chord.symbol);
-        uniqueChords.push(chord);
-      }
-    }
-    
-    setChordProgression(uniqueChords.length > 0 ? uniqueChords : scaleChords.slice(0, 2));
+    const scaleChords = getChordsForScale(selectedKey, scaleType);
+    const progression = generateChordProgression(scaleChords);
+    setChordProgression(progression);
   };
 
-  // Gam için akorları al
-  const getChordsForScale = (rootKey, type) => {
-    try {
-      // Special handling for pentatonic scales
-      if (type.includes('pentatonic')) {
-        return [
-          { symbol: 'I', name: rootKey + 'maj', notes: [rootKey + '3', rootKey + '5', rootKey + '7'] },
-          { symbol: 'IV', name: rootKey + 'maj', notes: [rootKey + '4', rootKey + '6', rootKey + '8'] },
-          { symbol: 'V', name: rootKey + 'maj', notes: [rootKey + '5', rootKey + '7', rootKey + '9'] }
-        ];
-      }
-  
-      // Special handling for other problematic scales
-      if (['japanese', 'arabic', 'byzantine', 'neapolitan'].some(s => type.includes(s))) {
-        return [
-          { symbol: 'I', name: rootKey + 'maj', notes: [rootKey + '3', rootKey + '5', rootKey + '7'] },
-          { symbol: 'II', name: rootKey + 'min', notes: [rootKey + '4', rootKey + '6', rootKey + '8'] }
-        ];
-      }
-  
-      const scale = Scale.get(`${rootKey} ${type}`);
-      if (!scale.intervals || scale.intervals.length === 0) {
-        return riffGeneratorRef.current.getFallbackChords(rootKey);
-      }
-      
-      const chords = [];
-      
-      scale.intervals.forEach((interval, i) => {
-        const note = scale.tonic + interval;
-        const chordType = getChordType(type, i);
-        const chord = Chord.get(note + chordType);
-        
-        if (chord && chord.notes && chord.notes.length > 0) {
-          chords.push({
-            symbol: getRomanNumeral(i, type),
-            name: chord.symbol,
-            notes: chord.notes
-          });
-        }
-      });
-      
-      return chords.length > 0 ? chords : riffGeneratorRef.current.getFallbackChords(rootKey);
-    } catch (error) {
-      console.error('Error generating chords:', error);
-      return riffGeneratorRef.current.getFallbackChords(rootKey);
-    }
-  };
-
-  const getChordType = (scaleType, degree) => {
-    scaleType = scaleType.toLowerCase();
-    
-    // Handle pentatonic scales
-    if (scaleType.includes('pentatonic')) {
-      return degree % 2 === 0 ? 'maj' : 'min';
-    }
-    
-    // Handle other special scales
-    if (['japanese', 'arabic', 'byzantine', 'neapolitan'].some(s => scaleType.includes(s))) {
-      return degree === 0 ? 'maj' : 'min';
-    }
-  
-    // Default handling
-    if (scaleType.includes('major')) {
-      return degree === 6 ? 'dim' : degree === 0 ? 'maj' : [2, 3, 6].includes(degree) ? 'min' : 'maj';
-    } else if (scaleType.includes('minor')) {
-      return degree === 1 ? 'dim' : [0, 3, 4].includes(degree) ? 'min' : 'maj';
-    } else {
-      return 'maj';
-    }
-  };
-  
-
-  const getRomanNumeral = (degree, scaleType) => {
-    const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
-    scaleType = scaleType.toLowerCase();
-    
-    if (scaleType.includes('major') || scaleType === 'pentatonic major') {
-      return [0, 3, 4].includes(degree) ? numerals[degree] : numerals[degree].toLowerCase();
-    } else if (scaleType.includes('minor') || scaleType === 'pentatonic minor') {
-      return [0, 3, 4].includes(degree) ? numerals[degree].toLowerCase() : numerals[degree];
-    } else {
-      return numerals[degree];
-    }
-  };
-
-  // Riff çalma fonksiyonu
-  const playRiff = async () => {
+  const playRiff = () => {
     if (!instrumentRef.current || riff.length === 0) return;
 
-    // Clear any existing timeouts
     activeTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
     activeTimeoutsRef.current = [];
     
@@ -314,48 +331,26 @@ const AdvancedRiffGenerator = () => {
 
     riff.forEach((note, index) => {
       const noteStartTime = startTime + getRiffDuration(riff.slice(0, index));
-      const noteEndTime = noteStartTime + note.duration;
       
-      // Play the note
       instrumentRef.current.play(
         riffGeneratorRef.current.midiToNoteName(note.midiNote),
         noteStartTime,
         { duration: note.duration * 0.8, gain: note.velocity }
       );
-      
-      // Highlight the active chord
-      const scaleChords = getChordsForScale(selectedKey, scaleType);
-      const noteName = riffGeneratorRef.current.midiToNoteName(note.midiNote);
-      const chord = riffGeneratorRef.current.getChordForRiffNote(
-        { name: noteName }, 
-        scaleChords
-      );
-      
-      const timeout = setTimeout(() => {
-        setActiveChords([chord.symbol]);
-      }, (noteStartTime - startTime) * 1000);
-      
-      activeTimeoutsRef.current.push(timeout);
     });
 
     const totalDuration = getRiffDuration(riff);
     const endTimeout = setTimeout(() => {
       setIsPlaying(false);
-      setActiveChords([]);
     }, totalDuration * 1000);
-    
     activeTimeoutsRef.current.push(endTimeout);
   };
 
-  const getRiffDuration = (riffSegment) => {
-    return riffSegment.reduce((total, note) => total + note.duration, 0);
-  };
-
-  // Akor dizisini çalma
-  const playChordProgression = async () => {
+   // Fixed playChordProgression function
+   const playChordProgression = async () => {
     if (!instrumentRef.current || chordProgression.length === 0) return;
-  
-    // Clear any existing timeouts
+
+    // Clear previous timeouts
     activeTimeoutsRef.current.forEach(timeout => clearTimeout(timeout));
     activeTimeoutsRef.current = [];
     
@@ -363,42 +358,48 @@ const AdvancedRiffGenerator = () => {
     const startTime = audioContextRef.current.currentTime;
     const chordDuration = (60 / tempo) * 2; // 2 beats per chord
     setActiveChords([]);
-  
+
     chordProgression.forEach((chord, index) => {
-      if (!chord || !chord.notes) return; // Skip invalid chords
+      if (!chord?.notes) return;
       
       const chordStartTime = startTime + index * chordDuration;
       
-      // Highlight the chord
+      // Highlight chord
       const highlightTimeout = setTimeout(() => {
-        setActiveChords([chord.symbol || 'I']);
+        setActiveChords([chord.symbol]);
       }, index * chordDuration * 1000);
-      
       activeTimeoutsRef.current.push(highlightTimeout);
       
-      // Play each note of the chord with slight offset for realism
+      // Play chord notes with slight arpeggiation
       chord.notes.forEach((note, noteIndex) => {
-        if (note) { // Only play valid notes
-          const noteStartTime = chordStartTime + (noteIndex * 0.05);
+        try {
+          const noteStartTime = chordStartTime + (noteIndex * 0.1);
           instrumentRef.current.play(
             note,
             noteStartTime,
-            { duration: chordDuration * 0.8 }
+            { 
+              duration: chordDuration * 0.8,
+              gain: 0.7 - (noteIndex * 0.1)
+            }
           );
+        } catch (error) {
+          console.error('Error playing note:', note, error);
         }
       });
     });
-  
+
     const totalDuration = chordProgression.length * chordDuration;
     const endTimeout = setTimeout(() => {
       setIsPlaying(false);
       setActiveChords([]);
     }, totalDuration * 1000);
-    
     activeTimeoutsRef.current.push(endTimeout);
   };
 
-  // Circle of Fifths oluşturma
+  const getRiffDuration = (riffSegment) => {
+    return riffSegment.reduce((total, note) => total + note.duration, 0);
+  };
+
   const createCircleOfFifths = () => {
     const circle = [];
     const keys = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F'];
@@ -461,6 +462,17 @@ const AdvancedRiffGenerator = () => {
             </div>
 
             <div className="control-group">
+              <label>Riff Length: {riffLength} notes</label>
+              <input
+                type="range"
+                min="4"
+                max="16"
+                value={riffLength}
+                onChange={(e) => setRiffLength(Number(e.target.value))}
+              />
+            </div>
+
+            <div className="control-group">
               <label>Instrument:</label>
               <select
                 value={instrument}
@@ -484,11 +496,11 @@ const AdvancedRiffGenerator = () => {
               Play Riff
             </button>
             <button 
-  onClick={playChordProgression} 
-  disabled={!chordProgression || chordProgression.length === 0 || isPlaying}
->
-  Play Chords ({chordProgression.length > 0 ? chordProgression.map(c => c?.symbol || '?').join('-') : 'N/A'})
-</button>
+              onClick={playChordProgression} 
+              disabled={chordProgression.length === 0 || isPlaying}
+            >
+              Play Chords ({chordProgression.map(c => c?.symbol || '?').join('-')})
+            </button>
           </div>
 
           <div className="output-section">
@@ -502,58 +514,51 @@ const AdvancedRiffGenerator = () => {
             </div>
 
             <div className="chord-progression">
-  <h2>Chord Progression:</h2>
-  <div className="chords">
-    {chordProgression.map((chord, index) => (
-      chord && chord.symbol ? (
-        <div 
-          key={index} 
-          className={`chord ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
-        >
-          <div className="chord-symbol">{chord.symbol}</div>
-          <div className="chord-name">{chord.name || chord.symbol}</div>
-        </div>
-      ) : null
-    ))}
-  </div>
-</div>
+              <h2>Chord Progression:</h2>
+              <div className="chords">
+                {chordProgression.map((chord, index) => (
+                  <div 
+                    key={index} 
+                    className={`chord ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
+                  >
+                    <div className="chord-symbol">{chord.symbol}</div>
+                    <div className="chord-name">{chord.name}</div>
+                    <div className="chord-notes">
+                      {chord.notes.map((note, i) => (
+                        <span key={i} className="chord-note">{note}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="circle-of-fifths-panel">
-          <h2>Circle of Fifths - {selectedKey} {scaleType.charAt(0).toUpperCase() + scaleType.slice(1)}</h2>
-          
+          <h2>Circle of Fifths</h2>
           <div className="circle-container">
-            {circleOfFifths.map((item, index) => (
-              <div
-                key={item.key}
-                className={`circle-item ${item.isCurrent ? 'current' : ''}`}
-                style={{
-                  transform: `rotate(${index * 30}deg) translate(200px) rotate(${-index * 30}deg)`
-                }}
-              >
-                <div className="key-degree">{item.degree}</div>
-                <div className="key-name">{item.key}</div>
-                <div className="key-chords">
-                  {item.chords.slice(0, 3).map((chord, i) => (
-                    <div key={i} className="chord-symbol">{chord.symbol}</div>
-                  ))}
+            <div className="circle-visualization">
+              {circleOfFifths.map((item, index) => (
+                <div
+                  key={item.key}
+                  className={`circle-key ${item.isCurrent ? 'current' : ''}`}
+                  style={{
+                    transform: `rotate(${index * 30}deg) translate(12em) rotate(${-index * 30}deg)`
+                  }}
+                >
+                  <div className="key-info">
+                    <div className="key-degree">{item.degree}</div>
+                    <div className="key-name">{item.key}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="circle-center">
-            <div className="current-key">{selectedKey}</div>
-            <div className="current-scale">{scaleType.charAt(0).toUpperCase() + scaleType.slice(1)}</div>
-          </div>
-
-          <div className="scale-info">
-            <h3>{selectedKey} {scaleType.charAt(0).toUpperCase() + scaleType.slice(1)} Scale:</h3>
-            <div className="scale-notes">
-              {Scale.get(`${selectedKey} ${scaleType}`).notes.map((note, index) => (
-                <span key={index} className="note">{note}</span>
               ))}
+            </div>
+            <div className="circle-center">
+              <div className="current-scale-info">
+                <div className="current-key">{selectedKey}</div>
+                <div className="current-scale">{scaleType.charAt(0).toUpperCase() + scaleType.slice(1)}</div>
+              </div>
             </div>
           </div>
         </div>

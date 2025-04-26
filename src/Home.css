@@ -184,3 +184,74 @@ button:hover {
 .pedal input[type="range"] {
   width: 80px; /* Daha küçük genişlik */
 }
+
+.image-container {
+  display: flex;
+  flex-direction: column; /* Görselleri alt alta yerleştir */
+  justify-content: flex-start; /* Görselleri yukarı hizala */
+  align-items: center; /* Görselleri yatayda ortala */
+  width: 100vw; /* Tam genişlik */
+  height: auto; /* Yükseklik içeriğe göre ayarlanır */
+  overflow: hidden; /* Taşan içerikleri gizle */
+  margin: 0; /* Varsayılan boşlukları kaldır */
+  padding: 0;
+}
+
+.home-image {
+  width: 100%; /* Görsellerin tam genişlikte olmasını sağlar */
+  height: 45vh; /* Her görselin yüksekliği ekranın %45'i kadar */
+  object-fit: cover; /* Görselleri düzgün bir şekilde kırp */
+  transition: transform 0.3s ease;
+}
+
+.home-image:hover {
+  transform: scale(1.05); /* Hover sırasında büyütme efekti */
+}
+
+.image-gap {
+  height: 200px; /* Boşluk boyutunu büyüt */
+  width: 100%; /* Tam genişlik */
+  background-color: #f9f9f9; /* Hafif gri arka plan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+.site-info-panel {
+  max-width: 800px;
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Panel için gölge */
+}
+
+.site-info-panel h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.site-info-panel p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.site-info-panel button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.site-info-panel button:hover {
+  background-color: #0056b3;
+}

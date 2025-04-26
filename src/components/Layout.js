@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 import Subheader from "./Subheader";
 import logo from "../assets/logo.png";
 import "./Layout.css";
@@ -8,12 +9,16 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr");
 
-  const handleLogout = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    navigate("/login");
+  const handleLogout = async () => {
+    const auth = getAuth();
+    try {
+      await signOut(auth);
+      console.log("Sign out successful");
+      navigate("/login", { replace: true }); // ← BU ŞART
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
-
   return (
     <div className="layout">
       {/* Ana Header */}

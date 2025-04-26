@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Yönlendirme için useNavigate'i içe aktarın
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import logo from "./assets/logo.png";
+import unnamed1 from "./assets/unnamed (1).png";
+import unnamed2 from "./assets/unnamed (2).png";
 import Subheader from "./components/Subheader";
+
 const Home = () => {
-  const navigate = useNavigate(); // Yönlendirme için hook
-  const [language, setLanguage] = useState("tr");
+  const navigate = useNavigate();
+  const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
 
   const handleLogout = () => {
-    // Kullanıcı bilgilerini temizle
     localStorage.removeItem("username");
     localStorage.removeItem("password");
-
-    // Login sayfasına yönlendir
     navigate("/login");
   };
   const menuItems = [
@@ -119,7 +119,29 @@ const Home = () => {
       </div>
 
       {/* Alt Header */}
-      <Subheader menuItems={menuItems} />
+      <Subheader language={language} /> {/* Dil state'i Subheader'a prop olarak geçildi */}
+
+      {/* Görseller */}
+      <div className="image-container">
+        <img src={unnamed1} alt="Unnamed 1" className="home-image" />
+
+        {/* Görseller arasındaki boşluk ve tanıtım paneli */}
+        <div className="image-gap">
+          <div className="site-info-panel">
+            <h2>{language === "tr" ? "Sitemize Hoşgeldiniz!" : "Welcome to Our Site!"}</h2>
+            <p>
+              {language === "tr"
+                ? "Gitar tutkunları için en iyi araçları ve kaynakları keşfedin. Riff oluşturuculardan ton laboratuvarlarına kadar, gitar becerilerinizi bir üst seviyeye taşımanız için ihtiyacınız olan her şey burada."
+                : "Discover the best tools and resources for guitar enthusiasts. From riff generators to tone labs, we have everything you need to take your guitar skills to the next level."}
+            </p>
+            <button onClick={() => navigate("/about")}>
+              {language === "tr" ? "Daha Fazla Bilgi" : "Learn More"}
+            </button>
+          </div>
+        </div>
+
+        <img src={unnamed2} alt="Unnamed 2" className="home-image" />
+      </div>
     </div>
   );
 };

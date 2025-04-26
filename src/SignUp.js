@@ -1,34 +1,22 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // Firebase Authentication fonksiyonlarını ekliyoruz
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "./Firebase"; // Firebase config dosyanızdan
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
-    try {
-      await signInWithEmailAndPassword(auth, email, password); // Giriş işlemi
-      navigate("/home"); // Başarılı giriş sonrası yönlendirme
-    } catch (err) {
-      setError(err.message); // Hata mesajını göster
-    }
-  };
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
     const auth = getAuth();
 
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log(user);
-      navigate("/home"); // Başarılı giriş sonrası yönlendirme
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/home"); // Başarılı kayıt sonrası yönlendirme
     } catch (err) {
       setError(err.message); // Hata mesajını göster
     }
@@ -36,8 +24,8 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Giriş Yap</h2>
-      <form onSubmit={handleLogin}>
+      <h2>Kayıt Ol</h2>
+      <form onSubmit={handleSignUp}>
         <div>
           <label>Email:</label>
           <input
@@ -57,12 +45,10 @@ const Login = () => {
           />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Giriş Yap</button>
+        <button type="submit">Kayıt Ol</button>
       </form>
-
-      <button onClick={handleGoogleLogin}>Google ile Giriş Yap</button>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

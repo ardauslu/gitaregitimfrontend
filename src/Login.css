@@ -1,119 +1,102 @@
-body {
+/* Login Sayfası Genel Arka Plan */
+.login-page {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); /* Havalı bir degrade */
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite; /* Arka plan animasyonu */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* Arka Plan Animasyonu */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Login Container */
 .login-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz arka plan */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
 }
 
-.login-image {
+.login-container .image-container {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-image img {
-  max-width: 80%;
+.login-container .chatgpt-image {
+  width: 400px; /* Daha küçük boyut */
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.login-form {
+.login-container .form-container {
   flex: 1;
-  max-width: 400px;
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  padding: 20px;
 }
 
-.login-form h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.login-form p {
-  font-size: 14px;
-  color: #666;
+.login-container .form-group {
   margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
   text-align: left;
 }
 
-.form-group label {
+.login-container .form-group label {
   display: block;
   font-size: 14px;
   color: #333;
   margin-bottom: 5px;
 }
 
-.form-group input {
+.login-container .form-group input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-.login-button {
+.login-container .form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.login-container .login-button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-button:hover {
+.login-container .login-button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
-.signup-link {
-  margin-top: 15px;
+.login-container .error-message {
+  color: red;
   font-size: 14px;
-  color: #666;
-}
-
-.signup-link a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.signup-link a:hover {
-  text-decoration: underline;
-}
-
-.google-login-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  background-color: #4285f4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.google-login-button:hover {
-  background-color: #357ae8;
+  margin-top: 10px;
 }

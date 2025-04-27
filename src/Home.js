@@ -6,21 +6,13 @@ import logo from "./assets/logo.png";
 import unnamed1 from "./assets/unnamed (1).png";
 import unnamed2 from "./assets/unnamed (2).png";
 import Subheader from "./components/Subheader";
-import { signOut } from "firebase/auth"; // Bunu import et, Home.js içinde
+import { useAuth } from "./AuthContext";
 const Home = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth); // Firebase'den çıkış yap
-      localStorage.removeItem("username");
-      localStorage.removeItem("password");
-      navigate("/login");
-    } catch (error) {
-      console.error("Çıkış yaparken hata:", error);
-    }
-  };
+  const { logout } = useAuth();
+  
   const menuItems = [
     {
       title: language === "tr" ? "Elektro Gitar Dersleri" : "Electric Guitar Lessons",
@@ -118,7 +110,7 @@ const Home = () => {
           </button>
         </div>
         <div className="header-right">
-          <button className="logout-button" onClick={handleLogout}>
+          <button className="logout-button" onClick={logout}>
             {language === "tr" ? "Çıkış Yap" : "Logout"}
           </button>
         </div>

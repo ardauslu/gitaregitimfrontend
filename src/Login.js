@@ -72,6 +72,12 @@ const Login = () => {
             </button>
           </form>
           {error && <p className="error-message">{error}</p>}
+          <button
+            className="signup-button"
+            onClick={() => navigate("/signup")} // Sign Up butonu için yönlendirme
+          >
+            Sign Up
+          </button>
         </div>
       </div>
     </div>

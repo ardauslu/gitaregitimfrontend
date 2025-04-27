@@ -100,3 +100,21 @@
   font-size: 14px;
   margin-top: 10px;
 }
+
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #28a745; /* Yeşil renk */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-button:hover {
+  background-color: #218838; /* Daha koyu yeşil */
+  transform: translateY(-2px);
+}

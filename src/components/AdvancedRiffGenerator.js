@@ -876,27 +876,26 @@ const AdvancedRiffGenerator = () => {
     
     {/* Full chord names (Cmaj7, G7, etc.) */}
     <div className="chord-names" data-scale-type={scaleType}>
-      {chordProgression.map((chord, index) => (
-        <div 
-          key={`${chord.fullName}-${index}`}
-          className={`chord-name ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
-        >
-          {chord.fullName}
-          {activeChords.includes(chord.symbol) && (
-            <div className="voicing-details">
-              <div className="chord-notes">
-                {chord.notes.map((note, i) => (
-                  <span key={i} className="note">{note}</span>
-                ))}
-              </div>
-              {chord.extensions && (
-                <div className="extensions">{chord.extensions}</div>
-              )}
-            </div>
-          )}
+  {chordProgression.map((chord, index) => (
+    <div 
+      key={`${chord.fullName}-${index}`}
+      className={`chord-name ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
+    >
+      {chord.fullName}
+      {/* Voicing details artık her zaman gösterilecek */}
+      <div className="voicing-details">
+        <div className="chord-notes">
+          {chord.notes.map((note, i) => (
+            <span key={i} className="note">{note}</span>
+          ))}
         </div>
-      ))}
+        {chord.extensions && (
+          <div className="extensions">{chord.extensions}</div>
+        )}
+      </div>
     </div>
+  ))}
+</div>
   </div>
 </div>
           </div>

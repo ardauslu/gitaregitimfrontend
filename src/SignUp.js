@@ -1,54 +1,106 @@
 import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./Firebase"; // Firebase config dosyanızdan
+import "./Login.css"; // Login.css'i yeniden kullanıyoruz
+import chatgptImage from "./assets/chatgpt.png"; // Resmi içe aktarın
 
-const SignUp = () => {
-  const navigate = useNavigate();
+const Signup = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSignUp = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    const auth = getAuth();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/home"); // Başarılı kayıt sonrası yönlendirme
+      const response = await fetch("http://localhost:5000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Signup failed");
+      }
+
+      // Kayıt başarılıysa login sayfasına yönlendir
+      navigate("/login");
     } catch (err) {
-      setError(err.message); // Hata mesajını göster
+      setError(err.message);
     }
   };
 
   return (
-    <div>
-      <h2>Kayıt Ol</h2>
-      <form onSubmit={handleSignUp}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="login-page">
+      <div className="login-container">
+        <div className="image-container">
+          <img src={chatgptImage} alt="ChatGPT Logo" className="chatgpt-image" />
         </div>
-        <div>
-          <label>Şifre:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="form-container">
+          <form onSubmit={handleSignup}>
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+            <button type="submit" className="login-button">
+              Sign Up
+            </button>
+          </form>
+          {error && <p className="error-message">{error}</p>}
         </div>
-        {error && <p>{error}</p>}
-        <button type="submit">Kayıt Ol</button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Signup;

@@ -32,7 +32,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px; /* Daha küçük padding */
-  background: linear-gradient(45deg, #000, #333);
+  background: linear-gradient(45deg, #fff, #333);
   color: white;
   height: 80px; /* Daha küçük yükseklik */
   border-bottom-left-radius: 10px;

@@ -92,6 +92,16 @@ const Subheader = ({ language }) => {
 
   return (
     <div className="sub-header">
+      {/* Anasayfa Bağlantısı */}
+      <a
+        onClick={() => navigate("/home")}
+        className="sub-header-home"
+        style={{ cursor: "pointer" }}
+      >
+        {language === "tr" ? "Anasayfa" : "Home"}
+      </a>
+
+      {/* Diğer Menü Öğeleri */}
       {menuItems.map((menu, index) => (
         <div className="sub-header-item" key={index}>
           <span>{menu.title}</span>
@@ -111,5 +121,4 @@ const Subheader = ({ language }) => {
     </div>
   );
 };
-
 export default Subheader;

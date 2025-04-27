@@ -1,0 +1,27 @@
+[
+    {
+      "title": "Ders 1: Orta Düzey Gam Çalışmaları",
+      "url": "https://www.youtube.com/watch?v=example1",
+      "description": "Bu derste orta düzey gam çalışmaları yaparak hız ve doğruluk kazanacaksınız."
+    },
+    {
+      "title": "Ders 2: Orta Düzey Akor Geçişleri",
+      "url": "https://www.youtube.com/watch?v=example2",
+      "description": "Bu derste akor geçişlerini daha akıcı hale getirmek için teknikler öğreneceksiniz."
+    },
+    {
+      "title": "Ders 3: Orta Düzey Ritim Teknikleri",
+      "url": "https://www.youtube.com/watch?v=example3",
+      "description": "Bu derste ritim tekniklerini geliştirmek için egzersizler yapacağız."
+    },
+    {
+      "title": "Ders 4: Orta Düzey Solo Çalışmaları",
+      "url": "https://www.youtube.com/watch?v=example4",
+      "description": "Bu derste solo çalma tekniklerini geliştirmek için çalışacağız."
+    },
+    {
+      "title": "Ders 5: Orta Düzey Arpej Teknikleri",
+      "url": "https://www.youtube.com/watch?v=example5",
+      "description": "Bu derste arpej tekniklerini daha etkili bir şekilde kullanmayı öğreneceksiniz."
+    }
+  ]

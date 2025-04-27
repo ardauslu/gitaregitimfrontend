@@ -1,42 +1,27 @@
-.sub-header {
-    display: flex;
-    background-color: #f8f9fa;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .sub-header-item {
-    margin-right: 20px;
-    position: relative;
-  }
-  
-  .sub-header-item span {
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .sub-header-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    z-index: 10;
-  }
-  
-  .sub-header-item:hover .sub-header-dropdown {
-    display: block;
-  }
-  
-  .sub-header-dropdown a {
-    display: block;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .sub-header-dropdown a:hover {
-    background-color: #f1f1f1;
-  }
+.subheader-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Menü öğeleri arasındaki boşluk */
+  padding: 10px 0;
+  background-color: #f8f9fa; /* Hafif bir arka plan rengi */
+  border-bottom: 1px solid #ddd; /* Alt çizgi */
+}
+
+.subheader-menu-item.home {
+  font-size: 1rem; /* Biraz daha büyük yazı boyutu */
+  padding: 8px 15px; /* Daha geniş iç boşluk */
+  border-radius: 25px; /* Daha yuvarlak köşeler */
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradyan arka plan */
+  color: #fff; /* Beyaz yazı rengi */
+  font-weight: bold; /* Kalın yazı */
+  text-decoration: none; /* Alt çizgiyi kaldır */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.subheader-menu-item.home:hover {
+  transform: translateY(-3px); /* Hover sırasında yukarı kaldır */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Hover sırasında daha belirgin gölge */
+  background: linear-gradient(135deg, #2575fc, #6a11cb); /* Gradyan yönünü değiştir */
+}

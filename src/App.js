@@ -10,6 +10,7 @@ import Intermediate from "./pages/Intermediate";
 import Advanced from "./pages/Advanced";
 import Etudes from "./pages/Etudes";
 import YourLessons from "./pages/YourLessons";
+import Profile from "./pages/Profile";
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -26,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/advanced" element={<Advanced />} />
       <Route path="/etudes" element={<Etudes />} />
       <Route path="/your-lessons" element={<YourLessons />} />
+      <Route path="/profile" element={<Profile/>} />
     </Routes>
   );
 };

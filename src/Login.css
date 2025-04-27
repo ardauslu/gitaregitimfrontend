@@ -118,3 +118,15 @@
   background-color: #218838; /* Daha koyu yeşil */
   transform: translateY(-2px);
 }
+
+.success-message {
+  color: #28a745; /* Yeşil renk */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  background: rgba(40, 167, 69, 0.1); /* Hafif yeşil arka plan */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

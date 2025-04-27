@@ -1,40 +1,51 @@
-.layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f9fa;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .header-logo {
-    height: 40px;
-  }
-  
-  .language-toggle {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .logout-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-  }
+.welcome-container {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Profil resmi ve isim arasındaki boşluk */
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Resim ve isim arasındaki boşluk */
+}
+
+.profile-image-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #6a11cb; /* Çerçeve rengi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge */
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.profile-image-small {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0, 0, 0, 0.8); /* Siyah ve yumuşak çerçeve */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover için geçiş efekti */
+}
+
+.profile-image-small:hover {
+  transform: scale(1.1); /* Hover sırasında resmi büyüt */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Hover sırasında daha belirgin gölge */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* Daha beyaza yakın bir arka plan rengi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+  border-bottom: 1px solid #ddd; /* Alt çizgi */
+}

@@ -1,0 +1,90 @@
+/* Genel Admin Paneli Stili */
+.admin-panel {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb); /* İlk gradyan renkleri */
+    background-size: 300% 300%; /* Animasyon için genişletilmiş arka plan */
+    animation: gradientAnimation 6s ease infinite; /* Gradyan animasyonu */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    overflow-x: auto; /* Yatay kaydırma çubuğu eklenir */
+  }
+  
+  /* Başlık Stili */
+  .admin-panel h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Tablo Stili */
+  .reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservations-table th,
+  .reservations-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .reservations-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .reservations-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .reservations-table tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .reservations-table tr:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: scale(1.01);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Link Stili */
+  .reservations-table a {
+    color: #4285f4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .reservations-table a:hover {
+    color: #357ae8;
+    text-decoration: underline;
+  }
+  
+  /* Gradyan Animasyonu */
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

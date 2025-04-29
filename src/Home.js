@@ -1,18 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import { auth } from "./Firebase"; 
-import logo from "./assets/logo.png";
 import unnamed1 from "./assets/unnamed (1).png";
 import unnamed2 from "./assets/unnamed (2).png";
 import Subheader from "./components/Subheader";
+import Header from "./components/Header"; // Header bileşenini içe aktarın
 import { useAuth } from "./AuthContext";
+
 const Home = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
-
+  const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
   const { logout } = useAuth();
-  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/users/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Kullanıcı bilgileri alınamadı.");
+        }
+
+        const data = await response.json();
+        setIsAdmin(data.isAdmin); // Kullanıcının admin olup olmadığını kontrol et
+      } catch (err) {
+        console.error("Kullanıcı bilgileri alınamadı:", err);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const menuItems = [
     {
       title: language === "tr" ? "Elektro Gitar Dersleri" : "Electric Guitar Lessons",
@@ -74,10 +99,10 @@ const Home = () => {
       ],
     },
     {
-      title: language === "tr" ? "AI Riff Asistanı" : "AI Riff Assistant",
+      title: language === "tr" ? "Özel Ders" : "Private Lesson",
       options: [
-        { name: language === "tr" ? "Riff Öner" : "Suggest Riff", path: "/suggest-riff" },
-        { name: language === "tr" ? "Riff Analizi" : "Riff Analysis", path: "/riff-analysis" },
+        { name: language === "tr" ? "Ders Konusu Yarat" : "Create Lesson Subject", path: "/lesson-subject" },
+        { name: language === "tr" ? "Ders Al" : "Take Lesson", path: "/take-lesson" },
       ],
     },
     {
@@ -92,32 +117,10 @@ const Home = () => {
   return (
     <div>
       {/* Ana Header */}
-      <div className="header">
-        <div className="header-left">
-          <img src={logo} alt="Logo" className="header-logo" />
-        </div>
-        <div className="header-middle">
-          <div className="welcome-container">
-            <span className="username">
-              {language === "tr" ? "Hoşgeldiniz" : "Welcome"}, {localStorage.getItem("username")}
-            </span>
-          </div>
-          <button
-            className="language-toggle"
-            onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
-          >
-            {language === "tr" ? "EN" : "TR"}
-          </button>
-        </div>
-        <div className="header-right">
-          <button className="logout-button" onClick={logout}>
-            {language === "tr" ? "Çıkış Yap" : "Logout"}
-          </button>
-        </div>
-      </div>
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
 
-      {/* Alt Header */}
-      <Subheader language={language} /> {/* Dil state'i Subheader'a prop olarak geçildi */}
+{/* Subheader */}
+<Subheader language={language} />
 
       {/* Görseller */}
       <div className="image-container">

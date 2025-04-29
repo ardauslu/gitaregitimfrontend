@@ -1,27 +1,30 @@
 [
-    {
-      "title": "Ders 1: Orta Düzey Gam Çalışmaları",
-      "url": "https://www.youtube.com/watch?v=example1",
-      "description": "Bu derste orta düzey gam çalışmaları yaparak hız ve doğruluk kazanacaksınız."
-    },
-    {
-      "title": "Ders 2: Orta Düzey Akor Geçişleri",
-      "url": "https://www.youtube.com/watch?v=example2",
-      "description": "Bu derste akor geçişlerini daha akıcı hale getirmek için teknikler öğreneceksiniz."
-    },
-    {
-      "title": "Ders 3: Orta Düzey Ritim Teknikleri",
-      "url": "https://www.youtube.com/watch?v=example3",
-      "description": "Bu derste ritim tekniklerini geliştirmek için egzersizler yapacağız."
-    },
-    {
-      "title": "Ders 4: Orta Düzey Solo Çalışmaları",
-      "url": "https://www.youtube.com/watch?v=example4",
-      "description": "Bu derste solo çalma tekniklerini geliştirmek için çalışacağız."
-    },
-    {
-      "title": "Ders 5: Orta Düzey Arpej Teknikleri",
-      "url": "https://www.youtube.com/watch?v=example5",
-      "description": "Bu derste arpej tekniklerini daha etkili bir şekilde kullanmayı öğreneceksiniz."
-    }
-  ]
+  {
+    "title_tr": "Ders 1: Orta Seviye Akorlar",
+    "title_en": "Lesson 1: Intermediate Chords",
+    "url": "https://youtu.be/example1",
+    "description_tr": "Bu derste orta seviye akorları öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn intermediate chords."
+  },
+  {
+    "title_tr": "Ders 2: Barre Akorları",
+    "title_en": "Lesson 2: Barre Chords",
+    "url": "https://youtu.be/example2",
+    "description_tr": "Bu derste barre akorlarını çalmayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn how to play barre chords."
+  },
+  {
+    "title_tr": "Ders 3: İleri Ritm Teknikleri",
+    "title_en": "Lesson 3: Advanced Rhythm Techniques",
+    "url": "https://youtu.be/example3",
+    "description_tr": "Bu derste ileri ritm tekniklerini keşfedeceksiniz.",
+    "description_en": "In this lesson, you will explore advanced rhythm techniques."
+  },
+  {
+    "title_tr": "Ders 4: Solo Çalışmaları",
+    "title_en": "Lesson 4: Solo Practices",
+    "url": "https://youtu.be/example4",
+    "description_tr": "Bu derste solo çalma tekniklerini geliştireceksiniz.",
+    "description_en": "In this lesson, you will improve your solo playing techniques."
+  }
+]

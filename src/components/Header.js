@@ -1,0 +1,88 @@
+import React, { useState, useEffect } from "react";
+import "./Header.css";
+import logo from "../assets/logo.png";
+
+const Header = ({ language, setLanguage, logout }) => {
+  const [profileImage, setProfileImage] = useState(""); // Profil resmi için state
+  const [username, setUsername] = useState(""); // Kullanıcı adı için state
+  const [isLoading, setIsLoading] = useState(true); // Yükleme durumu için state
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/users/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Profil bilgileri alınamadı.");
+        }
+
+        const data = await response.json();
+
+        // Profil resmi kontrolü ve formatlama
+        if (data.profileImage) {
+          const isBase64 = data.profileImage.startsWith("/9j/"); // Base64 formatını kontrol et
+          const formattedImage = isBase64
+            ? `data:image/jpeg;base64,${data.profileImage}`
+            : data.profileImage; // Eğer base64 değilse, direkt URL olarak kullan
+          setProfileImage(formattedImage);
+        }
+
+        setUsername(data.username || ""); // Kullanıcı adını ayarla
+      } catch (err) {
+        console.error("Profil bilgileri alınamadı:", err);
+      } finally {
+        setIsLoading(false); // Yükleme tamamlandı
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  return (
+    <div className="header">
+      {/* Sol Bölüm: Hoşgeldiniz Mesajı */}
+      <div className="header-left">
+        <span className="welcome-message">
+          {language === "tr" ? "Hoşgeldiniz" : "Welcome"}
+        </span>
+      </div>
+
+      {/* Orta Bölüm: Profil Resmi veya Yükleme Animasyonu */}
+      <div className="header-middle">
+        {isLoading ? (
+          <div className="profile-loading"></div> // Parlayan yükleme animasyonu
+        ) : (
+          profileImage && (
+            <img
+              src={profileImage}
+              alt="Profil Resmi"
+              className="profile-image"
+            />
+          )
+        )}
+      </div>
+
+      {/* Sağ Bölüm: Kullanıcı Adı, Dil Butonu ve Çıkış Butonu */}
+      <div className="header-right">
+        <span className="username">{username}</span>
+        <button
+          className="language-toggle"
+          onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
+        >
+          {language === "tr" ? "EN" : "TR"}
+        </button>
+        <button className="logout-button" onClick={logout}>
+          {language === "tr" ? "Çıkış Yap" : "Logout"}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Header;

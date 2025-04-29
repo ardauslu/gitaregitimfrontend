@@ -22,7 +22,7 @@
 .profile-name {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #f9f9f9;
 }
 
 .profile-image-small {
@@ -48,4 +48,41 @@
   background-color: #f9f9f9; /* Daha beyaza yakın bir arka plan rengi */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
   border-bottom: 1px solid #ddd; /* Alt çizgi */
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  height: 50px;
+}
+
+.header-middle h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.header-right .logout-button {
+  padding: 8px 15px;
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-right .logout-button:hover {
+  background-color: #1a5bbf;
+}
+
+.content {
+  padding: 20px;
+  margin-top: 20px;
 }

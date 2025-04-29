@@ -825,3 +825,34 @@
   box-shadow: 0 0 15px rgba(71, 118, 230, 0.5);
   transform: scale(1.1);
 }
+
+/* Görsel ve başlık konteyneri */
+.notes-image-container {
+  display: flex;
+  flex-direction: column; /* Elemanları dikey olarak hizala */
+  align-items: center; /* Elemanları yatayda ortala */
+  margin-top: 20px;
+  width: 100%; /* Genişliği tam yap */
+}
+
+/* Başlık */
+.notes-image-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px; /* Görsel ile başlık arasında boşluk */
+  color: #ddd;
+}
+
+/* Görsel */
+.notes-image {
+  max-width: 80%; /* Görselin genişliği ekranın %80'ini geçmesin */
+  height: auto;
+  border-radius: 10px; /* Köşeleri yuvarlat */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* Hafif gölge efekti */
+  transition: transform 0.3s ease;
+}
+
+.notes-image:hover {
+  transform: scale(1.05); /* Hover sırasında büyütme efekti */
+}

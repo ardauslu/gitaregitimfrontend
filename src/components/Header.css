@@ -1,0 +1,127 @@
+/* Genel Header Stili */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Sol Bölüm: Hoşgeldiniz Mesajı */
+.header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-left .welcome-message {
+  font-size: 1.2rem;
+  color: #f9f9f9;
+}
+
+/* Orta Bölüm: Profil Resmi */
+.header-middle {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-middle .profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Sağ Bölüm: Kullanıcı Adı */
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-right .username {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.header-right .logout-button {
+  padding: 8px 15px;
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-right .logout-button:hover {
+  background-color: #1a5bbf;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+.language-toggle {
+  padding: 5px 10px;
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Kullanıcı adı ile dil butonu arasına mesafe */
+  margin-right: 10px; /* Dil butonu ile çıkış butonu arasına mesafe */
+  transition: background-color 0.3s ease;
+}
+
+.language-toggle:hover {
+  background-color: #1a5bbf;
+}
+
+.logout-button {
+  padding: 8px 15px;
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #1a5bbf;
+}
+
+/* Yükleme Animasyonu */
+/* Yükleme Animasyonu: Parlayan Efekt */
+.profile-loading {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #ddd, #f0f0f0, #ddd);
+  background-size: 200% 200%;
+  animation: shimmer 1.5s infinite;
+  margin: auto;
+}
+
+/* Parlayan animasyon */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

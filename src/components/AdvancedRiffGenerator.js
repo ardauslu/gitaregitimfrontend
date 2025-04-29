@@ -4,6 +4,8 @@ import { Chord , Scale } from 'tonal';
 import './AdvancedRiffGenerator.css';
 import Layout from './Layout';
 import notesImage from '../assets/notes.png'; // Görseli içe aktarın
+import Header from "../components/Header";
+import Subheader from "../components/Subheader";
 
 class RiffGenerator {
   constructor() {
@@ -180,6 +182,7 @@ const AdvancedRiffGenerator = () => {
   const instrumentRef = useRef(null);
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
+  const [language, setLanguage] = useState("tr"); // Dil state'i
 
  
 
@@ -751,41 +754,53 @@ const AdvancedRiffGenerator = () => {
 
   const circleOfFifths = createCircleOfFifths();
 
-  return (
-    <Layout>
+  return (<div>
+    <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+      <Subheader language={language} />
+
       <div className="advanced-riff-generator">
         <div className="main-panel">
-          <h1>Advanced Riff Generator</h1>
+        <h1>
+            {language === "tr"
+              ? "Gelişmiş Riff Üretici"
+              : "Advanced Riff Generator"}
+          </h1>
           
           <div className="controls">
-            <div className="control-group">
-              <label>Key:</label>
-              <select 
-                value={selectedKey} 
+          <div className="control-group">
+              <label>{language === "tr" ? "Ton:" : "Key:"}</label>
+              <select
+                value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
                 disabled={isPlaying}
               >
-                {['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F'].map(k => (
-                  <option key={k} value={k}>{k}</option>
+                {["C", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#", "F"].map((k) => (
+                  <option key={k} value={k}>
+                    {k}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className="control-group">
-              <label>Scale Type:</label>
-              <select 
-                value={scaleType} 
+              <label>{language === "tr" ? "Skala Türü:" : "Scale Type:"}</label>
+              <select
+                value={scaleType}
                 onChange={(e) => setScaleType(e.target.value)}
                 disabled={isPlaying}
               >
-                {riffGeneratorRef.current.scaleTypes.map(type => (
-                  <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                {riffGeneratorRef.current.scaleTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className="control-group">
-              <label>Tempo: {tempo} BPM</label>
+              <label>
+                {language === "tr" ? "Tempo:" : "Tempo:"} {tempo} BPM
+              </label>
               <input
                 type="range"
                 min="40"
@@ -797,7 +812,9 @@ const AdvancedRiffGenerator = () => {
             </div>
 
             <div className="control-group">
-              <label>Riff Length: {riffLength}</label>
+              <label>
+                {language === "tr" ? "Riff Uzunluğu:" : "Riff Length:"} {riffLength}
+              </label>
               <input
                 type="range"
                 min="4"
@@ -809,93 +826,113 @@ const AdvancedRiffGenerator = () => {
             </div>
 
             <div className="control-group">
-              <label>Instrument:</label>
-              <select
-  value={instrument}
-  onChange={(e) => setInstrument(e.target.value)}
-  disabled={isPlaying}
->
-  <option value="acoustic_guitar_nylon">Nylon Acoustic</option>
-  <option value="acoustic_guitar_steel">Steel Acoustic</option>
-  <option value="electric_guitar_jazz">Jazz Electric</option>
-  <option value="electric_guitar_clean">Clean Electric</option>
-</select>
-            </div>
+  <label>{language === "tr" ? "Enstrüman:" : "Instrument:"}</label>
+  <select
+    value={instrument}
+    onChange={(e) => setInstrument(e.target.value)}
+    disabled={isPlaying}
+  >
+    <option value="acoustic_guitar_nylon">
+      {language === "tr" ? "Klasik" : "Nylon Acoustic"}
+    </option>
+    <option value="acoustic_guitar_steel">
+      {language === "tr" ? "Akustik" : "Steel Acoustic"}
+    </option>
+    <option value="electric_guitar_jazz">
+      {language === "tr" ? "Caz Elektro" : "Jazz Electric"}
+    </option>
+    <option value="electric_guitar_clean">
+      {language === "tr" ? "Temiz Elektro" : "Clean Electric"}
+    </option>
+  </select>
+</div>
           </div>
 
           <div className="action-buttons">
-            <button 
-              onClick={generateRiff} 
-              disabled={isPlaying}
-              className="generate-btn"
-            >
-              Generate Riff
+            <button onClick={generateRiff} disabled={isPlaying} className="generate-btn">
+              {language === "tr" ? "Riff Üret" : "Generate Riff"}
             </button>
-            <button 
-              onClick={playRiff} 
+            <button
+              onClick={playRiff}
               disabled={riff.length === 0 || isPlaying}
               className="play-btn"
             >
-              Play Riff
+              {language === "tr" ? "Riff Çal" : "Play Riff"}
             </button>
-            <button 
-              onClick={playChordProgression} 
+            <button
+              onClick={playChordProgression}
               disabled={isPlaying}
               className="chords-btn"
             >
-              Play I-IV-vi-V
+              {language === "tr" ? "Akor Çal" : "Play Chords"}
             </button>
           </div>
 
           <div className="output-section">
-            <div className="riff-output">
-              <h2>Generated Riff:</h2>
-              <div className="notes">
-                {riffNotes.map((note, index) => (
-                  <span key={index} className="note">{note}</span>
-                ))}
-              </div>
-            </div>
+          <div className="riff-output">
+  <h2>{language === "tr" ? "Üretilen Riff:" : "Generated Riff:"}</h2>
+  {riffNotes.length > 0 ? (
+    <div className="notes">
+      {riffNotes.map((note, index) => (
+        <span key={index} className="note">
+          {note}
+        </span>
+      ))}
+    </div>
+  ) : (
+    <p className="no-riff-message">
+      {language === "tr"
+        ? "Henüz bir riff üretilmedi."
+        : "No riff has been generated yet."}
+    </p>
+  )}
+</div>
 
             <div className="chord-progression">
-  <h2>Chord Progression:</h2>
+  <h2>{language === "tr" ? "Akor İlerleyişi:" : "Chord Progression:"}</h2>
   <div className="chord-display-container">
     {/* Roman numeral analysis (I-IV-vi-V etc.) */}
     <div className="roman-numerals">
       {chordProgression.map((chord, index) => (
-        <div 
+        <div
           key={`${chord.symbol}-${index}`}
-          className={`roman-numeral ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
+          className={`roman-numeral ${
+            activeChords.includes(chord.symbol) ? "active" : ""
+          }`}
           style={{ color: chord.color }}
         >
           {chord.romanNumeral}
-          {chord.extensions && <span className="extension">{chord.extensions}</span>}
+          {chord.extensions && (
+            <span className="extension">{chord.extensions}</span>
+          )}
         </div>
       ))}
     </div>
-    
+
     {/* Full chord names (Cmaj7, G7, etc.) */}
     <div className="chord-names" data-scale-type={scaleType}>
-  {chordProgression.map((chord, index) => (
-    <div 
-      key={`${chord.fullName}-${index}`}
-      className={`chord-name ${activeChords.includes(chord.symbol) ? 'active' : ''}`}
-    >
-      {chord.fullName}
-      {/* Voicing details artık her zaman gösterilecek */}
-      <div className="voicing-details">
-        <div className="chord-notes">
-          {chord.notes.map((note, i) => (
-            <span key={i} className="note">{note}</span>
-          ))}
+      {chordProgression.map((chord, index) => (
+        <div
+          key={`${chord.fullName}-${index}`}
+          className={`chord-name ${
+            activeChords.includes(chord.symbol) ? "active" : ""
+          }`}
+        >
+          {chord.fullName}
+          {/* Voicing details */}
+          <div className="voicing-details">
+            <div className="chord-notes">
+              {chord.notes.map((note, i) => (
+                <span key={i} className="note">{note}</span>
+              ))}
+            </div>
+            {chord.extensions && (
+              <div className="extensions">{chord.extensions}</div>
+            )}
+          </div>
         </div>
-        {chord.extensions && (
-          <div className="extensions">{chord.extensions}</div>
-        )}
-      </div>
+      ))}
     </div>
-  ))}
-</div>
   </div>
 </div>
           </div>
@@ -903,10 +940,13 @@ const AdvancedRiffGenerator = () => {
         </div>
         
         <div className="notes-image-container">
-          <img src={notesImage} alt="Notes" className="notes-image" />
-        </div>
+  <h3 className="notes-image-title">
+    {language === "tr" ? "Gitar Klavyesi Görseli" : "Guitar Fretboard Diagram"}
+  </h3>
+  <img src={notesImage} alt="Notes" className="notes-image" />
+</div>
       </div>
-    </Layout>
+      </div>
   );
 };
 

@@ -67,3 +67,105 @@
     font-size: 1rem;
     color: #666;
   }
+
+  .beginner-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .beginner-content {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .beginner-content h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .beginner-content p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  /* Video Listesi */
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Video Öğesi */
+.video-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.video-item p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+/* Video Oynatıcı */
+.video-player {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Video Listesi */
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kartlar yan yana */
+  gap: 20px; /* Kartlar arasında boşluk */
+  margin-top: 20px;
+}
+
+/* Video Kartı */
+.video-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item:hover {
+  transform: translateY(-5px); /* Hover sırasında yukarı hareket */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hover sırasında gölge efekti */
+}
+
+/* Video Başlık */
+.video-item h3 {
+  font-size: 1rem;
+  margin: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* Video Açıklama */
+.video-item p {
+  font-size: 0.9rem;
+  margin: 10px;
+  color: #666;
+  text-align: center;
+}
+
+/* Video Oynatıcı */
+.video-player {
+  width: 100%;
+  height: 150px; /* Küçük boyutlu video oynatıcı */
+  border-radius: 0;
+  overflow: hidden;
+}

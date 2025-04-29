@@ -1,27 +1,37 @@
 [
-    {
-      "title": "Ders 1: İleri Düzey Sweep Picking",
-      "url": "https://www.youtube.com/watch?v=example6",
-      "description": "Bu derste sweep picking tekniklerini ileri düzeyde geliştireceksiniz."
-    },
-    {
-      "title": "Ders 2: İleri Düzey Legato Teknikleri",
-      "url": "https://www.youtube.com/watch?v=example7",
-      "description": "Bu derste legato tekniklerini daha hızlı ve temiz bir şekilde çalmayı öğreneceksiniz."
-    },
-    {
-      "title": "Ders 3: İleri Düzey Tapping Teknikleri",
-      "url": "https://www.youtube.com/watch?v=example8",
-      "description": "Bu derste tapping tekniklerini ileri düzeyde uygulamayı öğreneceksiniz."
-    },
-    {
-      "title": "Ders 4: İleri Düzey Hız Egzersizleri",
-      "url": "https://www.youtube.com/watch?v=example9",
-      "description": "Bu derste hızınızı artırmak için özel egzersizler yapacağız."
-    },
-    {
-      "title": "Ders 5: İleri Düzey Armonik Teknikler",
-      "url": "https://www.youtube.com/watch?v=example10",
-      "description": "Bu derste armonik teknikleri ileri düzeyde kullanmayı öğreneceksiniz."
-    }
-  ]
+  {
+    "title_tr": "Ders 1: İleri Düzey Sweep Picking",
+    "title_en": "Lesson 1: Advanced Sweep Picking",
+    "url": "https://www.youtube.com/watch?v=example6",
+    "description_tr": "Bu derste sweep picking tekniklerini ileri düzeyde geliştireceksiniz.",
+    "description_en": "In this lesson, you will improve your advanced sweep picking techniques."
+  },
+  {
+    "title_tr": "Ders 2: İleri Düzey Legato Teknikleri",
+    "title_en": "Lesson 2: Advanced Legato Techniques",
+    "url": "https://www.youtube.com/watch?v=example7",
+    "description_tr": "Bu derste legato tekniklerini daha hızlı ve temiz bir şekilde çalmayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn to play legato techniques faster and cleaner."
+  },
+  {
+    "title_tr": "Ders 3: İleri Düzey Tapping Teknikleri",
+    "title_en": "Lesson 3: Advanced Tapping Techniques",
+    "url": "https://www.youtube.com/watch?v=example8",
+    "description_tr": "Bu derste tapping tekniklerini ileri düzeyde uygulamayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn to apply advanced tapping techniques."
+  },
+  {
+    "title_tr": "Ders 4: İleri Düzey Hız Egzersizleri",
+    "title_en": "Lesson 4: Advanced Speed Exercises",
+    "url": "https://www.youtube.com/watch?v=example9",
+    "description_tr": "Bu derste hızınızı artırmak için özel egzersizler yapacağız.",
+    "description_en": "In this lesson, we will do special exercises to increase your speed."
+  },
+  {
+    "title_tr": "Ders 5: İleri Düzey Armonik Teknikler",
+    "title_en": "Lesson 5: Advanced Harmonic Techniques",
+    "url": "https://www.youtube.com/watch?v=example10",
+    "description_tr": "Bu derste armonik teknikleri ileri düzeyde kullanmayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn to use harmonic techniques at an advanced level."
+  }
+]

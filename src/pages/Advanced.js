@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
 import ReactPlayer from "react-player";
+import Header from "../components/Header";
+import Subheader from "../components/Subheader";
 import "./Advanced.css";
 
 const Advanced = () => {
   const [videoData, setVideoData] = useState([]);
+  const [language, setLanguage] = useState("tr"); // Dil state'i
 
+  // Videoları dinamik olarak yükleme
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("/data/advancedVideos.json");
+        const response = await fetch("/data/advancedVideos.json"); // JSON dosyasından veri çek
         const data = await response.json();
         setVideoData(data);
       } catch (error) {
@@ -21,40 +24,46 @@ const Advanced = () => {
   }, []);
 
   return (
-    <Layout>
-      <div className="advanced-page">
-        <header className="advanced-header">
-          <h1>İleri Düzey Elektro Gitar Dersleri</h1>
-          <p>
-            Bu sayfa ileri düzey gitar derslerini içerir. Aşağıdaki dersleri
-            izleyerek gitar çalma yeteneklerinizi geliştirebilirsiniz.
-          </p>
-        </header>
+    <div>
+      <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+      <Subheader language={language} />
+      <div className="advanced-content">
+        <div className="advanced-page">
+          <header className="advanced-header">
+            <h1>
+              {language === "tr"
+                ? "İleri Düzey Dersler"
+                : "Advanced Lessons"}
+            </h1>
+            <p>
+              {language === "tr"
+                ? "İleri düzey gitar derslerini keşfedin."
+                : "Explore advanced-level guitar lessons."}
+            </p>
+          </header>
 
-        <div className="video-grid">
-          {videoData.length > 0 ? (
-            videoData.map((video, index) => (
-              <div className="video-card" key={index}>
-                <div className="video-thumbnail">
-                  <ReactPlayer
-                    url={video.url}
-                    width="100%"
-                    height="100%"
-                    controls
-                  />
-                </div>
-                <div className="video-info">
-                  <h2>{video.title}</h2>
-                  <p>{video.description}</p>
-                </div>
+          <div className="video-list">
+            {videoData.map((video, index) => (
+              <div key={index} className="video-item">
+                <ReactPlayer
+                  url={video.url}
+                  controls={true}
+                  width="100%"
+                  height="150px"
+                  className="video-player"
+                />
+                <h3>{language === "tr" ? video.title_tr : video.title_en}</h3>
+                <p>
+                  {language === "tr"
+                    ? video.description_tr
+                    : video.description_en}
+                </p>
               </div>
-            ))
-          ) : (
-            <p>Videolar yükleniyor...</p>
-          )}
+            ))}
+          </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

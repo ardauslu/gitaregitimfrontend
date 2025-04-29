@@ -1,9 +1,40 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Subheader.css";
-
+import { useEffect, useState } from "react";
 const Subheader = ({ language }) => {
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
+ 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      console.log("fetchUserData çağrıldı."); // Kontrol için log ekledik
+
+      try {
+        const response = await fetch("http://localhost:5000/api/users/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`API isteği başarısız oldu: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Kullanıcı bilgileri:", data); // Yanıtı kontrol etmek için log ekledik
+
+        setIsAdmin(data.isAdmin || false); // Kullanıcının admin olup olmadığını kontrol et
+      } catch (err) {
+        console.error("Kullanıcı bilgileri alınamadı:", err);
+        setIsAdmin(false); // Hata durumunda admin olarak işaretleme
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   // Menü öğeleri
   const menuItems = [
@@ -67,10 +98,13 @@ const Subheader = ({ language }) => {
       ],
     },
     {
-      title: language === "tr" ? "AI Riff Asistanı" : "AI Riff Assistant",
+      title: language === "tr" ? "Özel Ders" : "Private Lesson",
       options: [
-        { name: language === "tr" ? "Riff Öner" : "Suggest Riff", path: "/suggest-riff" },
-        { name: language === "tr" ? "Riff Analizi" : "Riff Analysis", path: "/riff-analysis" },
+        { name: language === "tr" ? "Ders Konusu Yarat" : "Create Lesson Subject", path: "/lesson-subject" },
+        { name: language === "tr" ? "Ders Al" : "Take Lesson", path: "/take-lesson" },
+        ...(isAdmin
+          ? [{ name: language === "tr" ? "Admin Paneli" : "Admin Panel", path: "/admin-panel" }]
+          : []), // Eğer admin ise "Admin Paneli" seçeneğini ekle
       ],
     },
     {

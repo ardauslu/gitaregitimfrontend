@@ -1,27 +1,72 @@
 [
-    {
-      "title": "Ders 1: Gitarın Temelleri",
-      "url": "https://youtu.be/L2j7g85XYMo",
-      "description": "Bu derste gitarın temelleri hakkında bilgi edineceksiniz."
-    },
-    {
-      "title": "Ders 2: Temel Akorlar",
-      "url": "https://youtu.be/L2j7g85XYMo",
-      "description": "Bu derste gitarın temel akorlarını öğreneceksiniz."
-    },
-    {
-      "title": "Ders 3: Parçalama ve Ritm Teknikleri",
-      "url": "https://youtu.be/L2j7g85XYMo",
-      "description": "Bu derste ritm teknikleri ve parçalama hakkında bilgi edineceksiniz."
-    },
-    {
-      "title": "Ders 4: Başlangıç Seviye Solo Çalışması",
-      "url": "https://youtu.be/L2j7g85XYMo",
-      "description": "Bu derste başlangıç seviyesi solo çalma teknikleri üzerinde çalışacağız."
-    },
-    {
-      "title": "Ders 5: Temel Gitar Çalma Pozisyonları",
-      "url": "https://youtu.be/L2j7g85XYMo",
-      "description": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz."
-    }
-  ]
+  {
+    "title_tr": "Ders 1: Gitarın Temelleri",
+    "title_en": "Lesson 1: Basics of Guitar",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitarın temelleri hakkında bilgi edineceksiniz.",
+    "description_en": "In this lesson, you will learn the basics of the guitar."
+  },
+  {
+    "title_tr": "Ders 2: Temel Akorlar",
+    "title_en": "Lesson 2: Basic Chords",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitarın temel akorlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn the basic chords of the guitar."
+  },
+  {
+    "title_tr": "Ders 3: Parçalama ve Ritm Teknikleri",
+    "title_en": "Lesson 3: Strumming and Rhythm Techniques",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste ritm teknikleri ve parçalama hakkında bilgi edineceksiniz.",
+    "description_en": "In this lesson, you will learn about rhythm techniques and strumming."
+  },
+  {
+    "title_tr": "Ders 4: Başlangıç Seviye Solo Çalışması",
+    "title_en": "Lesson 4: Beginner Level Solo Practice",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste başlangıç seviyesi solo çalma teknikleri üzerinde çalışacağız.",
+    "description_en": "In this lesson, we will work on beginner-level solo playing techniques."
+  },
+  {
+    "title_tr": "Ders 5: Temel Gitar Çalma Pozisyonları",
+    "title_en": "Lesson 5: Basic Guitar Playing Positions",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn basic guitar playing positions."
+  },
+  {
+    "title_tr": "Ders 6: İlk Şarkını Çal!",
+    "title_en": "Lesson 6: Play Your First Song!",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste basit akorlu ilk şarkınızı çalmayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn to play your first song with simple chords."
+  },
+  {
+    "title_tr": "Ders 7: Temel Gitar Çalma Pozisyonları",
+    "title_en": "Lesson 7: Basic Guitar Playing Positions",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn basic guitar playing positions."
+  },
+  {
+    "title_tr": "Ders 8: Temel Gitar Çalma Pozisyonları",
+    "title_en": "Lesson 8: Basic Guitar Playing Positions",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn basic guitar playing positions."
+  },
+  {
+    "title_tr": "Ders 9: Temel Gitar Çalma Pozisyonları",
+    "title_en": "Lesson 9: Basic Guitar Playing Positions",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn basic guitar playing positions."
+  },
+  {
+    "title_tr": "Ders 10: Temel Gitar Çalma Pozisyonları",
+    "title_en": "Lesson 10: Basic Guitar Playing Positions",
+    "url": "https://youtu.be/L2j7g85XYMo",
+    "description_tr": "Bu derste gitar çalma pozisyonlarını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn basic guitar playing positions."
+  }
+]

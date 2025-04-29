@@ -49,10 +49,27 @@ const Subheader = ({ language }) => {
       ],
     },
     {
+      title: language === "tr" ? "Akort & Metronom" : "Tuner & Metronome",
+      options: [
+        { name: language === "tr" ? "Akort Et" : "Tune", path: "/tune" },
+        { name: language === "tr" ? "Metronom" : "Metronome", path: "/metronome" },
+      ],
+    },
+    {
       title: language === "tr" ? "Riff Generator" : "Riff Generator",
       options: [
         { name: language === "tr" ? "Riff Oluştur" : "Generate Riff", path: "/riff-generator" },
         { name: language === "tr" ? "Riff Kaydet" : "Save Riff", path: "/save-riff" },
+      ],
+    },
+    {
+      title: language === "tr" ? "Özel Ders" : "Private Lesson",
+      options: [
+        { name: language === "tr" ? "Ders Konusu Yarat" : "Create Lesson Subject", path: "/lesson-subject" },
+        { name: language === "tr" ? "Ders Al" : "Take Lesson", path: "/take-lesson" },
+        ...(isAdmin
+          ? [{ name: language === "tr" ? "Admin Paneli" : "Admin Panel", path: "/admin-panel" }]
+          : []), // Eğer admin ise "Admin Paneli" seçeneğini ekle
       ],
     },
     {
@@ -76,13 +93,7 @@ const Subheader = ({ language }) => {
         { name: language === "tr" ? "İleri Seviye" : "Advanced Level", path: "/guitar-hero-advanced" },
       ],
     },
-    {
-      title: language === "tr" ? "Akort & Metronom" : "Tuner & Metronome",
-      options: [
-        { name: language === "tr" ? "Akort Et" : "Tune", path: "/tune" },
-        { name: language === "tr" ? "Metronom" : "Metronome", path: "/metronome" },
-      ],
-    },
+    
     {
       title: language === "tr" ? "Cover Yarışması" : "Cover Contest",
       options: [
@@ -95,16 +106,6 @@ const Subheader = ({ language }) => {
       options: [
         { name: language === "tr" ? "Test Başlat" : "Start Test", path: "/start-dna-test" },
         { name: language === "tr" ? "Sonuçlar" : "Results", path: "/dna-test-results" },
-      ],
-    },
-    {
-      title: language === "tr" ? "Özel Ders" : "Private Lesson",
-      options: [
-        { name: language === "tr" ? "Ders Konusu Yarat" : "Create Lesson Subject", path: "/lesson-subject" },
-        { name: language === "tr" ? "Ders Al" : "Take Lesson", path: "/take-lesson" },
-        ...(isAdmin
-          ? [{ name: language === "tr" ? "Admin Paneli" : "Admin Panel", path: "/admin-panel" }]
-          : []), // Eğer admin ise "Admin Paneli" seçeneğini ekle
       ],
     },
     {

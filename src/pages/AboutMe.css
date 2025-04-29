@@ -1,0 +1,33 @@
+.about-me-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #121212;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    color: white;
+    text-align: center;
+  }
+  
+  .about-me-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #00bcd4;
+  }
+  
+  .about-me-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 2rem;
+  }
+  
+  .about-me-text a {
+    color: #00bcd4;
+    text-decoration: none;
+  }
+  
+  .about-me-text a:hover {
+    text-decoration: underline;
+  }
+  

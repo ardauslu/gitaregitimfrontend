@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import ReactPlayer from "react-player";
 import Layout from "../components/Layout";
 import "./Etudes.css"; // CSS dosyasını import ediyoruz
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
-
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 
 const etudesData = [
   {
@@ -88,12 +89,20 @@ const etudesData = [
 const Etudes = () => {
   const [activeTab, setActiveTab] = useState(0); // Varsayılan olarak ilk sekme aktif
   const [language, setLanguage] = useState("tr"); // Dil state'i
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
 
+      useEffect(() => {
+        if (!isAuthenticated) {
+          navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+        }
+      }, [isAuthenticated, navigate]);
+    
   return (
     <>
-      <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-
+    
       <h1 className="etudes-title">Etüdler</h1>
       <p className="etudes-description">Bu sayfa gitar etüdlerini içerir.</p>
 

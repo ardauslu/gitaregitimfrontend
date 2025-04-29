@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
 import ReactPlayer from "react-player";
 import "./Beginner.css";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 
 const Beginner = () => {
   const [videoData, setVideoData] = useState([]);
   const [language, setLanguage] = useState("tr"); // Dil state'i
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+    }
+  }, [isAuthenticated, navigate]);
 
   // Videoları dinamik olarak yükleme
   useEffect(() => {
@@ -26,7 +35,7 @@ const Beginner = () => {
 
   return (
     <div>
-      <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
       <div className="beginner-content">
         <div className="beginner-page">
@@ -44,20 +53,20 @@ const Beginner = () => {
           </header>
 
           <div className="video-list">
-  {videoData.map((video, index) => (
-    <div key={index} className="video-item">
-      <ReactPlayer
-        url={video.url}
-        controls={true}
-        width="100%"
-        height="150px"
-        className="video-player"
-      />
-      <h3>{language === "tr" ? video.title_tr : video.title_en}</h3>
-      <p>{language === "tr" ? video.description_tr : video.description_en}</p>
-    </div>
-  ))}
-</div>
+            {videoData.map((video, index) => (
+              <div key={index} className="video-item">
+                <ReactPlayer
+                  url={video.url}
+                  controls={true}
+                  width="100%"
+                  height="150px"
+                  className="video-player"
+                />
+                <h3>{language === "tr" ? video.title_tr : video.title_en}</h3>
+                <p>{language === "tr" ? video.description_tr : video.description_en}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

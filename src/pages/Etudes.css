@@ -31,13 +31,13 @@
 }
 
 .tab-button:hover {
-  background: #e0e0e0;
+  background: #0c1927;
 }
 
 .tab-button.active {
-  background: #007bff;
+  background: #0c1927;
   color: white;
-  border-color: #007bff;
+  border-color: #f4f4f9;
 }
 
 /* Sekme İçeriği */

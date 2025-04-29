@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./AdminPanel.css";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader"; // Subheader bileşenini içe aktar
-
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 const AdminPanel = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [language, setLanguage] = useState('tr'); // Dil state'i
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
 
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+      }
+    }, [isAuthenticated, navigate]);
   // Rezervasyonları API'den çek
   useEffect(() => {
     const fetchReservations = async () => {
@@ -83,8 +91,9 @@ const AdminPanel = () => {
   }
 
   return (
-    <><Header language={language} setLanguage={setLanguage} logout={() => { } } /><Subheader language={language} />{/* Subheader bileşenini ekle */}
-
+    <><Header language={language} setLanguage={setLanguage} logout={logout} />
+    <Subheader language={language} />
+ 
     <div className="admin-panel">
     <h1>{language === 'tr' ? 'Admin Paneli' : 'Admin Page'}</h1>
     <div className="table-container">

@@ -13,7 +13,9 @@ import YourLessons from "./pages/YourLessons";
 import Profile from "./pages/Profile";
 import TakeLesson from "./pages/TakeLesson";
 import AdminPanel from "./pages/AdminPanel";
-import Layout from "./components/Layout";
+import Metronome from "./components/Metronome";
+import AboutMe from "./pages/AboutMe";
+
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
 
@@ -32,7 +34,9 @@ const AppRoutes = () => {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/take-lesson" element={<TakeLesson />} />
         <Route path="/admin-panel" element={<AdminPanel />} />
-    </Routes>
+        <Route path="/metronome" element={<Metronome />} />
+        <Route path="/about" element={<AboutMe />} /> 
+     </Routes>
   );
 };
 

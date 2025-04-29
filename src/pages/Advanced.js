@@ -3,11 +3,20 @@ import ReactPlayer from "react-player";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import "./Advanced.css";
-
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 const Advanced = () => {
   const [videoData, setVideoData] = useState([]);
   const [language, setLanguage] = useState("tr"); // Dil state'i
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
 
+      useEffect(() => {
+        if (!isAuthenticated) {
+          navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+        }
+      }, [isAuthenticated, navigate]);
+    
   // Videoları dinamik olarak yükleme
   useEffect(() => {
     const fetchVideos = async () => {
@@ -25,9 +34,9 @@ const Advanced = () => {
 
   return (
     <div>
-      <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-      <div className="advanced-content">
+       <div className="advanced-content">
         <div className="advanced-page">
           <header className="advanced-header">
             <h1>

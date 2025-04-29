@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TakeLesson.css';
 import Subheader from '../components/Subheader';
 import Header from '../components/Header';
-
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 const TakeLesson = () => {
   const [language, setLanguage] = useState('tr'); // Dil state'i
 
@@ -13,7 +14,15 @@ const TakeLesson = () => {
   const [lessonTime, setLessonTime] = useState('');
   const [reservationDone, setReservationDone] = useState(false);
   const [zoomLink, setZoomLink] = useState(''); // Zoom toplantı linki
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
 
+      useEffect(() => {
+        if (!isAuthenticated) {
+          navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+        }
+      }, [isAuthenticated, navigate]);
+    
   const handleReservation = async () => {
     if (!lessonDate || !lessonTime || !name || !email) {
       alert('Lütfen tüm alanları doldurun.');
@@ -60,9 +69,9 @@ const TakeLesson = () => {
   return (
     <div className="take-lesson-page">
       {/* Header bileşenine language ve setLanguage prop'larını geçiyoruz */}
-      <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-
+   
       <div className="lesson-container">
         <h2 className="take-lesson-header">Online Gitar Dersi Rezervasyonu</h2>
         {reservationDone ? (

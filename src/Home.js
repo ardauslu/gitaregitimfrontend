@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
-  const { logout } = useAuth();
+  const { logout } = useAuth(); // AuthContext'ten logout fonksiyonunu alın
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -117,7 +117,7 @@ const Home = () => {
   return (
     <div>
       {/* Ana Header */}
-      <Header language={language} setLanguage={setLanguage} logout={logout} />
+      <Header language={language} setLanguage={setLanguage}/>
 
 {/* Subheader */}
 <Subheader language={language} />

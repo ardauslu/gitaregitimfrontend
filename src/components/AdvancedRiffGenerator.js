@@ -6,7 +6,8 @@ import Layout from './Layout';
 import notesImage from '../assets/notes.png'; // Görseli içe aktarın
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
-
+import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useNavigate } from "react-router-dom";
 class RiffGenerator {
   constructor() {
     this.scaleTypes = [
@@ -183,8 +184,15 @@ const AdvancedRiffGenerator = () => {
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
   const [language, setLanguage] = useState("tr"); // Dil state'i
-
+  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const navigate = useNavigate();
  
+       useEffect(() => {
+         if (!isAuthenticated) {
+           navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+         }
+       }, [isAuthenticated, navigate]);
+     
 
    // Safe note transposition
    const safeTranspose = (note, semitones) => {
@@ -755,10 +763,9 @@ const AdvancedRiffGenerator = () => {
   const circleOfFifths = createCircleOfFifths();
 
   return (<div>
-    <Header language={language} setLanguage={setLanguage} logout={() => {}} />
+    <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-
-      <div className="advanced-riff-generator">
+         <div className="advanced-riff-generator">
         <div className="main-panel">
         <h1>
             {language === "tr"

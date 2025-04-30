@@ -5,7 +5,7 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
-
+import config from "../config";
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -50,8 +50,8 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/profile", {
-        method: "GET",
+       const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
+                method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -122,8 +122,8 @@ const Profile = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/users/profile/update", {
-        method: "PUT",
+       const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
+               method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

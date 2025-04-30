@@ -6,7 +6,7 @@ import unnamed2 from "./assets/unnamed (2).png";
 import Subheader from "./components/Subheader";
 import Header from "./components/Header"; // Header bileşenini içe aktarın
 import { useAuth } from "./AuthContext";
-
+import config from "./config";
 const Home = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/users/profile", {
+        const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

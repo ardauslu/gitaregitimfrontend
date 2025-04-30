@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Login.css'i yeniden kullanıyoruz
 import chatgptImage from "./assets/chatgpt.png"; // Resmi içe aktarın
-
+import config from "./config";
 const Signup = () => {
   const [firstName, setFirstName] = useState(""); // İsim için state
   const [lastName, setLastName] = useState(""); // Soyisim için state
@@ -23,7 +23,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const response = await fetch(`${config.API_BASE_URL}/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

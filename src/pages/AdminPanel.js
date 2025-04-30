@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Subheader from "../components/Subheader"; // Subheader bileşenini içe aktar
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
+import config from "../config";
 const AdminPanel = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/reservations/list", {
+        const response = await fetch(`${config.API_BASE_URL}/api/reservations/list`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

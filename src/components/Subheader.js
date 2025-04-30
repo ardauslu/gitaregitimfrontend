@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Subheader.css";
 import { useEffect, useState } from "react";
+import config from "../config";
 const Subheader = ({ language }) => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
@@ -11,7 +12,7 @@ const Subheader = ({ language }) => {
       console.log("fetchUserData çağrıldı."); // Kontrol için log ekledik
 
       try {
-        const response = await fetch("http://localhost:5000/api/users/profile", {
+        const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
 import logo from "../assets/logo.png";
-
+import config from "../config";
 const Header = ({ language, setLanguage, logout }) => {
   const [profileImage, setProfileImage] = useState(""); // Profil resmi için state
   const [username, setUsername] = useState(""); // Kullanıcı adı için state
@@ -10,7 +10,7 @@ const Header = ({ language, setLanguage, logout }) => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/users/profile", {
+        const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

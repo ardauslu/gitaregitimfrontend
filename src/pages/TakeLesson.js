@@ -4,6 +4,7 @@ import Subheader from '../components/Subheader';
 import Header from '../components/Header';
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
+import config from "../config";
 const TakeLesson = () => {
   const [language, setLanguage] = useState('tr'); // Dil state'i
 
@@ -43,8 +44,8 @@ const TakeLesson = () => {
         throw new Error('Token bulunamadı. Lütfen giriş yapın.');
       }
 
-      const response = await fetch('http://localhost:5000/api/reservations', {
-        method: 'POST',
+      const response = await fetch(`${config.API_BASE_URL}/api/reservations`, {
+                 method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`, // Token'ı Authorization başlığına ekle

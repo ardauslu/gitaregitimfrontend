@@ -19,6 +19,8 @@
     "react-router-dom": "^7.5.2",
     "react-scripts": "^5.0.1",
     "react-spinners": "^0.17.0",
+    "serve": "^14.2.4",
+    "serve-handler": "^6.1.6",
     "soundfont-player": "^0.12.0",
     "tonal": "^6.4.1",
     "tone": "^15.0.4",

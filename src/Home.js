@@ -117,12 +117,9 @@ const Home = () => {
   return (
     <div>
       {/* Ana Header */}
-      <Header language={language} setLanguage={setLanguage}/>
-
-{/* Subheader */}
-<Subheader language={language} />
-
-      {/* Görseller */}
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
+        <Subheader language={language} />
+         {/* Görseller */}
       <div className="image-container">
         <img src={unnamed1} alt="Unnamed 1" className="home-image" />
 

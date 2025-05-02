@@ -16,40 +16,45 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+  
+    if (!firstName || !lastName || !username || !email || !password || !confirmPassword) {
+      setError("All fields are required");
+      return;
+    }
+  
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-
+  
     try {
+      const requestBody = { firstName, lastName, username, email, password };
+      console.log("Request Body:", requestBody);
+  
       const response = await fetch(`${config.API_BASE_URL}/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firstName, lastName, username, email, password }),
+        body: JSON.stringify(requestBody),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Signup failed");
       }
-
-      // Başarı mesajını göster
+  
       setSuccessMessage("Başarıyla kaydoldunuz!");
       setError(null);
-
-      // 3 saniye bekleyip login sayfasına yönlendir
+  
       setTimeout(() => {
         navigate("/login");
       }, 3000);
     } catch (err) {
       setError(err.message);
-      setSuccessMessage(""); // Hata durumunda başarı mesajını temizle
+      setSuccessMessage("");
     }
   };
-
   return (
     <div className="login-page">
       <div className="login-container">

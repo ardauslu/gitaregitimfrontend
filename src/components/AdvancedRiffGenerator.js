@@ -174,17 +174,17 @@ const AdvancedRiffGenerator = () => {
   const [riffLength, setRiffLength] = useState(8);
   const [riff, setRiff] = useState([]);
   const [chordProgression, setChordProgression] = useState([]);
+  const [lastPlayedChords, setLastPlayedChords] = useState([]); // Son çalınan akorlar
   const [isPlaying, setIsPlaying] = useState(false);
   const [instrument, setInstrument] = useState('acoustic_grand_piano');
   const [riffNotes, setRiffNotes] = useState([]);
   const [activeChords, setActiveChords] = useState([]);
-  const [activeNotes, setActiveNotes] = useState([]);
   const audioContextRef = useRef(null);
   const instrumentRef = useRef(null);
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
-  const [language, setLanguage] = useState("tr"); // Dil state'i
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const [language, setLanguage] = useState("tr");
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
  
        useEffect(() => {
@@ -631,36 +631,23 @@ const AdvancedRiffGenerator = () => {
     return numerals[degree];
   };
 
-
-
-
-
-
-
-  
-
-  // Play chord progression
-  const playChordProgression = async () => {
-    const progression = generateAdvancedChordProgression();
-    setChordProgression(progression);
-    
+  const playChords = (progression) => {
     const startTime = audioContextRef.current.currentTime;
     const chordDuration = (60 / tempo) * 2; // 2 beats per chord
 
     progression.forEach((chord, index) => {
       const chordStartTime = startTime + (index * chordDuration);
-      
-      // Highlight chord
+
+      // Akoru vurgula
       const highlightTimeout = setTimeout(() => {
         setActiveChords([chord.symbol]);
       }, index * chordDuration * 1000);
       activeTimeoutsRef.current.push(highlightTimeout);
-      
-      // Play chord notes
+
+      // Akor notalarını çal
       chord.notes.forEach((note, noteIndex) => {
         const noteStartTime = chordStartTime + (noteIndex * 0.1);
-        // Ensure chord notes include octave (e.g. "E4" instead of just "E")
-        const fullNoteName = note + "4"; // Default to octave 4 if not specified
+        const fullNoteName = note + "4"; // Oktav bilgisi ekle
         instrumentRef.current.play(
           fullNoteName,
           noteStartTime,
@@ -672,14 +659,33 @@ const AdvancedRiffGenerator = () => {
           }
         );
       });
-      const totalDuration = progression.length * chordDuration;
-     
-      const endTimeout = setTimeout(() => {
-        setIsPlaying(false);
-        setActiveChords([]);
-      }, totalDuration * 1000);
-      activeTimeoutsRef.current.push(endTimeout);
     });
+
+    const totalDuration = progression.length * chordDuration;
+    const endTimeout = setTimeout(() => {
+      setIsPlaying(false);
+      setActiveChords([]);
+    }, totalDuration * 1000);
+    activeTimeoutsRef.current.push(endTimeout);
+  };
+
+  const replayChords = () => {
+    if (lastPlayedChords.length > 0) {
+      playChords(lastPlayedChords);
+    }
+  };
+
+
+
+
+  
+
+  // Play chord progression
+  const playChordProgression = async () => {
+    const progression = generateAdvancedChordProgression();
+    setChordProgression(progression);
+    setLastPlayedChords(progression); // Son çalınan akorları kaydet
+    playChords(progression);
   };
 
   // Generate riff
@@ -772,7 +778,8 @@ const AdvancedRiffGenerator = () => {
               ? "Gelişmiş Riff Üretici"
               : "Advanced Riff Generator"}
           </h1>
-          
+          <div className="action-buttons">
+          </div>
           <div className="controls">
           <div className="control-group">
               <label>{language === "tr" ? "Ton:" : "Key:"}</label>
@@ -873,6 +880,9 @@ const AdvancedRiffGenerator = () => {
             >
               {language === "tr" ? "Akor Çal" : "Play Chords"}
             </button>
+            <button onClick={replayChords} disabled={isPlaying || lastPlayedChords.length === 0} className="replay-btn">
+              {language === "tr" ? "Tekrar Çal" : "Replay Chords"}
+            </button>
           </div>
 
           <div className="output-section">
@@ -895,7 +905,7 @@ const AdvancedRiffGenerator = () => {
   )}
 </div>
 
-            <div className="chord-progression">
+<div className="chord-progression">
   <h2>{language === "tr" ? "Akor İlerleyişi:" : "Chord Progression:"}</h2>
   <div className="chord-display-container">
     {/* Roman numeral analysis (I-IV-vi-V etc.) */}
@@ -903,15 +913,10 @@ const AdvancedRiffGenerator = () => {
       {chordProgression.map((chord, index) => (
         <div
           key={`${chord.symbol}-${index}`}
-          className={`roman-numeral ${
-            activeChords.includes(chord.symbol) ? "active" : ""
-          }`}
+          className={`roman-numeral ${activeChords.includes(chord.symbol) ? "active" : ""}`}
           style={{ color: chord.color }}
         >
           {chord.romanNumeral}
-          {chord.extensions && (
-            <span className="extension">{chord.extensions}</span>
-          )}
         </div>
       ))}
     </div>
@@ -921,9 +926,7 @@ const AdvancedRiffGenerator = () => {
       {chordProgression.map((chord, index) => (
         <div
           key={`${chord.fullName}-${index}`}
-          className={`chord-name ${
-            activeChords.includes(chord.symbol) ? "active" : ""
-          }`}
+          className={`chord-name ${activeChords.includes(chord.symbol) ? "active" : ""}`}
         >
           {chord.fullName}
           {/* Voicing details */}

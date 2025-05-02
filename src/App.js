@@ -36,6 +36,7 @@ const AppRoutes = () => {
         <Route path="/admin-panel" element={<AdminPanel />} />
         <Route path="/metronome" element={<Metronome />} />
         <Route path="/about" element={<AboutMe />} /> 
+        <Route path="your-lessons" element={<YourLessons />} />
      </Routes>
   );
 };

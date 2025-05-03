@@ -15,7 +15,7 @@ import TakeLesson from "./pages/TakeLesson";
 import AdminPanel from "./pages/AdminPanel";
 import Metronome from "./components/Metronome";
 import AboutMe from "./pages/AboutMe";
-
+import SpeedAnalysis from "./pages/SpeedAnalysis";
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
 
@@ -37,6 +37,7 @@ const AppRoutes = () => {
         <Route path="/metronome" element={<Metronome />} />
         <Route path="/about" element={<AboutMe />} /> 
         <Route path="your-lessons" element={<YourLessons />} />
+        <Route path="/speed-analysis" element={<SpeedAnalysis />} />
      </Routes>
   );
 };

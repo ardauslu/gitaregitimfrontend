@@ -16,6 +16,7 @@ import AdminPanel from "./pages/AdminPanel";
 import Metronome from "./components/Metronome";
 import AboutMe from "./pages/AboutMe";
 import SpeedAnalysis from "./pages/SpeedAnalysis";
+import { LanguageProvider } from "./contexts/LanguageContext";
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
 
@@ -44,11 +45,13 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
+    <LanguageProvider>
     <AuthProvider>
       <Router>
         <AppRoutes />
       </Router>
     </AuthProvider>
+    </LanguageProvider>
   );
 };
 

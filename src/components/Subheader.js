@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "./Subheader.css";
 import { useEffect, useState } from "react";
 import config from "../config";
-const Subheader = ({ language }) => {
+import { useLanguage } from "../contexts/LanguageContext";
+const Subheader = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
+   const { language, setLanguage } = useLanguage();
  
   useEffect(() => {
     const fetchUserData = async () => {
@@ -36,16 +38,19 @@ const Subheader = ({ language }) => {
 
     fetchUserData();
   }, []);
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "tr" ? "en" : "tr"));
+  };
 
   // Menü öğeleri
   const menuItems = [
     {
       title: language === "tr" ? "Elektro Gitar Dersleri" : "Electric Guitar Lessons",
       options: [
-        { name: language === "tr" ? "Başlangıç" : "Beginner", path: "/beginner" },
-        { name: language === "tr" ? "Orta Düzey" : "Intermediate", path: "/intermediate" },
-        { name: language === "tr" ? "İleri Seviye" : "Advanced", path: "/advanced" },
-        { name: language === "tr" ? "Etüdler" : "Etudes", path: "/etudes" },
+        { name: language === "tr" ? "Giriş Kapısı" : "The Entry Gate", path: "/beginner" },
+        { name: language === "tr" ? "Keşif Yolu" : "The Path of Discovery", path: "/intermediate" },
+        { name: language === "tr" ? "Ustalık Zirvesi" : "The Summit of Mastery", path: "/advanced" },
+        { name: language === "tr" ? "Teknik Bahçesi" : "The Technique Garden", path: "/etudes" },
         { name: language === "tr" ? "Sizin Dersleriniz" : "Your Lessons", path: "/your-lessons" },
       ],
     },

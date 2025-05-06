@@ -5,9 +5,10 @@ import Subheader from "../components/Subheader";
 import "./Advanced.css";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 const Advanced = () => {
   const [videoData, setVideoData] = useState([]);
-  const [language, setLanguage] = useState("tr"); // Dil state'i
+  const { language, setLanguage } = useLanguage();// Dil state'i
   const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
 

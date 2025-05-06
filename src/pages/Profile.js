@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import config from "../config";
+import { useLanguage } from "../contexts/LanguageContext";
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -17,7 +18,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { isAuthenticated, logout } = useAuth();
-  const [language, setLanguage] = useState("tr");
+  const { language, setLanguage } = useLanguage(); 
   const navigate = useNavigate();
 
   const styleOptions = [
@@ -184,7 +185,7 @@ const Profile = () => {
   return (
     <div>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
-      <Subheader language={language} />
+    <Subheader language={language} />
 
       <div className="profile-page">
       <div className="profile-container">

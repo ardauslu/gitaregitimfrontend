@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import logo from "../assets/logo.png";
 import config from "../config";
-const Header = ({ language, setLanguage, logout }) => {
+import { useLanguage } from "../contexts/LanguageContext";
+
+const Header = ({ logout }) => {
   const [profileImage, setProfileImage] = useState(""); // Profil resmi için state
   const [username, setUsername] = useState(""); // Kullanıcı adı için state
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu için state
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -43,7 +46,9 @@ const Header = ({ language, setLanguage, logout }) => {
 
     fetchUserProfile();
   }, []);
-
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "tr" ? "en" : "tr"));
+  };
   return (
     <div className="header">
       {/* Sol Bölüm: Hoşgeldiniz Mesajı */}
@@ -73,7 +78,7 @@ const Header = ({ language, setLanguage, logout }) => {
         <span className="username">{username}</span>
         <button
           className="language-toggle"
-          onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
+          onClick={toggleLanguage}
         >
           {language === "tr" ? "EN" : "TR"}
         </button>

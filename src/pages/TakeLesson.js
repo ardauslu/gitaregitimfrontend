@@ -5,9 +5,9 @@ import Header from '../components/Header';
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import config from "../config";
-const TakeLesson = () => {
-  const [language, setLanguage] = useState('tr'); // Dil state'i
+import { useLanguage } from "../contexts/LanguageContext";
 
+const TakeLesson = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [lessonType, setLessonType] = useState('beginner');
@@ -17,7 +17,7 @@ const TakeLesson = () => {
   const [zoomLink, setZoomLink] = useState(''); // Zoom toplantı linki
   const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
-
+  const { language, setLanguage } = useLanguage();
       useEffect(() => {
         if (!isAuthenticated) {
           navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
@@ -67,26 +67,30 @@ const TakeLesson = () => {
     }
   };
 
-  return (
-    <div className="take-lesson-page">
-      {/* Header bileşenine language ve setLanguage prop'larını geçiyoruz */}
-      <Header language={language} setLanguage={setLanguage} logout={logout} />
+  return (<div>
+     <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-   
+  
+    <div className="take-lesson-page">
+     
       <div className="lesson-container">
-        <h2 className="take-lesson-header">Online Gitar Dersi Rezervasyonu</h2>
+        <h2 className="take-lesson-header">
+          {language === "tr"
+            ? "Online Gitar Dersi Rezervasyonu"
+            : "Online Reservation For Lesson"}
+        </h2>
         {reservationDone ? (
           <div className="success-message">
-            <h3>Rezervasyon Tamamlandı!</h3>
+            <h3>{language === "tr" ? "Rezervasyon Tamamlandı!" : "Reservation Completed!"}</h3>
             <p>
-              {language === 'tr'
-                ? 'Rezervasyonunuz başarıyla kaydedildi.'
-                : 'Your reservation has been successfully saved.'}
+              {language === "tr"
+                ? "Rezervasyonunuz başarıyla kaydedildi."
+                : "Your reservation has been successfully saved."}
             </p>
             <p>
-              {language === 'tr'
-                ? 'Zoom toplantı linkiniz:'
-                : 'Your Zoom meeting link:'}{' '}
+              {language === "tr"
+                ? "Zoom toplantı linkiniz:"
+                : "Your Zoom meeting link:"}{" "}
               <a href={zoomLink} target="_blank" rel="noopener noreferrer">
                 {zoomLink}
               </a>
@@ -94,12 +98,13 @@ const TakeLesson = () => {
           </div>
         ) : (
           <form className="reservation-form">
+            {/* Form alanları */}
             <div className="form-group">
-              <label htmlFor="name">{language === 'tr' ? 'Adınız' : 'Name'}</label>
+              <label htmlFor="name">{language === "tr" ? "Adınız" : "Name"}</label>
               <input
                 type="text"
                 id="name"
-                placeholder={language === 'tr' ? 'Adınızı girin' : 'Enter your name'}
+                placeholder={language === "tr" ? "Adınızı girin" : "Enter your name"}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -154,13 +159,15 @@ const TakeLesson = () => {
             </div>
 
             <button type="button" className="submit-btn" onClick={handleReservation}>
-              {language === 'tr' ? 'Rezervasyonu Tamamla' : 'Complete Reservation'}
-            </button>
-          </form>
-        )}
-      </div>
+            {language === "tr" ? "Rezervasyonu Tamamla" : "Complete Reservation"}
+          </button>
+        </form>
+      )}
     </div>
+  </div>
+  </div>
   );
+
 };
 
 export default TakeLesson;

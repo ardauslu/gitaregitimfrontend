@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import unnamed1 from "./assets/unnamed (1).png";
-import unnamed2 from "./assets/unnamed (2).png";
+import unnamed1 from "./assets/gemini1.jpg";
+import unnamed2 from "./assets/gemini2.jpg";
 import Subheader from "./components/Subheader";
 import Header from "./components/Header"; // Header bileşenini içe aktarın
 import { useAuth } from "./AuthContext";

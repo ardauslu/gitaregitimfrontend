@@ -26,5 +26,47 @@
     "url": "https://youtu.be/example4",
     "description_tr": "Bu derste solo çalma tekniklerini geliştireceksiniz.",
     "description_en": "In this lesson, you will improve your solo playing techniques."
+  },
+  {
+    "title_tr": "Ders 5: Pentatonik Ölçeklere Giriş",
+    "title_en": "Lesson 5: Introduction to Pentatonic Scales",
+    "url": "https://youtu.be/example5",
+    "description_tr": "Bu derste pentatonik dizilere giriş yapacaksınız.",
+    "description_en": "In this lesson, you will be introduced to pentatonic scales."
+  },
+  {
+    "title_tr": "Ders 6: Power Akorlar ve Riff Yazımı",
+    "title_en": "Lesson 6: Power Chords and Writing Riffs",
+    "url": "https://youtu.be/example6",
+    "description_tr": "Bu derste power akorlar ve riff yazımı üzerinde çalışacaksınız.",
+    "description_en": "In this lesson, you will work on power chords and writing riffs."
+  },
+  {
+    "title_tr": "Ders 7: Gitarla Melodi Oluşturma",
+    "title_en": "Lesson 7: Creating Melodies with Guitar",
+    "url": "https://youtu.be/example7",
+    "description_tr": "Bu derste gitarla basit melodiler oluşturmayı öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn to create simple melodies with guitar."
+  },
+  {
+    "title_tr": "Ders 8: Alternatif Akort Sistemleri",
+    "title_en": "Lesson 8: Alternative Tunings",
+    "url": "https://youtu.be/example8",
+    "description_tr": "Bu derste farklı akort sistemlerini keşfedeceksiniz.",
+    "description_en": "In this lesson, you will explore alternative tuning systems."
+  },
+  {
+    "title_tr": "Ders 9: Dinleyerek Çalma Pratikleri",
+    "title_en": "Lesson 9: Ear Training and Play-by-Ear",
+    "url": "https://youtu.be/example9",
+    "description_tr": "Bu derste kulağa göre çalma ve işitme gelişimi üzerine çalışacağız.",
+    "description_en": "In this lesson, we will focus on ear training and playing by ear."
+  },
+  {
+    "title_tr": "Ders 10: Kendi Besteni Yap",
+    "title_en": "Lesson 10: Compose Your Own Piece",
+    "url": "https://youtu.be/example10",
+    "description_tr": "Bu derste öğrendiklerinizi kullanarak kendi kısa bestenizi oluşturacaksınız.",
+    "description_en": "In this lesson, you will use what you've learned to compose your own short piece."
   }
 ]

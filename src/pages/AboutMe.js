@@ -1,36 +1,52 @@
 import React, { useEffect, useState } from "react";
-import './AboutMe.css'; // CSS dosyasını import etmeniz gerekir
+import "./AboutMe.css"; // CSS dosyasını import edin
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
-import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-const AboutMe = () => {
-     const [language, setLanguage] = useState("tr"); // Dil state'i
-      const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
-      const navigate = useNavigate();
 
-      useEffect(() => {
-          if (!isAuthenticated) {
-            navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-          }
-        }, [isAuthenticated, navigate]);
-      
-  return (<div>
-  <Header language={language} setLanguage={setLanguage} logout={logout} />
-        <Subheader language={language} />
-      
-  <div className="about-me-container">
-      <h2 className="about-me-title">Hakkımda</h2>
-      <p className="about-me-text">
-        Merhaba, ismim Arda Uslu. Mesleğim bilgisayar mühendisliği ve bir süredir gitar çalma konusunda kendimi geliştirmekteyim.
-        Bu web sitesini kurma amacım, gitar çalma yolculuğunda hem kendimi hem de öğrencilerimi daha ileriye taşıyabilmek.
-        Daha önce özel gitar dersi vermemiş olsam da, elektro gitar ve web sitesi yapma konularında uzun süredir kendimi geliştiriyorum.
-        Bu siteyi açarak, öğrendiklerimi ve deneyimlerimi başkalarına faydalı olabilmek adına paylaşmak istiyorum.
-        Umarım, gitar çalma sürecinde sizlere de katkı sağlayabilirim.
-      </p>
+const translations = {
+  tr: {
+    title: "Hakkımda",
+    content: `
+       Selam! Ben Arda — mesai saatlerinde yazılımcı, geceleri distortion büyücüsü. Bilgisayar mühendisiyim ama kodlardan çok bazen tel sesleri kafamı toparlıyor. Gitar çalmak benim için bir tür kaçış planı; bu site de o planın haritası. Burada rock’ı, tınıyı, yanlış bastığım notaları (ve doğrularını) birlikte konuşacağız. Yani: "Ders" gibi düşünme — bu bir ortak çalma alanı!    `,
+  },
+  en: {
+    title: "About Me",
+    content: `
+      Sure, I write code for a living, but sometimes it's the sound of strings, not keystrokes, that clears my mind. Playing guitar is my escape plan, and this website? Well, it's the map.
+Here, we'll talk rock, tone, and all the wrong notes I’ve hit (and the right ones too).
+So don’t think of this as a “lesson” — think of it as a shared space to play, learn, and get loud together.    `,
+  },
+};
+
+const AboutMe = () => {
+  const [language, setLanguage] = useState("tr");
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const t = translations[language];
+
+  return (
+    <div>
+    <Header language={language} setLanguage={setLanguage} logout={logout} />
+    <Subheader language={language} />
+    <div className="about-me-page">
+     
+
+      <div className="about-me-content">
+        <h1 className="about-me-title">{t.title}</h1>
+        <p className="about-me-text">{t.content}</p>
+      </div>
     </div>
     </div>
   );
-}
+};
 
 export default AboutMe;

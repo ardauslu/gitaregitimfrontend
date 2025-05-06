@@ -5,8 +5,34 @@ import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const waveTypes = ['sine', 'triangle', 'square', 'sawtooth'];
+
+const translations = {
+  tr: {
+    title: "Metronom",
+    bpmLabel: "Vuruş Hızı (BPM):",
+    start: "Başlat",
+    stop: "Durdur",
+    timeSignature: "Zaman İşareti",
+    mainWave: "Ana Dalga",
+    accentWave: "Vurgu Dalga",
+    volume: "Ses Seviyesi",
+    tempo: "Tempo",
+  },
+  en: {
+    title: "Metronome",
+    bpmLabel: "Beats Per Minute (BPM):",
+    start: "Start",
+    stop: "Stop",
+    timeSignature: "Time Signature",
+    mainWave: "Main Wave",
+    accentWave: "Accent Wave",
+    volume: "Volume",
+    tempo: "Tempo",
+  },
+};
 
 const Metronome = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -19,7 +45,8 @@ const Metronome = () => {
   const [timeSignatureTop, setTimeSignatureTop] = useState(4);
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(4);
   const [currentBeat, setCurrentBeat] = useState(0);
-
+  const { language, setLanguage } = useLanguage();
+   
   const beatCount = useRef(0);
   const intervalRef = useRef(null);
   const audioCtxRef = useRef(null);
@@ -80,25 +107,27 @@ const Metronome = () => {
     return stopMetronome;
   }, [isPlaying, bpm, accentWave, mainWave, accentFreq, mainFreq, volume]);
 
+  const t = translations[language]; // Çeviri metinlerini seç
+
   return (
     <div>
-      <Header logout={logout} />
-      <Subheader />
-
+    <Header language={language} setLanguage={setLanguage} logout={logout} />
+         <Subheader language={language} />
       <div className="metronome-container">
 
         {/* BPM ve Play Button */}
         <div className="display">
-          <h2>{bpm} BPM</h2>
-          <button className="play-button" onClick={() => setIsPlaying((prev) => !prev)}>
+        <label htmlFor="bpm-slider" className="bpm-label">
+          {t.bpmLabel} {bpm}
+        </label> <button className="play-button" onClick={() => setIsPlaying((prev) => !prev)}>
             {isPlaying ? <FaStop /> : <FaPlay />}
           </button>
         </div>
 
         {/* Time Signature */}
         <div className="time-signature">
-          <label>Time Signature</label>
-          <div className="signature-inputs">
+        <label>{t.timeSignature}</label>
+        <div className="signature-inputs">
             <input
               type="number"
               min="1"
@@ -139,7 +168,7 @@ const Metronome = () => {
           </div>
 
           <div className="preset-control">
-            <label>Main Wave</label>
+            <label>{t.mainWave}</label>
             <select value={mainWave} onChange={(e) => setMainWave(e.target.value)}>
               {waveTypes.map((type) => (
                 <option key={type} value={type}>{type}</option>
@@ -155,7 +184,7 @@ const Metronome = () => {
           </div>
 
           <div className="preset-control">
-            <label>Accent Wave</label>
+            <label>{t.accentWave}</label>
             <select value={accentWave} onChange={(e) => setAccentWave(e.target.value)}>
               {waveTypes.map((type) => (
                 <option key={type} value={type}>{type}</option>
@@ -171,7 +200,7 @@ const Metronome = () => {
           </div>
 
           <div className="volume-control">
-            <label>Volume</label>
+            <label>{t.volume}</label>
             <input
               type="range"
               min="0"

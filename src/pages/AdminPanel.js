@@ -5,14 +5,16 @@ import Subheader from "../components/Subheader"; // Subheader bileşenini içe a
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import config from "../config";
+import { useLanguage } from "../contexts/LanguageContext";
+
+
 const AdminPanel = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [language, setLanguage] = useState('tr'); // Dil state'i
   const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
-
+  const { language, setLanguage } = useLanguage();
     useEffect(() => {
       if (!isAuthenticated) {
         navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
@@ -92,21 +94,22 @@ const AdminPanel = () => {
   }
 
   return (
-    <><Header language={language} setLanguage={setLanguage} logout={logout} />
+    <> 
+    <Header language={language} setLanguage={setLanguage} logout={logout} />
     <Subheader language={language} />
- 
+
     <div className="admin-panel">
     <h1>{language === 'tr' ? 'Admin Paneli' : 'Admin Page'}</h1>
     <div className="table-container">
         <table className="reservations-table">
           <thead>
             <tr>
-              <th>Ad</th>
-              <th>E-posta</th>
-              <th>Ders Tipi</th>
-              <th>Tarih</th>
-              <th>Saat</th>
-              <th>Zoom Linki</th>
+              <th>{language === 'tr' ? 'Ad' : 'Name'}</th>
+              <th>{language === 'tr' ? 'E-Posta' : 'E-Mail'}</th>
+              <th>{language === 'tr' ? 'Ders Tipi' : 'Lesson Type'}</th>
+              <th>{language === 'tr' ? 'Tarih' : 'Date'}</th>
+              <th>{language === 'tr' ? 'Saat' : 'Time'}</th>
+              <th>{language === 'tr' ? 'Zoom Linki' : 'Zoom Link'}</th>
             </tr>
           </thead>
           <tbody>
@@ -119,7 +122,7 @@ const AdminPanel = () => {
                 <td>{reservation.lessonTime}</td>
                 <td>
                   <a href={reservation.zoomLink} target="_blank" rel="noopener noreferrer">
-                    Zoom Linki
+                  {language === 'tr' ? 'Zoom Linki' : 'Zoom Link'}
                   </a>
                 </td>
               </tr>

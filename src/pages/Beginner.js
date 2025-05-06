@@ -5,13 +5,12 @@ import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
-
+import { useLanguage } from "../contexts/LanguageContext";
 const Beginner = () => {
   const [videoData, setVideoData] = useState([]);
-  const [language, setLanguage] = useState("tr"); // Dil state'i
   const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
-
+  const { language, setLanguage } = useLanguage();
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir

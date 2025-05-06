@@ -7,12 +7,42 @@ import config from "../config";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiTrash2, FiPlus, FiStar, FiHeart } from "react-icons/fi";
 import { useAuth } from "../AuthContext";
-
+import { FiChevronDown } from 'react-icons/fi';
 const videoVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
   exit: { opacity: 0, x: -50 }
 };
+
+const MUSIC_CATEGORIES = [
+  "Rock",
+  "Pop",
+  "Jazz",
+  "Blues",
+  "Classical",
+  "Metal",
+  "Hip Hop",
+  "Electronic",
+  "Folk",
+  "Country",
+  "R&B",
+  "Reggae",
+  "Punk",
+  "Alternative",
+  "Indie",
+  "Gospel",
+  "Soul",
+  "Funk",
+  "Disco",
+  "Techno",
+  "House",
+  "Drum & Bass",
+  "Dubstep",
+  "Trap",
+  "K-Pop",
+  "Latin",
+  "World Music"
+];
 
 const YourLessons = () => {
   const [videoUrl, setVideoUrl] = useState('');
@@ -25,11 +55,11 @@ const YourLessons = () => {
   const [notification, setNotification] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const navigate = useNavigate();
   const { logout } = useAuth();
   const token = localStorage.getItem('token');
-
   const getEmbedUrl = (url) => {
     if (!url) return '';
 
@@ -245,6 +275,12 @@ const YourLessons = () => {
     return videos.filter(video => video.category === selectedCategory);
   };
 
+  
+  const handleCategorySelect = (selectedCat) => {
+    setCategory(selectedCat);
+    setShowCategoryDropdown(false);
+  };
+
   const uniqueCategories = [...new Set([
     ...userVideos.map(v => v.category),
     ...otherVideos.map(v => v.category)
@@ -279,10 +315,12 @@ const YourLessons = () => {
   };
 
   return (
-    <div className="lessons-page">
+    <div>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
 
+    <div className="your-lessons-page">
+      
       <div className="lesson-container">
         {notification && (
           <motion.div
@@ -295,51 +333,86 @@ const YourLessons = () => {
           </motion.div>
         )}
 
-        <div className="video-upload-container">
-          <h2 className="lesson-title">Add Your Lesson</h2>
+<div className="video-upload-container">
+  <h2 className="lesson-title">Add Your Lesson</h2>
 
-          <div className="input-group">
-            <input
-              type="text"
-              value={videoUrl}
-              onChange={e => setVideoUrl(e.target.value)}
-              placeholder="YouTube, Vimeo or direct video URL"
-              className="input-url"
-            />
-            <input
-              type="text"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              placeholder="Description"
-              className="input-meta"
-            />
-            <input
-              type="text"
-              value={category}
-              onChange={e => setCategory(e.target.value)}
-              placeholder="Category"
-              className="input-meta"
-            />
-            <label className="favorite-checkbox">
-              <input
-                type="checkbox"
-                checked={favorite}
-                onChange={() => setFavorite(!favorite)}
-              />
-              <FiStar className={favorite ? 'favorite' : ''} /> Favorite
-            </label>
-            <motion.button
-              onClick={handleAddVideo}
-              className="add-button"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={isLoading}
+  <div className="input-group">
+    <input
+      type="text"
+      value={videoUrl}
+      onChange={(e) => setVideoUrl(e.target.value)}
+      placeholder="YouTube, Vimeo or direct video URL"
+      className="input-url"
+    />
+    <input
+      type="text"
+      value={description}
+      onChange={(e) => setDescription(e.target.value)}
+      placeholder="Description"
+      className="input-meta"
+    />
+    <label className="favorite-checkbox">
+      <input
+        type="checkbox"
+        checked={favorite}
+        onChange={() => setFavorite(!favorite)}
+      />
+      <FiStar className={favorite ? 'favorite' : ''} /> Favorite
+    </label>
+  </div>
+
+  {/* Category Input Group Taşındı */}
+  <div className="category-input-group">
+    <div className="category-input-container">
+      <input
+        type="text"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        placeholder="Select a music category"
+        className="category-input-field"
+        onFocus={() => setShowCategoryDropdown(true)}
+      />
+      <button
+        className="category-toggle-button"
+        onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
+        type="button"
+      >
+        <FiChevronDown />
+      </button>
+    </div>
+
+    {showCategoryDropdown && (
+      <div className="category-dropdown-container">
+        <div className="category-dropdown">
+          {MUSIC_CATEGORIES.map((cat) => (
+            <div
+              key={cat}
+              className={`category-option ${category === cat ? 'highlight' : ''}`}
+              onClick={() => {
+                handleCategorySelect(cat);
+                setShowCategoryDropdown(false);
+              }}
             >
-              <FiPlus /> {isLoading ? 'Adding...' : 'Add Video'}
-            </motion.button>
-          </div>
+              {cat}
+            </div>
+          ))}
         </div>
+      </div>
+    )}
+  </div>
 
+  <motion.button
+    onClick={handleAddVideo}
+    className="add-button"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    disabled={isLoading}
+  >
+    <FiPlus /> {isLoading ? 'Adding...' : 'Add Video'}
+  </motion.button>
+</div>
+
+      
         <div className="category-filter">
           <select
             value={selectedCategory}
@@ -472,6 +545,8 @@ const YourLessons = () => {
         )}
       </div>
     </div>
+    </div>
+
   );
 };
 

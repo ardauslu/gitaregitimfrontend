@@ -8,6 +8,9 @@ import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
+import gifImage from '../assets/gif.png';
+import { useLanguage } from "../contexts/LanguageContext";
+
 class RiffGenerator {
   constructor() {
     this.scaleTypes = [
@@ -183,10 +186,10 @@ const AdvancedRiffGenerator = () => {
   const instrumentRef = useRef(null);
   const riffGeneratorRef = useRef(new RiffGenerator());
   const activeTimeoutsRef = useRef([]);
-  const [language, setLanguage] = useState("tr");
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
- 
+  const { language, setLanguage } = useLanguage();
+   
        useEffect(() => {
          if (!isAuthenticated) {
            navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
@@ -769,10 +772,10 @@ const AdvancedRiffGenerator = () => {
   const circleOfFifths = createCircleOfFifths();
 
   return (<div>
-    <Header language={language} setLanguage={setLanguage} logout={logout} />
-      <Subheader language={language} />
-         <div className="advanced-riff-generator">
-        <div className="main-panel">
+   <Header language={language} setLanguage={setLanguage} logout={logout} />
+         <Subheader language={language} />
+      <div className="advanced-riff-generator-page">
+      <div className="main-panel">
         <h1>
             {language === "tr"
               ? "Gelişmiş Riff Üretici"
@@ -950,11 +953,11 @@ const AdvancedRiffGenerator = () => {
         </div>
         
         <div className="notes-image-container">
-  <h3 className="notes-image-title">
-    {language === "tr" ? "Gitar Klavyesi Görseli" : "Guitar Fretboard Diagram"}
-  </h3>
-  <img src={notesImage} alt="Notes" className="notes-image" />
-</div>
+          <h3 className="notes-image-title">
+            {language === "tr" ? "Gitar Klavyesi Görseli" : "Guitar Fretboard Diagram"}
+          </h3>
+          <img src={gifImage} alt="Guitar Animation" className="notes-image" />
+        </div>
       </div>
       </div>
   );

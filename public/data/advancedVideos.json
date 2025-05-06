@@ -1,37 +1,72 @@
 [
   {
-    "title_tr": "Ders 1: İleri Düzey Sweep Picking",
-    "title_en": "Lesson 1: Advanced Sweep Picking",
-    "url": "https://www.youtube.com/watch?v=example6",
-    "description_tr": "Bu derste sweep picking tekniklerini ileri düzeyde geliştireceksiniz.",
-    "description_en": "In this lesson, you will improve your advanced sweep picking techniques."
+    "title_tr": "Ders 1: Modlar ve Uygulamaları",
+    "title_en": "Lesson 1: Modes and Their Applications",
+    "url": "https://youtu.be/ustalik1",
+    "description_tr": "Bu derste müzikteki modları ve bunların nasıl kullanılacağını öğreneceksiniz.",
+    "description_en": "In this lesson, you will learn the modes in music and how to apply them."
   },
   {
-    "title_tr": "Ders 2: İleri Düzey Legato Teknikleri",
-    "title_en": "Lesson 2: Advanced Legato Techniques",
-    "url": "https://www.youtube.com/watch?v=example7",
-    "description_tr": "Bu derste legato tekniklerini daha hızlı ve temiz bir şekilde çalmayı öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn to play legato techniques faster and cleaner."
+    "title_tr": "Ders 2: Gelişmiş Sololar ve İfade Teknikleri",
+    "title_en": "Lesson 2: Advanced Solos and Expression Techniques",
+    "url": "https://youtu.be/ustalik2",
+    "description_tr": "Bu derste gelişmiş solo teknikleri ve müzikal ifade becerilerini geliştireceksiniz.",
+    "description_en": "In this lesson, you will improve your advanced solo techniques and musical expression."
   },
   {
-    "title_tr": "Ders 3: İleri Düzey Tapping Teknikleri",
-    "title_en": "Lesson 3: Advanced Tapping Techniques",
-    "url": "https://www.youtube.com/watch?v=example8",
-    "description_tr": "Bu derste tapping tekniklerini ileri düzeyde uygulamayı öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn to apply advanced tapping techniques."
+    "title_tr": "Ders 3: Arpejlerle Harmonik Zenginlik",
+    "title_en": "Lesson 3: Harmonic Depth with Arpeggios",
+    "url": "https://youtu.be/ustalik3",
+    "description_tr": "Bu derste arpejlerle armonik derinlik yaratmayı keşfedeceksiniz.",
+    "description_en": "In this lesson, you will explore how to create harmonic depth using arpeggios."
   },
   {
-    "title_tr": "Ders 4: İleri Düzey Hız Egzersizleri",
-    "title_en": "Lesson 4: Advanced Speed Exercises",
-    "url": "https://www.youtube.com/watch?v=example9",
-    "description_tr": "Bu derste hızınızı artırmak için özel egzersizler yapacağız.",
-    "description_en": "In this lesson, we will do special exercises to increase your speed."
+    "title_tr": "Ders 4: Poliritmik Gitar Çalışmaları",
+    "title_en": "Lesson 4: Polyrhythmic Guitar Studies",
+    "url": "https://youtu.be/ustalik4",
+    "description_tr": "Bu derste poliritm kavramını gitar üzerinde uygulamalı olarak öğreneceksiniz.",
+    "description_en": "In this lesson, you will practically learn the concept of polyrhythms on the guitar."
   },
   {
-    "title_tr": "Ders 5: İleri Düzey Armonik Teknikler",
-    "title_en": "Lesson 5: Advanced Harmonic Techniques",
-    "url": "https://www.youtube.com/watch?v=example10",
-    "description_tr": "Bu derste armonik teknikleri ileri düzeyde kullanmayı öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn to use harmonic techniques at an advanced level."
+    "title_tr": "Ders 5: Doğaçlama Üzerine İleri Seviye Yaklaşımlar",
+    "title_en": "Lesson 5: Advanced Approaches to Improvisation",
+    "url": "https://youtu.be/ustalik5",
+    "description_tr": "Bu derste doğaçlamada kullanılan ileri teknikleri ve yaklaşımları ele alacağız.",
+    "description_en": "In this lesson, we will cover advanced techniques and approaches to improvisation."
+  },
+  {
+    "title_tr": "Ders 6: Hızlı Çalma İçin Egzersizler",
+    "title_en": "Lesson 6: Exercises for Speed and Precision",
+    "url": "https://youtu.be/ustalik6",
+    "description_tr": "Bu derste hız ve hassasiyet geliştirmeye yönelik egzersizler yapacaksınız.",
+    "description_en": "In this lesson, you will do exercises aimed at improving speed and precision."
+  },
+  {
+    "title_tr": "Ders 7: Kendi Stilini Geliştirme",
+    "title_en": "Lesson 7: Developing Your Own Style",
+    "url": "https://youtu.be/ustalik7",
+    "description_tr": "Bu derste teknikleri kişiselleştirerek kendi gitar stilinizi oluşturacaksınız.",
+    "description_en": "In this lesson, you will personalize techniques to develop your own guitar style."
+  },
+  {
+    "title_tr": "Ders 8: Gelişmiş Harmoni Teorisi",
+    "title_en": "Lesson 8: Advanced Harmony Theory",
+    "url": "https://youtu.be/ustalik8",
+    "description_tr": "Bu derste armoni teorisini ileri seviyede ele alacağız.",
+    "description_en": "In this lesson, we will study harmony theory at an advanced level."
+  },
+  {
+    "title_tr": "Ders 9: Karmaşık Zaman İmzalarıyla Çalışma",
+    "title_en": "Lesson 9: Working with Complex Time Signatures",
+    "url": "https://youtu.be/ustalik9",
+    "description_tr": "Bu derste 5/4, 7/8 gibi karmaşık zaman imzalarıyla pratik yapacağız.",
+    "description_en": "In this lesson, we will practice using complex time signatures like 5/4 and 7/8."
+  },
+  {
+    "title_tr": "Ders 10: Sahnede Ustalık ve Performans Psikolojisi",
+    "title_en": "Lesson 10: Mastery on Stage and Performance Psychology",
+    "url": "https://youtu.be/ustalik10",
+    "description_tr": "Bu derste sahne hakimiyeti ve performans sırasında zihin kontrolü üzerine çalışacağız.",
+    "description_en": "In this lesson, we will focus on stage mastery and mental control during performance."
   }
 ]

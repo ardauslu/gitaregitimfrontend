@@ -5,6 +5,7 @@ import Subheader from "../components/Subheader";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
+import { motion } from "framer-motion";
 const translations = {
   tr: {
     title: "Hakkımda",
@@ -24,7 +25,12 @@ const AboutMe = () => {
   const { language, setLanguage } = useLanguage();
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-
+  
+  const pageVariants = {
+    initial: { opacity: 0, x: "100vw" },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: "-100vw" },
+  };
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -37,16 +43,19 @@ const AboutMe = () => {
     <div>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
          <Subheader language={language} />
-     <div className="about-me-page">
-     
-
-      <div className="about-me-content">
-        <h1 className="about-me-title">{t.title}</h1>
-        <p className="about-me-text">{t.content}</p>
-      </div>
-    </div>
+         <motion.div
+      className="about-me-page"
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
+      transition={{ duration: 0.5 }}
+    >
+       <h1 className="about-me-title">{t.title}</h1>
+       <p className="about-me-text">{t.content}</p>
+    </motion.div>
     </div>
   );
 };
 
-export default AboutMe;
+export default AboutMe;  

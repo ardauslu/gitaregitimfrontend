@@ -1,6 +1,6 @@
 /* Sayfa genel stili */
 .profile-page {
-  font-family: 'Roboto', Arial, sans-serif; /* Modern font */
+  font-family: 'Roboto', sans-serif; /* Modern font */
   background: linear-gradient(135deg, #0d4dc4, #11b973); /* Gradyan arka plan */
   min-height: 100vh;
   padding: 20px;
@@ -58,6 +58,7 @@
   color: #40db9a; /* Sarı başlık */
   margin-bottom: 10px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Gölge efekti */
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Kart içeriği */
@@ -82,6 +83,7 @@
   font-weight: bold;
   color: #ffcc00; /* Sarı etiket */
   margin-bottom: 5px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .profile-form input {

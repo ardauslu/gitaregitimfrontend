@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Home from "./Home";
 import SignUp from "./SignUp";
 import Login from "./Login";
@@ -17,6 +18,22 @@ import Metronome from "./components/Metronome";
 import AboutMe from "./pages/AboutMe";
 import SpeedAnalysis from "./pages/SpeedAnalysis";
 import { LanguageProvider } from "./contexts/LanguageContext";
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-me" element={<AboutMe />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
+
+
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
 
@@ -49,6 +66,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <AppRoutes />
+        <AnimatedRoutes />
       </Router>
     </AuthProvider>
     </LanguageProvider>

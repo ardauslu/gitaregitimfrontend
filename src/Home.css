@@ -255,3 +255,27 @@ button:hover {
 .site-info-panel button:hover {
   background-color: #0056b3;
 }
+
+/* Ana kapsayıcı */
+.home-page {
+  max-width: 1200px; /* Sayfa genişliği sabitlendi */
+  margin: 0 auto; /* Ortalamak için */
+  padding: 20px; /* İçerik için boşluk */
+  text-align: center; /* Metinleri ortalamak için */
+}
+
+/* Paragraf stili */
+.home-page p {
+  font-size: 1.2rem; /* Yazı boyutu */
+  line-height: 1.6; /* Satır yüksekliği */
+  color: #000; /* Yazı rengi */
+  margin: 20px 0; /* Üst ve alt boşluk */
+  word-wrap: break-word; /* Uzun kelimelerin taşmasını önler */
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    max-width: 90%; /* Mobil cihazlarda genişlik ekranın %90'ı olacak */
+  }
+}
+

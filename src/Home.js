@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./Home.css";
 import unnamed1 from "./assets/gemini1.jpg";
 import unnamed2 from "./assets/gemini2.jpg";
@@ -13,6 +14,13 @@ const Home = () => {
   const { language, setLanguage } = useLanguage();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
   const { logout } = useAuth(); // AuthContext'ten logout fonksiyonunu alın
+
+  const pageVariants = {
+    initial: { opacity: 0, x: "-100vw" },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: "100vw" },
+  };
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -126,17 +134,21 @@ const Home = () => {
 
         {/* Görseller arasındaki boşluk ve tanıtım paneli */}
         <div className="image-gap">
-          <div className="site-info-panel">
-            <h2>{language === "tr" ? "Sitemize Hoşgeldiniz!" : "Welcome to Our Site!"}</h2>
+        <motion.div
+      className="home-page"
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
+      transition={{ duration: 0.5 }}
+    >
+      <h2>{language === "tr" ? "Sitemize Hoşgeldiniz!" : "Welcome to Our Site!"}</h2>
             <p>
               {language === "tr"
-                ? "Gitar tutkunları için en iyi araçları ve kaynakları keşfedin. Riff oluşturuculardan ton laboratuvarlarına kadar, gitar becerilerinizi bir üst seviyeye taşımanız için ihtiyacınız olan her şey burada."
-                : "Discover the best tools and resources for guitar enthusiasts. From riff generators to tone labs, we have everything you need to take your guitar skills to the next level."}
-            </p>
-            <button onClick={() => navigate("/about")}>
-              {language === "tr" ? "Daha Fazla Bilgi" : "Learn More"}
-            </button>
-          </div>
+                ? "Gitar dünyasına adım atın! İlham verici riff oluşturucu, seviyelere göre derslerle müziğinizi bir üst seviyeye taşıyın. Hayalinizdeki gitarist olmak için ihtiyacınız olan her şey burada."
+                : "Step into the world of guitars! With inspiring riff generator, personalized lessons, take your music to the next level. Everything you need to become the guitarist of your dreams is right here."}
+            </p><button onClick={() => navigate("/about-me")}>{language === "tr" ? "Hakkımda" : "About Me"}</button>
+    </motion.div>
         </div>
 
         <img src={unnamed2} alt="Unnamed 2" className="home-image" />

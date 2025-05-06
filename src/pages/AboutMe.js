@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import { useLanguage } from "../contexts/LanguageContext";
 const translations = {
   tr: {
     title: "Hakkımda",
@@ -21,7 +21,7 @@ So don’t think of this as a “lesson” — think of it as a shared space to 
 };
 
 const AboutMe = () => {
-  const [language, setLanguage] = useState("tr");
+  const { language, setLanguage } = useLanguage();
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -35,9 +35,9 @@ const AboutMe = () => {
 
   return (
     <div>
-    <Header language={language} setLanguage={setLanguage} logout={logout} />
-    <Subheader language={language} />
-    <div className="about-me-page">
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
+         <Subheader language={language} />
+     <div className="about-me-page">
      
 
       <div className="about-me-content">

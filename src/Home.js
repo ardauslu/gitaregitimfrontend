@@ -7,9 +7,10 @@ import Subheader from "./components/Subheader";
 import Header from "./components/Header"; // Header bileşenini içe aktarın
 import { useAuth } from "./AuthContext";
 import config from "./config";
+import { useLanguage } from "./contexts/LanguageContext";
 const Home = () => {
   const navigate = useNavigate();
-  const [language, setLanguage] = useState("tr"); // Varsayılan dil Türkçe
+  const { language, setLanguage } = useLanguage();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
   const { logout } = useAuth(); // AuthContext'ten logout fonksiyonunu alın
 
@@ -117,9 +118,9 @@ const Home = () => {
   return (
     <div>
       {/* Ana Header */}
-      <Header language={language} setLanguage={setLanguage} logout={logout} />
-        <Subheader language={language} />
-         {/* Görseller */}
+       <Header language={language} setLanguage={setLanguage} logout={logout} />
+         <Subheader language={language} />
+      {/* Görseller */}
       <div className="image-container">
         <img src={unnamed1} alt="Unnamed 1" className="home-image" />
 

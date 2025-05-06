@@ -7,7 +7,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 const Subheader = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
-   const { language, setLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
  
   useEffect(() => {
     const fetchUserData = async () => {

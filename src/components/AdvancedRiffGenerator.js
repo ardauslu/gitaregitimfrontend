@@ -949,15 +949,15 @@ const AdvancedRiffGenerator = () => {
   </div>
 </div>
           </div>
-          
-        </div>
-        
-        <div className="notes-image-container">
+          <div className="notes-image-container">
           <h3 className="notes-image-title">
             {language === "tr" ? "Gitar Klavyesi Görseli" : "Guitar Fretboard Diagram"}
           </h3>
           <img src={gifImage} alt="Guitar Animation" className="notes-image" />
         </div>
+        </div>
+        
+        
       </div>
       </div>
   );

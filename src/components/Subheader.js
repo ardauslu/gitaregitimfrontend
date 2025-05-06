@@ -86,21 +86,6 @@ const Subheader = () => {
       ],
     },
     {
-      title: language === "tr" ? "Ton Laboratuvarı" : "Tone Lab",
-      options: [
-        { name: language === "tr" ? "Efektler" : "Effects", path: "/effects" },
-        { name: language === "tr" ? "Ton Ayarları" : "Tone Settings", path: "/tone-settings" },
-      ],
-    },
-    {
-      title: language === "tr" ? "Gitar Hero" : "Guitar Hero",
-      options: [
-        { name: language === "tr" ? "Başlangıç Seviyesi" : "Beginner Level", path: "/guitar-hero-beginner" },
-        { name: language === "tr" ? "İleri Seviye" : "Advanced Level", path: "/guitar-hero-advanced" },
-      ],
-    },
-    
-    {
       title: language === "tr" ? "Cover Yarışması" : "Cover Contest",
       options: [
         { name: language === "tr" ? "Katıl" : "Join", path: "/join-contest" },

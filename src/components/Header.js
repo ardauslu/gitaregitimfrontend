@@ -54,7 +54,7 @@ const Header = ({ logout }) => {
       {/* Sol Bölüm: Hoşgeldiniz Mesajı */}
       <div className="header-left">
         <span className="welcome-message">
-          {language === "tr" ? "Hoşgeldiniz" : "Welcome"}
+          {language === "tr" ? "Gitarlar ve Teoriler" : "Guitarz and Theoriez"}
         </span>
       </div>
 

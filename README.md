@@ -17,49 +17,49 @@ Bu proje, gitar öğrenmek isteyen kullanıcılar için özel olarak tasarlanmı
 - 🎸 **Metronom (Metronome )**: Kullanıcıların metronom ile pratik yapabileceği bir alan.
 ---
 
-## Kullanılan Teknolojiler
+## Kullanılan Teknolojiler ve Detaylar
 
-- **React.js**: Kullanıcı arayüzünü oluşturmak için kullanılan JavaScript kütüphanesi.
-- **Framer Motion**: Sayfa geçişleri ve animasyonlar için kullanılan kütüphane.
-- **CSS**: Uygulamanın stilini oluşturmak için kullanılan stil dili.
-- **React Router**: Sayfa yönlendirmeleri için kullanılan kütüphane.
-- **Google Fonts**: Yazı tipleri için kullanılan harici kaynak.
+### 1. **React.js**
+- **Kullanım Amacı**: Kullanıcı arayüzünü oluşturmak için kullanıldı.
+- **Özellikler**:
+  - **Fonksiyonel Bileşenler**: Tüm bileşenler fonksiyonel olarak yazılmıştır.
+  - **React Hooks**: `useState`, `useEffect`, `useContext` gibi hook'lar kullanılarak state yönetimi ve yan etkiler kontrol edilmiştir.
+  - **Context API**: Dil seçimi (`LanguageContext`) ve kimlik doğrulama (`AuthContext`) gibi global durumlar için kullanılmıştır.
+
+### 2. **Framer Motion**
+- **Kullanım Amacı**: Sayfa geçişleri ve animasyonlar için kullanıldı.
+- **Özellikler**:
+  - **`motion.div`**: Sayfa ve bileşen animasyonları için kullanıldı.
+  - **`AnimatePresence`**: Sayfa geçişlerinde çıkış animasyonlarını etkinleştirmek için kullanıldı.
+  - **Geçişler**: `initial`, `animate`, ve `exit` durumları ile animasyonlar tanımlandı.
+
+### 3. **React Router**
+- **Kullanım Amacı**: Sayfa yönlendirmeleri ve dinamik rotalar için kullanıldı.
+- **Özellikler**:
+  - **`useNavigate`**: Sayfalar arasında programatik geçişler için kullanıldı.
+  - **Dinamik Rotalar**: Örneğin, `/about-me` ve `/your-lessons` gibi rotalar tanımlandı.
+
+### 4. **CSS**
+- **Kullanım Amacı**: Uygulamanın stilini oluşturmak için kullanıldı.
+- **Özellikler**:
+  - **Responsive Tasarım**: Mobil ve masaüstü cihazlar için optimize edilmiş tasarım.
+  - **Gradyan Arka Planlar**: Modern bir görünüm için gradyan arka planlar kullanıldı.
+  - **Hover ve Geçiş Efektleri**: Butonlar ve görseller için hover efektleri eklendi.
+
+### 5. **Google Fonts**
+- **Kullanım Amacı**: Yazı tiplerini özelleştirmek için kullanıldı.
+- **Özellikler**:
+  - **Roboto** ve **Montserrat** yazı tipleri kullanıldı.
+  - Başlıklar ve metinler için farklı ağırlıklar (`400`, `500`, `700`) tanımlandı.
+
+### 6. **Backend API**
+- **Kullanım Amacı**: Kullanıcı verilerini almak ve güncellemek için RESTful API kullanıldı.
+- **Özellikler**:
+  - **Kimlik Doğrulama**: `Bearer Token` ile güvenli API çağrıları yapıldı.
+  - **CRUD İşlemleri**: Kullanıcı profili ve ders bilgileri için `GET`, `POST`, `PUT` ve `DELETE` işlemleri gerçekleştirildi.
 
 ---
 
-## Proje Yapısı
-
-### 1. **Ana Sayfa (Home)**
-
-- **Dosya**: `src/pages/Home.js`
-- **CSS**: `src/Home.css`
-- **Açıklama**: Kullanıcıları karşılayan bir giriş sayfasıdır. Framer Motion kullanılarak sayfa geçiş animasyonları eklenmiştir. Kullanıcılar buradan "Hakkımda" sayfasına yönlendirilebilir.
-
-### 2. **Hakkımda Sayfası (About Me)**
-
-- **Dosya**: `src/pages/AboutMe.js`
-- **CSS**: `src/pages/AboutMe.css`
-- **Açıklama**: Kullanıcıya platformun amacı ve geliştirici hakkında bilgi veren bir sayfadır. Arka planda animasyonlu bir gradyan efekt bulunmaktadır.
-
-### 3. **Profil Sayfası (Profile)**
-
-- **Dosya**: `src/pages/Profile.js`
-- **CSS**: `src/pages/Profile.css`
-- **Açıklama**: Kullanıcıların kişisel bilgilerini düzenleyebileceği bir alandır. Kullanıcılar ad, soyad, favori tarzlar ve enstrümanlar gibi bilgileri güncelleyebilir.
-
-### 4. **Dersler Sayfası (Your Lessons)**
-
-- **Dosya**: `src/pages/YourLessons.js`
-- **CSS**: `src/pages/YourLessons.css`
-- **Açıklama**: Kullanıcıların mevcut derslerini görüntüleyebileceği ve yeni dersler ekleyebileceği bir alandır. Modern bir tasarım ve gradyan arka plan kullanılmıştır.
-
-### 5. **Ders Alma Sayfası (Take Lesson)**
-
-- **Dosya**: `src/pages/TakeLesson.js`
-- **CSS**: `src/pages/TakeLesson.css`
-- **Açıklama**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alandır. Form alanları ve butonlar modern bir tasarıma sahiptir.
-
----
 
 ## Kurulum
 

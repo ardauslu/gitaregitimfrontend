@@ -1,15 +1,20 @@
-# Guitar Learning Platform
+# Guitar Learning Platform 🎸
 
 Bu proje, gitar öğrenmek isteyen kullanıcılar için özel olarak tasarlanmış bir web uygulamasıdır. Kullanıcılar riff oluşturucular, kişiselleştirilmiş dersler ve ton laboratuvarları gibi araçlarla gitar becerilerini geliştirebilir.
 
 ## Özellikler
 
-- **Ana Sayfa (Home)**: Kullanıcıları karşılayan ve platformun özelliklerini tanıtan bir giriş sayfası.
-- **Hakkımda Sayfası (About Me)**: Kullanıcıya platformun amacı ve geliştirici hakkında bilgi veren bir sayfa.
-- **Profil Sayfası (Profile)**: Kullanıcıların kişisel bilgilerini düzenleyebileceği ve favori tarzlarını seçebileceği bir alan.
-- **Dersler Sayfası (Your Lessons)**: Kullanıcıların kendi derslerini youtube url'i ile paylaşabileceği,görüntüleyebileceği ve yeni dersler ekleyebileceği bir alan.
-- **Ders Alma Sayfası (Take Lesson)**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alan.
-
+- 🎵 **Ana Sayfa (Home)**: Kullanıcıları karşılayan ve platformun özelliklerini tanıtan bir giriş sayfası.
+- 📖 **Hakkımda Sayfası (About Me)**: Platformun amacı ve geliştirici hakkında bilgi veren bir sayfa.
+- 👤 **Profil Sayfası (Profile)**: Kullanıcıların kişisel bilgilerini düzenleyebileceği ve favori tarzlarını seçebileceği bir alan.
+- 📚 **Giriş Kapısı (The Entry Gate)**: Kullanıcıların gitar yolculuğuna başladığı ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Keşif Yolu (The Path of Discovery)**: Kullanıcıların gitar yolculuğuna devam ettiği ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Ustalık Zirvesi (The Mastery Summit)**: Kullanıcıların gitar yolculuğunda ustalık seviyesi dersleri incelediği ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Sizin Dersleriniz Sayfası (Your Lessons)**: Kullanıcıların youtube url'leri ile kendi oluşturduğu derslerini görüntüleyebileceği ve yeni dersler ekleyebileceği bir alan.
+- 📚 **Teknik Bahçesi (The Technique Garden)**: Kullanıcıların pratik ile gitar çalma becerilerini geliştirdiği bir alan.
+- 🎸 **Ders Alma Sayfası (Take Lesson)**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alan.
+- 🎸 **Riff ve Akor Üretme Sayfası (Riff Generator )**: Kullanıcıların Riff Üretici ile riff ve akor üretip klavye görseli ile çalışmak için kendilerine eğlenceli bir alan.
+- 🎸 **Metronom (Metronome )**: Kullanıcıların metronom ile pratik yapabileceği bir alan.
 ---
 
 ## Kullanılan Teknolojiler

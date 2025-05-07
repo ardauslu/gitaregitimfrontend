@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Guitar Learning Platform 🎸
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, gitar öğrenmek isteyen kullanıcılar için özel olarak tasarlanmış bir web uygulamasıdır. Kullanıcılar riff oluşturucular, kişiselleştirilmiş dersler ve ton laboratuvarları gibi araçlarla gitar becerilerini geliştirebilir.
 
-## Available Scripts
+## Özellikler
 
-In the project directory, you can run:
+- 🎵 **Ana Sayfa (Home)**: Kullanıcıları karşılayan ve platformun özelliklerini tanıtan bir giriş sayfası.
+- 📖 **Hakkımda Sayfası (About Me)**: Platformun amacı ve geliştirici hakkında bilgi veren bir sayfa.
+- 👤 **Profil Sayfası (Profile)**: Kullanıcıların kişisel bilgilerini düzenleyebileceği ve favori tarzlarını seçebileceği bir alan.
+- 📚 **Giriş Kapısı (The Entry Gate)**: Kullanıcıların gitar yolculuğuna başladığı ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Keşif Yolu (The Path of Discovery)**: Kullanıcıların gitar yolculuğuna devam ettiği ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Ustalık Zirvesi (The Mastery Summit)**: Kullanıcıların gitar yolculuğunda ustalık seviyesi dersleri incelediği ve eğitim içeriklerini görüntüleyebileceği bir alan.
+- 📚 **Sizin Dersleriniz Sayfası (Your Lessons)**: Kullanıcıların youtube url'leri ile kendi oluşturduğu derslerini görüntüleyebileceği ve yeni dersler ekleyebileceği bir alan.
+- 📚 **Teknik Bahçesi (The Technique Garden)**: Kullanıcıların pratik ile gitar çalma becerilerini geliştirdiği bir alan.
+- 🎸 **Ders Alma Sayfası (Take Lesson)**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alan.
+- 🎸 **Riff ve Akor Üretme Sayfası (Riff Generator )**: Kullanıcıların Riff Üretici ile riff ve akor üretip klavye görseli ile çalışmak için kendilerine eğlenceli bir alan.
+- 🎸 **Metronom (Metronome )**: Kullanıcıların metronom ile pratik yapabileceği bir alan.
+---
 
-### `npm start`
+## Kullanılan Teknolojiler ve Detaylar
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. **React.js**
+- **Kullanım Amacı**: Kullanıcı arayüzünü oluşturmak için kullanıldı.
+- **Özellikler**:
+  - **Fonksiyonel Bileşenler**: Tüm bileşenler fonksiyonel olarak yazılmıştır.
+  - **React Hooks**: `useState`, `useEffect`, `useContext` gibi hook'lar kullanılarak state yönetimi ve yan etkiler kontrol edilmiştir.
+  - **Context API**: Dil seçimi (`LanguageContext`) ve kimlik doğrulama (`AuthContext`) gibi global durumlar için kullanılmıştır.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. **Framer Motion**
+- **Kullanım Amacı**: Sayfa geçişleri ve animasyonlar için kullanıldı.
+- **Özellikler**:
+  - **`motion.div`**: Sayfa ve bileşen animasyonları için kullanıldı.
+  - **`AnimatePresence`**: Sayfa geçişlerinde çıkış animasyonlarını etkinleştirmek için kullanıldı.
+  - **Geçişler**: `initial`, `animate`, ve `exit` durumları ile animasyonlar tanımlandı.
 
-### `npm test`
+### 3. **React Router**
+- **Kullanım Amacı**: Sayfa yönlendirmeleri ve dinamik rotalar için kullanıldı.
+- **Özellikler**:
+  - **`useNavigate`**: Sayfalar arasında programatik geçişler için kullanıldı.
+  - **Dinamik Rotalar**: Örneğin, `/about-me` ve `/your-lessons` gibi rotalar tanımlandı.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. **CSS**
+- **Kullanım Amacı**: Uygulamanın stilini oluşturmak için kullanıldı.
+- **Özellikler**:
+  - **Responsive Tasarım**: Mobil ve masaüstü cihazlar için optimize edilmiş tasarım.
+  - **Gradyan Arka Planlar**: Modern bir görünüm için gradyan arka planlar kullanıldı.
+  - **Hover ve Geçiş Efektleri**: Butonlar ve görseller için hover efektleri eklendi.
 
-### `npm run build`
+### 5. **Google Fonts**
+- **Kullanım Amacı**: Yazı tiplerini özelleştirmek için kullanıldı.
+- **Özellikler**:
+  - **Roboto** ve **Montserrat** yazı tipleri kullanıldı.
+  - Başlıklar ve metinler için farklı ağırlıklar (`400`, `500`, `700`) tanımlandı.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 6. **Backend API**
+- **Kullanım Amacı**: Kullanıcı verilerini almak ve güncellemek için RESTful API kullanıldı.
+- **Özellikler**:
+  - **Kimlik Doğrulama**: `Bearer Token` ile güvenli API çağrıları yapıldı.
+  - **CRUD İşlemleri**: Kullanıcı profili ve ders bilgileri için `GET`, `POST`, `PUT` ve `DELETE` işlemleri gerçekleştirildi.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Kurulum
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Projeyi Klonlayın**:
+   ```bash
+   git clone https://github.com/kullaniciadi/proje-adi.git
+   cd proje-adi

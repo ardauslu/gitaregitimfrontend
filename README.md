@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Guitar Learning Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, gitar öğrenmek isteyen kullanıcılar için özel olarak tasarlanmış bir web uygulamasıdır. Kullanıcılar riff oluşturucular, kişiselleştirilmiş dersler ve ton laboratuvarları gibi araçlarla gitar becerilerini geliştirebilir.
 
-## Available Scripts
+## Özellikler
 
-In the project directory, you can run:
+- **Ana Sayfa (Home)**: Kullanıcıları karşılayan ve platformun özelliklerini tanıtan bir giriş sayfası.
+- **Hakkımda Sayfası (About Me)**: Kullanıcıya platformun amacı ve geliştirici hakkında bilgi veren bir sayfa.
+- **Profil Sayfası (Profile)**: Kullanıcıların kişisel bilgilerini düzenleyebileceği ve favori tarzlarını seçebileceği bir alan.
+- **Dersler Sayfası (Your Lessons)**: Kullanıcıların kendi derslerini youtube url'i ile paylaşabileceği,görüntüleyebileceği ve yeni dersler ekleyebileceği bir alan.
+- **Ders Alma Sayfası (Take Lesson)**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alan.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Kullanılan Teknolojiler
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React.js**: Kullanıcı arayüzünü oluşturmak için kullanılan JavaScript kütüphanesi.
+- **Framer Motion**: Sayfa geçişleri ve animasyonlar için kullanılan kütüphane.
+- **CSS**: Uygulamanın stilini oluşturmak için kullanılan stil dili.
+- **React Router**: Sayfa yönlendirmeleri için kullanılan kütüphane.
+- **Google Fonts**: Yazı tipleri için kullanılan harici kaynak.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Proje Yapısı
 
-### `npm run build`
+### 1. **Ana Sayfa (Home)**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Dosya**: `src/pages/Home.js`
+- **CSS**: `src/Home.css`
+- **Açıklama**: Kullanıcıları karşılayan bir giriş sayfasıdır. Framer Motion kullanılarak sayfa geçiş animasyonları eklenmiştir. Kullanıcılar buradan "Hakkımda" sayfasına yönlendirilebilir.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. **Hakkımda Sayfası (About Me)**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Dosya**: `src/pages/AboutMe.js`
+- **CSS**: `src/pages/AboutMe.css`
+- **Açıklama**: Kullanıcıya platformun amacı ve geliştirici hakkında bilgi veren bir sayfadır. Arka planda animasyonlu bir gradyan efekt bulunmaktadır.
 
-### `npm run eject`
+### 3. **Profil Sayfası (Profile)**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Dosya**: `src/pages/Profile.js`
+- **CSS**: `src/pages/Profile.css`
+- **Açıklama**: Kullanıcıların kişisel bilgilerini düzenleyebileceği bir alandır. Kullanıcılar ad, soyad, favori tarzlar ve enstrümanlar gibi bilgileri güncelleyebilir.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4. **Dersler Sayfası (Your Lessons)**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Dosya**: `src/pages/YourLessons.js`
+- **CSS**: `src/pages/YourLessons.css`
+- **Açıklama**: Kullanıcıların mevcut derslerini görüntüleyebileceği ve yeni dersler ekleyebileceği bir alandır. Modern bir tasarım ve gradyan arka plan kullanılmıştır.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 5. **Ders Alma Sayfası (Take Lesson)**
 
-## Learn More
+- **Dosya**: `src/pages/TakeLesson.js`
+- **CSS**: `src/pages/TakeLesson.css`
+- **Açıklama**: Kullanıcıların gitar dersleri için rezervasyon yapabileceği bir alandır. Form alanları ve butonlar modern bir tasarıma sahiptir.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Kurulum
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Projeyi Klonlayın**:
+   ```bash
+   git clone https://github.com/kullaniciadi/proje-adi.git
+   cd proje-adi

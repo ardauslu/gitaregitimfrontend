@@ -57,6 +57,13 @@ const Metronome = () => {
     if (!isAuthenticated) navigate("/login");
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    document.body.classList.add('metronome-page-bg');
+    return () => {
+      document.body.classList.remove('metronome-page-bg');
+    };
+  }, []);
+
   const playClick = (isAccent) => {
     const audioCtx = audioCtxRef.current;
     if (!audioCtx) return;

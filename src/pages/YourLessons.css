@@ -2,7 +2,7 @@
 
 /* Base Styles */
 .your-lessons-page {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   min-height: 100vh;
   color: #fff;
@@ -521,7 +521,7 @@
 /* Sayfa genel stili */
 .your-lessons-page {
   font-family: 'Roboto', Arial, sans-serif; /* Yeni font */
-  background: linear-gradient(135deg, #0f2027, #2980b9, #4caf50); /* Yeni gradyan arka plan */
+  background: linear-gradient(135deg, #0f2027, #13222c, #0dd814); /* Yeni gradyan arka plan */
   min-height: 100vh;
   color: #fff;
   padding: 20px 0;

@@ -37,6 +37,9 @@ h3 {
   height: 80px; /* Daha küçük yükseklik */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
 .header-logo {
@@ -69,6 +72,10 @@ h3 {
   background-color: #f1f1f1;
   height: 50px; /* Daha küçük yükseklik */
   border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 9;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .sub-header-item {
@@ -140,7 +147,7 @@ h3 {
 /* Butonlar */
 button {
   background-color: #007bff;
-  color: white;
+  color: #fff; /* Buton yazısı beyaz */
   border: none;
   padding: 8px 12px; /* Daha küçük padding */
   border-radius: 5px;
@@ -268,7 +275,7 @@ button:hover {
 .home-page p {
   font-size: 1.2rem; /* Yazı boyutu */
   line-height: 1.6; /* Satır yüksekliği */
-  color: #000; /* Yazı rengi */
+  color: #fff; /* Yazı rengi beyaz yapıldı */
   margin: 20px 0; /* Üst ve alt boşluk */
   word-wrap: break-word; /* Uzun kelimelerin taşmasını önler */
 }
@@ -277,5 +284,135 @@ button:hover {
   .home-page {
     max-width: 90%; /* Mobil cihazlarda genişlik ekranın %90'ı olacak */
   }
+}
+
+.home-small-video-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18px auto 10px auto;
+  /* width ve max-width kaldırıldı */
+}
+
+.home-small-video-frame {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+}
+
+.home-small-video {
+  width: 650px;
+  height: 370px;
+  border-radius: 10px;
+  background: #000;
+  box-shadow: none;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+}
+
+.home-small-video-frame, .home-small-video {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+}
+
+.home-small-video-frame:hover .home-small-video,
+.home-small-video:hover {
+  transform: scale(1.32) rotate(-2deg);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.32);
+  z-index: 3;
+}
+
+@media (max-width: 600px) {
+  .home-small-video-wrapper {
+    width: 98vw;
+  }
+  .home-small-video-frame {
+    padding: 2vw;
+  }
+  .home-small-video {
+    width: 98vw;
+    height: 35vw;
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-small-video {
+    width: 98vw;
+    height: 40vw;
+    min-height: 180px;
+  }
+}
+
+.home-video-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff; /* Başlık rengi beyaz yapıldı */
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.home-small-video-title-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.home-bg-video-container {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.home-bg-background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.45) blur(1px);
+  pointer-events: none;
+}
+
+.home-bg-content {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    padding: 10px 8px;
+    height: auto;
+  }
+  .sub-header {
+    flex-direction: column;
+    padding: 8px 4px;
+    height: auto;
+  }
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h3 {
+  color: #fff; /* Home.js içindeki başlıklar beyaz */
 }
 

@@ -31,7 +31,7 @@ const Login = () => {
       const { token } = data;
 
       login(token);
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }

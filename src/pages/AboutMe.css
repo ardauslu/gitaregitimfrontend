@@ -7,8 +7,9 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background: transparent !important;
   color: white;
+  box-shadow: none;
 }
 
 /* Animasyonlu arka plan */
@@ -69,7 +70,7 @@
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #2c3e50, #4ca1af); /* Gradyan arka plan */
+  background: transparent !important;
   color: #fff;
   min-height: 100vh;
   display: flex;
@@ -78,6 +79,7 @@
   justify-content: center;
   text-align: center;
   overflow-x: hidden;
+  box-shadow: none;
 }
 
 .about-me-header {
@@ -136,4 +138,44 @@
 
 .about-me-image:hover {
   transform: scale(1.05);
+}
+
+.aboutme-bg-video-container {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.aboutme-bg-background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.45) blur(1px);
+  pointer-events: none;
+}
+
+.aboutme-bg-content {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-me-page h1,
+.about-me-page h2,
+.about-me-page h3,
+.about-me-title,
+.about-me-text,
+.about-me-page p {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.32);
 }

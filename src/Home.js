@@ -124,35 +124,94 @@ const Home = () => {
   ];
 
   return (
-    <div>
-      {/* Ana Header */}
-       <Header language={language} setLanguage={setLanguage} logout={logout} />
-         <Subheader language={language} />
-      {/* Görseller */}
-      <div className="image-container">
-        <img src={unnamed1} alt="Unnamed 1" className="home-image" />
-
-        {/* Görseller arasındaki boşluk ve tanıtım paneli */}
-        <div className="image-gap">
-        <motion.div
-      className="home-page"
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageVariants}
-      transition={{ duration: 0.5 }}
-    >
-      <h2>{language === "tr" ? "Sitemize Hoşgeldiniz!" : "Welcome to Our Site!"}</h2>
+<div>
+     <Header language={language} setLanguage={setLanguage} logout={logout} />
+        <Subheader language={language} />
+       
+    <div className="home-bg-video-container">
+      <video
+        className="home-bg-background-video"
+        src={require("./assets/guitaranime.mp4")}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div className="home-bg-content">
+        {/* Ana Header */}
+        {/* Görseller */}
+        <div className="image-container">
+          {/* <img src={unnamed1} alt="Unnamed 1" className="home-image" /> */}
+          <motion.div
+            className="home-page"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageVariants}
+            transition={{ duration: 0.5 }}
+          >
+            <h2>{language === "tr" ? "Sitemize Hoşgeldiniz!" : "Welcome to Our Site!"}</h2>
             <p>
               {language === "tr"
                 ? "Gitar dünyasına adım atın! İlham verici riff oluşturucu, seviyelere göre derslerle müziğinizi bir üst seviyeye taşıyın. Hayalinizdeki gitarist olmak için ihtiyacınız olan her şey burada."
                 : "Step into the world of guitars! With inspiring riff generator, personalized lessons, take your music to the next level. Everything you need to become the guitarist of your dreams is right here."}
             </p><button onClick={() => navigate("/about-me")}>{language === "tr" ? "Hakkımda" : "About Me"}</button>
-    </motion.div>
+          </motion.div>
+          <div className="home-small-video-title-wrapper">
+            <div className="home-video-title" style={{marginBottom: '6px'}}>
+              <span>{language === "tr" ? "Metronom" : "Metronome"}</span>
+            </div>
+          </div>
+          <div className="home-small-video-wrapper">
+            <div className="home-small-video-frame">
+              <video
+                className="home-small-video"
+                src={require("./assets/homescreen.mp4")}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          </div>
+          <div className="home-small-video-title-wrapper">
+            <div className="home-video-title" style={{marginBottom: '6px'}}>
+              <span>{language === "tr" ? "Riff Generator" : "Riff Generator"}</span>
+            </div>
+          </div>
+          <div className="home-small-video-wrapper">
+            <div className="home-small-video-frame">
+              <video
+                className="home-small-video"
+                src={require("./assets/riff.mp4")}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          </div>
+          <div className="home-small-video-title-wrapper">
+            <div className="home-video-title" style={{marginBottom: '6px'}}>
+              <span>{language === "tr" ? "Zoom Dersi" : "Zoom Lesson"}</span>
+            </div>
+          </div>
+          <div className="home-small-video-wrapper">
+            <div className="home-small-video-frame">
+              <video
+                className="home-small-video"
+                src={require("./assets/zoom.mp4")}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          </div>
+          {/* <img src={unnamed2} alt="Unnamed 2" className="home-image" /> */}
         </div>
-
-        <img src={unnamed2} alt="Unnamed 2" className="home-image" />
       </div>
+    </div>
     </div>
   );
 };

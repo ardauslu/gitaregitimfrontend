@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"; // Değişti!
 import { AnimatePresence } from "framer-motion";
 import Home from "./Home";
 import SignUp from "./SignUp";
@@ -19,27 +19,14 @@ import AboutMe from "./pages/AboutMe";
 import SpeedAnalysis from "./pages/SpeedAnalysis";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
-const AnimatedRoutes = () => {
+const AppRoutes = () => {
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about-me" element={<AboutMe />} />
-      </Routes>
-    </AnimatePresence>
-  );
-};
-
-
-
-const AppRoutes = () => {
-  const { isAuthenticated } = useAuth();
-
-  return (
-    <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
         <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/home" />} />
@@ -53,22 +40,21 @@ const AppRoutes = () => {
         <Route path="/take-lesson" element={<TakeLesson />} />
         <Route path="/admin-panel" element={<AdminPanel />} />
         <Route path="/metronome" element={<Metronome />} />
-        <Route path="/about" element={<AboutMe />} /> 
-        <Route path="your-lessons" element={<YourLessons />} />
+        <Route path="/about-me" element={<AboutMe />} />
         <Route path="/speed-analysis" element={<SpeedAnalysis />} />
-     </Routes>
+      </Routes>
+    </AnimatePresence>
   );
 };
 
 const App = () => {
   return (
     <LanguageProvider>
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-        <AnimatedRoutes />
-      </Router>
-    </AuthProvider>
+      <AuthProvider>
+        <Router> {/* Artık HashRouter olarak çalışıyor! */}
+          <AppRoutes />
+        </Router>
+      </AuthProvider>
     </LanguageProvider>
   );
 };

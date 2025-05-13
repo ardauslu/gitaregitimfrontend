@@ -42,20 +42,34 @@ const AboutMe = () => {
   return (
     <div>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
-         <Subheader language={language} />
-         <motion.div
-      className="about-me-page"
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageVariants}
-      transition={{ duration: 0.5 }}
-    >
-       <h1 className="about-me-title">{t.title}</h1>
-       <p className="about-me-text">{t.content}</p>
-    </motion.div>
+      <Subheader language={language} />
+      <div className="aboutme-bg-video-container">
+        <video
+          className="aboutme-bg-background-video"
+          src={require("../assets/guitaranime.mp4")}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="aboutme-bg-content">
+          <div className="aboutme-white-frame">
+            <motion.div
+              className="about-me-page"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="about-me-title">{t.title}</h1>
+              <p className="about-me-text">{t.content}</p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default AboutMe;  
+export default AboutMe;

@@ -98,7 +98,7 @@ const AdminPanel = () => {
     <Header language={language} setLanguage={setLanguage} logout={logout} />
     <Subheader language={language} />
 
-    <div className="admin-panel">
+    <div className="admin-panel admin-white-frame">
     <h1>{language === 'tr' ? 'Admin Paneli' : 'Admin Page'}</h1>
     <div className="table-container">
         <table className="reservations-table">

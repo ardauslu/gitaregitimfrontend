@@ -22,6 +22,47 @@
   color: #fff; /* Yazı rengi beyaz */
 }
 
+/* Beyaz çerçeve */
+.lesson-white-frame {
+  background: #fff !important;
+  color: #222 !important;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  border: 2px solid #f3f3f3;
+  padding: 28px 24px;
+}
+
+.lesson-white-frame .take-lesson-header {
+  color: #1e3c72 !important;
+  text-shadow: none;
+}
+
+.lesson-white-frame input,
+.lesson-white-frame select {
+  background: #f7f7f7;
+  color: #222;
+  border: 1px solid #d0d0d0;
+}
+
+.lesson-white-frame input:focus,
+.lesson-white-frame select:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 0 2px #1e3c7222;
+}
+
+.lesson-white-frame .submit-btn {
+  background: #1e3c72;
+  color: #fff;
+}
+
+.lesson-white-frame .submit-btn:hover {
+  background: #2a5298;
+}
+
+.lesson-white-frame .success-message {
+  color: #1e3c72;
+}
+
 /* Başlık */
 .take-lesson-header {
   text-align: center;

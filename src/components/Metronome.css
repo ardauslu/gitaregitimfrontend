@@ -1,3 +1,7 @@
+body.metronome-page-bg {
+  background: #162447 !important;
+}
+
 .metronome-container {
     max-width: 1000px;
     margin: 2rem auto;
@@ -101,4 +105,3 @@
   .beat-dot.active {
     background-color: #00ffc8;
   }
-  

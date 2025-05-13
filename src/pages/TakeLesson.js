@@ -73,7 +73,7 @@ const TakeLesson = () => {
   
     <div className="take-lesson-page">
      
-      <div className="lesson-container">
+      <div className="lesson-container lesson-white-frame">
         <h2 className="take-lesson-header">
           {language === "tr"
             ? "Online Gitar Dersi Rezervasyonu"

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import Soundfont from 'soundfont-player';
 import { Chord , Scale } from 'tonal';
 import './AdvancedRiffGenerator.css';
-import Layout from './Layout';
 import notesImage from '../assets/notes.png'; // Görseli içe aktarın
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";

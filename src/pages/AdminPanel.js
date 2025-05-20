@@ -28,7 +28,7 @@ const AdminPanel = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Token eklenir
+           Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Token eklenir
           },
         });
 

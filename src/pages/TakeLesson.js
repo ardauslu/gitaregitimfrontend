@@ -39,7 +39,7 @@ const TakeLesson = () => {
     };
 
     try {
-      const token = localStorage.getItem('token'); // Token'ı localStorage'dan al
+      const token = sessionStorage.getItem('token'); // Token'ı sessionStorage'dan al
       if (!token) {
         throw new Error('Token bulunamadı. Lütfen giriş yapın.');
       }

@@ -30,18 +30,18 @@ const AppRoutes = () => {
         <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/home" />} />
-        <Route path="/riff-generator" element={<AdvancedRiffGenerator />} />
-        <Route path="/beginner" element={<Beginner />} />
-        <Route path="/intermediate" element={<Intermediate />} />
-        <Route path="/advanced" element={<Advanced />} />
-        <Route path="/etudes" element={<Etudes />} />
-        <Route path="/your-lessons" element={<YourLessons />} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/take-lesson" element={<TakeLesson />} />
-        <Route path="/admin-panel" element={<AdminPanel />} />
-        <Route path="/metronome" element={<Metronome />} />
-        <Route path="/about-me" element={<AboutMe />} />
-        <Route path="/speed-analysis" element={<SpeedAnalysis />} />
+        <Route path="/riff-generator" element={isAuthenticated ? <AdvancedRiffGenerator /> : <Navigate to="/login" />} />
+        <Route path="/beginner" element={isAuthenticated ? <Beginner /> : <Navigate to="/login" />} />
+        <Route path="/intermediate" element={isAuthenticated ? <Intermediate /> : <Navigate to="/login" />} />
+        <Route path="/advanced" element={isAuthenticated ? <Advanced /> : <Navigate to="/login" />} />
+        <Route path="/etudes" element={isAuthenticated ? <Etudes /> : <Navigate to="/login" />} />
+        <Route path="/your-lessons" element={isAuthenticated ? <YourLessons /> : <Navigate to="/login" />} />
+        <Route path="/profile" element={isAuthenticated ? <Profile/> : <Navigate to="/login" />} />
+        <Route path="/take-lesson" element={isAuthenticated ? <TakeLesson /> : <Navigate to="/login" />} />
+        <Route path="/admin-panel" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
+        <Route path="/metronome" element={isAuthenticated ? <Metronome /> : <Navigate to="/login" />} />
+        <Route path="/about-me" element={isAuthenticated ? <AboutMe /> : <Navigate to="/login" />} />
+        <Route path="/speed-analysis" element={isAuthenticated ? <SpeedAnalysis /> : <Navigate to="/login" />} />
       </Routes>
     </AnimatePresence>
   );

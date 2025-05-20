@@ -3,15 +3,15 @@ import React, { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!sessionStorage.getItem("token"));
 
   const login = (token) => {
-    localStorage.setItem("token", token);
+    sessionStorage.setItem("token", token);
     setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setIsAuthenticated(false);
     window.location.href = "/login"; // Çıkış yaptıktan sonra giriş sayfasına yönlendirme
   };

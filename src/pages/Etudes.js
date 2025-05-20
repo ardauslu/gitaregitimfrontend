@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
-import Layout from "../components/Layout";
 import "./Etudes.css"; // CSS dosyasını import ediyoruz
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";

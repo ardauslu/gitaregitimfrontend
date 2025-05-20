@@ -14,7 +14,7 @@ const VideoPlayer = ({ videoUrl }) => {
 
   useEffect(() => {
     if (videoUrl) {
-      const src = `http://localhost:5003/results/${videoUrl}?t=${Date.now()}`;
+      const src = `http://localhost:5004/results/${videoUrl}?t=${Date.now()}`;
       setVideoSrc(src);
     }
   }, [videoUrl]);
@@ -128,7 +128,7 @@ const SpeedAnalysis = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5003/analyze/youtube', {
+      const response = await axios.post('http://localhost:5004/analyze/youtube', {
         youtube_url: youtubeUrl
       });
       setResults(response.data);

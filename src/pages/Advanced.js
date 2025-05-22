@@ -6,10 +6,11 @@ import "./Advanced.css";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
+import keycloak from "../keycloak";
 const Advanced = () => {
   const [videoData, setVideoData] = useState([]);
   const { language, setLanguage } = useLanguage();// Dil state'i
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
 
       useEffect(() => {
@@ -32,6 +33,12 @@ const Advanced = () => {
 
     fetchVideos();
   }, []);
+
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  };
 
   return (
     <div>

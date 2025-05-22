@@ -6,13 +6,12 @@ import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu
 import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
-
-
+import keycloak from "../keycloak";
 const AdminPanel = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated } = useAuth(); // useAuth'tan isAuthenticated alın
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
     useEffect(() => {
@@ -28,7 +27,7 @@ const AdminPanel = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-           Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Token eklenir
+            Authorization: `Bearer ${keycloak.token}`,
           },
         });
 
@@ -85,6 +84,42 @@ const AdminPanel = () => {
     return `${baseUrl}?${params.toString()}`;
   };
 
+  // Zoom toplantısı oluşturmak için API isteği
+  const createZoomMeeting = async ({ topic, lessonDate, lessonTime, duration }) => {
+    try {
+      const token = keycloak.token;
+      if (!token) throw new Error("Token bulunamadı");
+      const response = await fetch(`${config.API_BASE_URL}/api/zoom/meeting`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          topic,
+          lessonDate,
+          lessonTime,
+          duration,
+        }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Zoom toplantısı oluşturulamadı");
+      }
+      const data = await response.json();
+      return data; // Zoom toplantısı bilgileri
+    } catch (err) {
+      console.error("Zoom toplantısı oluşturma hatası:", err);
+      throw err;
+    }
+  };
+
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  };
+
   if (loading) {
     return <div className="admin-panel">Yükleniyor...</div>;
   }
@@ -121,9 +156,23 @@ const AdminPanel = () => {
                 <td>{formatDate(reservation.lessonDate)}</td> {/* Tarih formatlandı */}
                 <td>{reservation.lessonTime}</td>
                 <td>
-                  <a href={reservation.zoomLink} target="_blank" rel="noopener noreferrer">
-                  {language === 'tr' ? 'Zoom Linki' : 'Zoom Link'}
-                  </a>
+                  {reservation.zoomLink ? (
+                    <a
+                      href={reservation.zoomLink.startsWith('http') ? reservation.zoomLink : `https://${reservation.zoomLink}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => {
+                        // Eğer link yoksa veya geçersizse tıklamayı engelle
+                        if (!reservation.zoomLink || reservation.zoomLink === '#' || reservation.zoomLink === 'about:blank') {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
+                      {language === 'tr' ? 'Zoom Linki' : 'Zoom Link'}
+                    </a>
+                  ) : (
+                    <span style={{ color: '#aaa' }}>{language === 'tr' ? 'Yok' : 'N/A'}</span>
+                  )}
                 </td>
               </tr>
             ))}

@@ -7,6 +7,7 @@ import Subheader from '../components/Subheader';
 import Header from '../components/Header';
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import config from "../config";
+import keycloak from "../keycloak";
 
 // VideoPlayer component / VideoPlayer bileşeni
 const VideoPlayer = ({ videoUrl }) => {
@@ -50,7 +51,7 @@ const SpeedAnalysis = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
-  const { logout } = useAuth();
+  const { logout: authLogout } = useAuth();
   
   const translations = {
     en: {
@@ -149,6 +150,12 @@ const SpeedAnalysis = () => {
     if (score >= 80) return 'text-emerald-500';
     if (score >= 60) return 'text-amber-500';
     return 'text-red-500';
+  };
+
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login"
+    });
   };
 
   return (

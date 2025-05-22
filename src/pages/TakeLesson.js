@@ -6,6 +6,7 @@ import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu
 import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
+import keycloak from "../keycloak";
 
 const TakeLesson = () => {
   const [name, setName] = useState('');
@@ -15,40 +16,50 @@ const TakeLesson = () => {
   const [lessonTime, setLessonTime] = useState('');
   const [reservationDone, setReservationDone] = useState(false);
   const [zoomLink, setZoomLink] = useState(''); // Zoom toplantı linki
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated, logout: authLogout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
-      useEffect(() => {
-        if (!isAuthenticated) {
-          navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-        }
-      }, [isAuthenticated, navigate]);
-    
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+      }
+    }, [isAuthenticated, navigate]);
+  
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  }
+
   const handleReservation = async () => {
     if (!lessonDate || !lessonTime || !name || !email) {
       alert('Lütfen tüm alanları doldurun.');
       return;
     }
 
-    const reservationData = {
-      name,
-      email,
-      lessonType,
-      lessonDate,
-      lessonTime,
-    };
-
     try {
-      const token = sessionStorage.getItem('token'); // Token'ı sessionStorage'dan al
+      // Keycloak token kullan
+      const token = keycloak.token;
       if (!token) {
         throw new Error('Token bulunamadı. Lütfen giriş yapın.');
       }
-
+      // ISO 8601 formatı: 2025-05-23T15:00:00
+      const isoStartTime = lessonDate && lessonTime ? `${lessonDate}T${lessonTime}` : undefined;
+      const reservationData = {
+        topic: 'Gitar Eğitimi',
+        lessonDate,
+        lessonTime,
+        duration: 60,
+        isoStartTime,
+        name,
+        email,
+        lessonType,
+      };
       const response = await fetch(`${config.API_BASE_URL}/api/reservations`, {
-                 method: 'POST',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // Token'ı Authorization başlığına ekle
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(reservationData),
       });

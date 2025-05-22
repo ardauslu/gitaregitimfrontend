@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 const Beginner = () => {
   const [videoData, setVideoData] = useState([]);
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated, logout: keycloakLogout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   useEffect(() => {
@@ -31,6 +31,12 @@ const Beginner = () => {
 
     fetchVideos();
   }, []);
+
+  const logout = () => {
+    keycloakLogout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  };
 
   return (
     <div>

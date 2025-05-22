@@ -6,18 +6,20 @@ import "./Intermediate.css";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
+import keycloak from "../keycloak";
+
 const Intermediate = () => {
   const [videoData, setVideoData] = useState([]);
   const { language, setLanguage } = useLanguage();
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
 
-    useEffect(() => {
-      if (!isAuthenticated) {
-        navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-      }
-    }, [isAuthenticated, navigate]);
-  
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
+    }
+  }, [isAuthenticated, navigate]);
+
   // Videoları dinamik olarak yükleme
   useEffect(() => {
     const fetchVideos = async () => {
@@ -33,11 +35,17 @@ const Intermediate = () => {
     fetchVideos();
   }, []);
 
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login",
+    });
+  };
+
   return (
     <div>
-     <Header language={language} setLanguage={setLanguage} logout={logout} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-       <div className="intermediate-content">
+      <div className="intermediate-content">
         <div className="intermediate-page">
           <header className="intermediate-header">
             <h1>

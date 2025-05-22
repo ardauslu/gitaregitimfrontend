@@ -9,11 +9,12 @@ import Header from "./components/Header"; // Header bileşenini içe aktarın
 import { useAuth } from "./AuthContext";
 import config from "./config";
 import { useLanguage } from "./contexts/LanguageContext";
+import keycloak from "./keycloak";
 const Home = () => {
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
-  const { logout } = useAuth(); // AuthContext'ten logout fonksiyonunu alın
+  const { logout: logoutContext } = useAuth(); // AuthContext'ten logout fonksiyonunu alın
 
   const pageVariants = {
     initial: { opacity: 0, x: "-100vw" },
@@ -21,6 +22,11 @@ const Home = () => {
     exit: { opacity: 0, x: "100vw" },
   };
 
+  const logout = () => {
+    keycloak.logout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {

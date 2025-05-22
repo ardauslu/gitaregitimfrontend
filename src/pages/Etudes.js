@@ -89,7 +89,7 @@ const translations = {
 const Etudes = () => {
   const [activeTab, setActiveTab] = useState(0); // Varsayılan olarak ilk sekme aktif
   const { language, setLanguage } = useLanguage(); // Dil state'i
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
+  const { isAuthenticated, logout: keycloakLogout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,6 +99,12 @@ const Etudes = () => {
   }, [isAuthenticated, navigate]);
 
   const t = translations[language]; // Çeviri metinlerini seç
+
+  const logout = () => {
+    keycloakLogout({
+      redirectUri: "http://localhost:3000/login"
+    });
+  };
 
   return (
     <>

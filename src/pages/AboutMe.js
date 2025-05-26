@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./AboutMe.css"; // CSS dosyasını import edin
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
@@ -25,12 +25,7 @@ const AboutMe = () => {
   const { language, setLanguage } = useLanguage();
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-  
-  const pageVariants = {
-    initial: { opacity: 0, x: "100vw" },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: "-100vw" },
-  };
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login");
@@ -56,10 +51,9 @@ const AboutMe = () => {
           <div className="aboutme-white-frame">
             <motion.div
               className="about-me-page"
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
+              initial={{ opacity: 0, x: "100vw" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "-100vw" }}
               transition={{ duration: 0.5 }}
             >
               <h1 className="about-me-title">{t.title}</h1>

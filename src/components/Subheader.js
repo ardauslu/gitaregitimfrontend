@@ -4,39 +4,19 @@ import "./Subheader.css";
 import { useEffect, useState } from "react";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
+import keycloak from "../keycloak";
 const Subheader = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
   const { language, setLanguage } = useLanguage();
  
   useEffect(() => {
-    const fetchUserData = async () => {
-      console.log("fetchUserData çağrıldı."); // Kontrol için log ekledik
-
-      try {
-        const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`API isteği başarısız oldu: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Kullanıcı bilgileri:", data); // Yanıtı kontrol etmek için log ekledik
-
-        setIsAdmin(data.isAdmin || false); // Kullanıcının admin olup olmadığını kontrol et
-      } catch (err) {
-        console.error("Kullanıcı bilgileri alınamadı:", err);
-        setIsAdmin(false); // Hata durumunda admin olarak işaretleme
-      }
-    };
-
-    fetchUserData();
+    // Keycloak rolünden admin kontrolü
+    let isAdminRole = false;
+    if (keycloak && keycloak.tokenParsed && keycloak.tokenParsed.realm_access && Array.isArray(keycloak.tokenParsed.realm_access.roles)) {
+      isAdminRole = keycloak.tokenParsed.realm_access.roles.includes("admin");
+    }
+    setIsAdmin(isAdminRole);
   }, []);
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "tr" ? "en" : "tr"));

@@ -3,7 +3,7 @@ import "./Header.css";
 import logo from "../assets/logo.png";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
-
+import keycloak from "../keycloak";
 const Header = ({ logout }) => {
   const [profileImage, setProfileImage] = useState(""); // Profil resmi için state
   const [username, setUsername] = useState(""); // Kullanıcı adı için state
@@ -17,7 +17,7 @@ const Header = ({ logout }) => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            Authorization: `Bearer ${keycloak.token}`,
           },
         });
 

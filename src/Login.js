@@ -1,40 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-import "./Login.css";
 import chatgptImage from "./assets/chatgpt.png";
+import keycloak from "./keycloak.js";
 import config from "./config";
+import "./Login.css";
+
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const [language, setLanguage] = useState("tr");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${config.API_BASE_URL}/api/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  const handleKeycloakLogin = () => {
+    keycloak.login({
+      redirectUri: config.LOGIN_REDIRECT_URI,
+      locale: language
+    });
+  };
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
-      }
-
-      const data = await response.json();
-      const { token } = data;
-
-      login(token);
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-    }
+  const handleKeycloakRegister = () => {
+    keycloak.register({
+     redirectUri: config.REGISTER_REDIRECT_URI,
+      locale: language
+    });
   };
 
   return (
@@ -44,39 +28,29 @@ const Login = () => {
           <img src={chatgptImage} alt="ChatGPT Logo" className="chatgpt-image" />
         </div>
         <div className="form-container">
-          <form onSubmit={handleLogin}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-            <button type="submit" className="login-button">
-              Log In
+          <div className="language-switcher" style={{ marginBottom: "1rem" }}>
+            <button
+              className={language === "tr" ? "active" : ""}
+              onClick={() => setLanguage("tr")}
+            >
+              Türkçe
             </button>
-          </form>
-          {error && <p className="error-message">{error}</p>}
+            <button
+              className={language === "en" ? "active" : ""}
+              onClick={() => setLanguage("en")}
+              style={{ marginLeft: "0.5rem" }}
+            >
+              English
+            </button>
+          </div>
+          <button className="login-button" onClick={handleKeycloakLogin}>
+            {language === "tr" ? "Giriş Yap" : "Sign In"}
+          </button>
           <button
             className="signup-button"
-            onClick={() => navigate("/signup")} // Sign Up butonu için yönlendirme
+            onClick={handleKeycloakRegister}
           >
-            Sign Up
+            {language === "tr" ? "Kayıt Ol" : "Sign Up"}
           </button>
         </div>
       </div>

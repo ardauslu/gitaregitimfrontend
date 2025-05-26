@@ -1,36 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import ReactPlayer from "react-player";
-import "./Beginner.css";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
-import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
-const Beginner = () => {
-  const [videoData, setVideoData] = useState([]);
-  const { isAuthenticated, logout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
-  const navigate = useNavigate();
-  const { language, setLanguage } = useLanguage();
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-    }
-  }, [isAuthenticated, navigate]);
+import config from "../config";
+import "./Beginner.css";
 
-  // Videoları dinamik olarak yükleme
+// Custom hook for fetching video data
+const useVideoData = (jsonPath) => {
+  const [videoData, setVideoData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("/data/beginnerVideos.json"); // JSON dosyasından veri çek
+        const response = await fetch(jsonPath);
+        if (!response.ok) throw new Error("Failed to fetch videos");
         const data = await response.json();
         setVideoData(data);
-      } catch (error) {
-        console.error("Videolar yüklenirken bir hata oluştu:", error);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchVideos();
-  }, []);
+  }, [jsonPath]);
+
+  return { videoData, loading, error };
+};
+
+const Beginner = () => {
+  const { isAuthenticated, logout: keycloakLogout } = useAuth();
+  const navigate = useNavigate();
+  const { language, setLanguage } = useLanguage();
+  const { videoData, loading, error } = useVideoData("/data/beginnerVideos.json");
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
 
   return (
     <div>
@@ -40,9 +57,7 @@ const Beginner = () => {
         <div className="beginner-page">
           <header className="beginner-header">
             <h1>
-              {language === "tr"
-                ? "Başlangıç Seviyesi Dersler"
-                : "Beginner Lessons"}
+              {language === "tr" ? "Başlangıç Seviyesi Dersler" : "Beginner Lessons"}
             </h1>
             <p>
               {language === "tr"
@@ -50,8 +65,12 @@ const Beginner = () => {
                 : "Explore beginner-level guitar lessons."}
             </p>
           </header>
-
+          {loading && <div>Loading...</div>}
+          {error && <div style={{ color: 'red' }}>{error}</div>}
           <div className="video-list">
+            {!loading && !error && videoData.length === 0 && (
+              <div>No videos found.</div>
+            )}
             {videoData.map((video, index) => (
               <div key={index} className="video-item">
                 <ReactPlayer

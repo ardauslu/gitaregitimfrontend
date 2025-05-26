@@ -1,32 +1,54 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import keycloak from "./keycloak";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!sessionStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const login = (token) => {
-    sessionStorage.setItem("token", token);
-    setIsAuthenticated(true);
+  // Keycloak init sadece bir kez çağrılır
+  useEffect(() => {
+  keycloak.init({
+    onLoad: "check-sso",
+    redirectUri: "https://au.bishokudev.com/home"
+  })
+  .then(authenticated => {
+    setIsAuthenticated(keycloak.authenticated);
+    setLoading(false);
+  })
+  .catch(error => {
+    console.error("Keycloak init error:", error);
+    setIsAuthenticated(false);
+    setLoading(false);
+  });
+}, []);
+
+  // Token yenileme (isteğe bağlı)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      keycloak.updateToken(60);
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const login = () => {
+    keycloak.login({
+      redirectUri: "https://au.bishokudev.com/home"
+    });
   };
 
   const logout = () => {
-    sessionStorage.removeItem("token");
-    setIsAuthenticated(false);
-    window.location.href = "/login"; // Çıkış yaptıktan sonra giriş sayfasına yönlendirme
+    keycloak.logout({
+      redirectUri: "https://au.bishokudev.com/login"
+    });
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);

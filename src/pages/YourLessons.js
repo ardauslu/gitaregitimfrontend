@@ -5,9 +5,10 @@ import Header from '../components/Header';
 import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiTrash2, FiPlus, FiStar, FiHeart } from "react-icons/fi";
+import { FiTrash2, FiPlus, FiStar, FiHeart, FiChevronDown } from "react-icons/fi";
 import { useAuth } from "../AuthContext";
-import { FiChevronDown } from 'react-icons/fi';
+import keycloak from "../keycloak";
+
 const videoVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
@@ -44,6 +45,30 @@ const MUSIC_CATEGORIES = [
   "World Music"
 ];
 
+const getEmbedUrl = (url) => {
+  if (!url) return '';
+  // Handle YouTube URLs
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    const videoId = (match && match[2].length === 11) ? match[2] : null;
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1&modestbranding=1`;
+    }
+    return url;
+  }
+  // Handle Vimeo URLs
+  if (url.includes('vimeo.com')) {
+    const regExp = /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+    const match = url.match(regExp);
+    if (match && match[3]) {
+      return `https://player.vimeo.com/video/${match[3]}`;
+    }
+  }
+  // Return original URL for other cases
+  return url;
+};
+
 const YourLessons = () => {
   const [videoUrl, setVideoUrl] = useState('');
   const [userVideos, setUserVideos] = useState([]);
@@ -58,37 +83,27 @@ const YourLessons = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const navigate = useNavigate();
-  const { logout } = useAuth();
-  const token = localStorage.getItem('token');
-  const getEmbedUrl = (url) => {
-    if (!url) return '';
+  const { logout: keycloakLogout, isAuthenticated, loading } = useAuth();
 
-    // Handle YouTube URLs
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-      const match = url.match(regExp);
-      const videoId = (match && match[2].length === 11) ? match[2] : null;
+  // Token'ı keycloak.token'dan alacağız
 
-      if (videoId) {
-        return `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1&modestbranding=1`;
-      }
-      return url;
-    }
-
-    // Handle Vimeo URLs
-    if (url.includes('vimeo.com')) {
-      const regExp = /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
-      const match = url.match(regExp);
-      if (match && match[3]) {
-        return `https://player.vimeo.com/video/${match[3]}`;
+  // Token'ı güncel ve geçerli şekilde almak için yardımcı fonksiyon
+  const getValidToken = async () => {
+    if (keycloak && keycloak.token) {
+      try {
+        await keycloak.updateToken(30); // 30 saniyeden az kaldıysa yenile
+        return keycloak.token;
+      } catch (err) {
+        console.error("Token yenileme başarısız:", err);
+        return null;
       }
     }
-
-    // Return original URL for other cases
-    return url;
+    return null;
   };
 
   const fetchUserProfile = useCallback(async () => {
+    const token = await getValidToken();
+    if (!token) return;
     try {
       const profileResponse = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
         method: 'GET',
@@ -102,13 +117,14 @@ const YourLessons = () => {
       }
 
       const profileData = await profileResponse.json();
-      setIsAdmin(profileData.isAdmin || false); // Kullanıcının admin olup olmadığını kontrol et
+      // setIsAdmin(profileData.isAdmin || false); // Kullanıcının admin olup olmadığını kontrol et
     } catch (err) {
       console.error('Error fetching user profile:', err);
     }
-  }, [token]);
+  }, []);
 
   const fetchVideos = useCallback(async () => {
+    const token = await getValidToken();
     if (!token) return;
 
     setIsLoading(true);
@@ -125,8 +141,11 @@ const YourLessons = () => {
       }
 
       const data = await res.json();
-      setUserVideos(data.userVideos || []);
-      setOtherVideos(data.otherVideos || []);
+      // Videolarda _id yoksa id'yi _id olarak ata
+      const normalizeVideos = (videos) =>
+        (videos || []).map((v) => ({ ...v, _id: v._id || v.id }));
+      setUserVideos(normalizeVideos(data.userVideos));
+      setOtherVideos(normalizeVideos(data.otherVideos));
     } catch (err) {
       console.error('Error fetching videos:', err);
       showNotification(err.message, true);
@@ -136,16 +155,37 @@ const YourLessons = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [token, navigate]);
+  }, [navigate]);
 
   useEffect(() => {
-    if (!token) {
+    if (loading) return; // Auth yüklenmeden işlem yapma
+    if (!isAuthenticated) {
       navigate('/login');
     } else {
-      fetchUserProfile(); // Kullanıcı profilini getir
+      // Keycloak rolünden admin kontrolü
+      let isAdminRole = false;
+      if (keycloak && keycloak.tokenParsed && keycloak.tokenParsed.realm_access && Array.isArray(keycloak.tokenParsed.realm_access.roles)) {
+        isAdminRole = keycloak.tokenParsed.realm_access.roles.includes("admin");
+      }
+      setIsAdmin(isAdminRole);
+      fetchUserProfile(); // Kullanıcı profilini getir (artık sadece diğer bilgiler için)
       fetchVideos(); // Videoları getir
     }
-  }, [token, navigate, fetchUserProfile, fetchVideos]);
+  }, [isAuthenticated, loading, navigate, fetchUserProfile, fetchVideos]);
+
+  useEffect(() => {
+    if (!isAuthenticated && !loading) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, loading, navigate]);
+
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
+
+  if (loading) {
+    return <div>Yükleniyor...</div>;
+  }
 
   const showNotification = (message, isError = false) => {
     setNotification({ message, isError });
@@ -157,7 +197,8 @@ const YourLessons = () => {
       showNotification("Video URL is required", true);
       return;
     }
-
+    const token = await getValidToken();
+    if (!token) return;
     try {
       const profileResponse = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
         method: 'GET',
@@ -202,7 +243,9 @@ const YourLessons = () => {
       }
 
       const savedVideo = await response.json();
-      setUserVideos((prev) => [savedVideo, ...prev]);
+      // _id yoksa id'yi _id olarak ata
+      const normalizedVideo = { ...savedVideo, _id: savedVideo._id || savedVideo.id };
+      setUserVideos((prev) => [normalizedVideo, ...prev]);
       resetForm();
       showNotification("Video added successfully!");
     } catch (err) {
@@ -219,6 +262,8 @@ const YourLessons = () => {
   };
 
   const handleDelete = async (id) => {
+    const token = await getValidToken();
+    if (!token) return;
     try {
       const response = await fetch(`${config.API_BASE_URL}/api/videos/${id}`, {
         method: 'DELETE',
@@ -242,6 +287,8 @@ const YourLessons = () => {
   };
 
   const toggleFavorite = async (id) => {
+    const token = await getValidToken();
+    if (!token) return;
     try {
       const videoToUpdate = userVideos.find(v => v._id === id);
       if (!videoToUpdate) return;
@@ -287,8 +334,26 @@ const YourLessons = () => {
   ])].filter(Boolean);
 
   const renderVideoPlayer = (video) => {
-    const embedUrl = getEmbedUrl(video.url);
+    // MinIO'dan gelen videoları backend API üzerinden oynat
+    // Eğer video.url bir dosya adıysa (ör: .mp4 ile bitiyorsa ve http/https içermiyorsa), backend'den çek
+    const isMinioFile = video.url &&
+      (video.url.endsWith('.mp4') || video.url.endsWith('.webm') || video.url.endsWith('.mov')) &&
+      !video.url.startsWith('http');
 
+    if (isMinioFile) {
+      // MinIO dosyası ise backend API'den stream et
+      const apiUrl = `${config.API_BASE_URL}/api/videos/results/${encodeURIComponent(video.url)}`;
+      return (
+        <div className="video-embed">
+          <video controls className="video-tag">
+            <source src={apiUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      );
+    }
+
+    const embedUrl = getEmbedUrl(video.url);
     if (embedUrl.includes('youtube.com/embed') || embedUrl.includes('vimeo.com')) {
       return (
         <div className="video-embed">
@@ -303,6 +368,7 @@ const YourLessons = () => {
         </div>
       );
     } else {
+      // Diğer doğrudan video URL'leri (ör: http ile başlayan mp4)
       return (
         <div className="video-embed">
           <video controls className="video-tag">

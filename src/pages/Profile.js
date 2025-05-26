@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import imageCompression from "browser-image-compression";
 import "./Profile.css";
 import { useAuth } from "../AuthContext";
@@ -9,22 +9,82 @@ import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
 import keycloak from "../keycloak";
 
-const Profile = () => {
-  const [userData, setUserData] = useState(null); // MongoDB'den gelen veriler
-  const [keycloakProfile, setKeycloakProfile] = useState(null); // Keycloak'tan gelen veriler
-  const [isEditing, setIsEditing] = useState(false);
+// Custom hook for fetching user profile
+const useUserProfile = (token, setLoading, setError) => {
+  const [userData, setUserData] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [instruments, setInstruments] = useState([]);
   const [favoriteStyles, setFavoriteStyles] = useState([]);
   const [profileImage, setProfileImage] = useState(null);
+
+  const fetchProfile = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error("Profil bilgileri alınamadı.");
+      const data = await response.json();
+      setUserData(data);
+      setFirstName(data.firstName || "");
+      setLastName(data.lastName || "");
+      setInstruments(data.instruments || []);
+      setFavoriteStyles(data.favoriteStyles || []);
+      setProfileImage(data.profileImage || null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [token, setLoading, setError]);
+
+  return {
+    userData,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    instruments,
+    setInstruments,
+    favoriteStyles,
+    setFavoriteStyles,
+    profileImage,
+    setProfileImage,
+    fetchProfile,
+  };
+};
+
+const Profile = () => {
+  const [keycloakProfile, setKeycloakProfile] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [reservations, setReservations] = useState([]); // Kullanıcının randevuları
-  const { isAuthenticated, logout: authLogout } = useAuth();
+  const [reservations, setReservations] = useState([]);
+  const { isAuthenticated, logout: keycloakLogout } = useAuth();
   const { language, setLanguage } = useLanguage();
   const navigate = useNavigate();
 
+  // Use extracted profile hook
+  const {
+    userData,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    instruments,
+    setInstruments,
+    favoriteStyles,
+    setFavoriteStyles,
+    profileImage,
+    setProfileImage,
+    fetchProfile,
+  } = useUserProfile(keycloak.token, setLoading, setError);
 
   const styleOptions = [
     language === "tr" ? "Rock" : "Rock",
@@ -61,38 +121,32 @@ const Profile = () => {
     }
   }, []);
 
-  const fetchProfile = async () => {
-  try {
-    const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${keycloak.token}`, // DÜZELTİLDİ
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Profil bilgileri alınamadı.");
-    }
-
-    const data = await response.json();
-    setUserData(data);
-    setFirstName(data.firstName || "");
-    setLastName(data.lastName || "");
-    setInstruments(data.instruments || []);
-    setFavoriteStyles(data.favoriteStyles || []);
-    setProfileImage(data.profileImage || null);
-    setLoading(false);
-  } catch (err) {
-    setError(err.message);
-    setLoading(false);
-  }
-};
-
   useEffect(() => {
     fetchProfile();
     // eslint-disable-next-line
+  }, [fetchProfile]);
+
+  // Fetch reservations
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const response = await fetch(`${config.API_BASE_URL}/api/users/my`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${keycloak.token}`,
+          },
+        });
+        if (!response.ok) throw new Error('Randevular alınamadı');
+        const data = await response.json();
+        setReservations(data);
+      } catch (err) {
+        setReservations([]);
+      }
+    };
+    if (keycloak.token) fetchReservations();
   }, []);
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
 
@@ -113,7 +167,6 @@ const Profile = () => {
 
         reader.readAsDataURL(compressedFile);
       } catch (err) {
-        console.error("Resim sıkıştırma hatası:", err);
         alert("Resim sıkıştırılamadı. Lütfen başka bir resim seçin.");
       }
     }
@@ -135,20 +188,20 @@ const Profile = () => {
     }
   
     try {
-       const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
-  method: "PUT",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${keycloak.token}`, // DÜZELTİLDİ
-  },
-  body: JSON.stringify({
-    firstName,
-    lastName,
-    instruments,
-    favoriteStyles,
-    profileImage,
-  }),
-});
+      const response = await fetch(`${config.API_BASE_URL}/api/users/profile`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${keycloak.token}`,
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          instruments,
+          favoriteStyles,
+          profileImage,
+        }),
+      });
   
       if (response.ok) {
         alert(language === "tr" ? "Profil bilgileri başarıyla güncellendi!" : "Profile updated successfully!");
@@ -159,7 +212,6 @@ const Profile = () => {
         throw new Error(errorData.message || "Profil güncellenemedi.");
       }
     } catch (err) {
-      console.error("Hata:", err.message);
       alert(err.message);
     }
   };
@@ -186,32 +238,9 @@ const Profile = () => {
     );
   };
 
-  // Kullanıcıya ait randevuları çek
-useEffect(() => {
-  const fetchReservations = async () => {
-    try {
-        const response = await fetch(`${config.API_BASE_URL}/api/users/my`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${keycloak.token}`,
-        },
-      });
-      if (!response.ok) throw new Error('Randevular alınamadı');
-      const data = await response.json();
-      setReservations(data);
-    } catch (err) {
-      setReservations([]);
-    }
-  };
-  if (keycloak.token) fetchReservations();
-}, []);
-
-  const logout = () => {
-    keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
-    });
-  };
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
 
   if (loading) {
     return <div className="profile-page">{language === "tr" ? "Yükleniyor..." : "Loading..."}</div>;

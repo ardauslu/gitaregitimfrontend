@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useAuth } from "../AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import config from "../config";
@@ -9,8 +9,9 @@ import Subheader from "../components/Subheader";
 const Security = () => {
   const [redirectUrl, setRedirectUrl] = useState("");
   const [error, setError] = useState("");
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout: keycloakLogout } = useAuth();
   const { language, setLanguage } = useLanguage();
+
   const handleChangePassword = async () => {
     setError("");
     try {
@@ -33,13 +34,17 @@ const Security = () => {
     }
   };
 
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
+
   if (!isAuthenticated) {
     return <div>{language === "tr" ? "Lütfen giriş yapın." : "Please log in."}</div>;
   }
 
   return (
     <div>
-      <Header language={language} setLanguage={setLanguage} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
       <div className="security-page" style={{ padding: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
         <button onClick={handleChangePassword} style={{ padding: 16, fontSize: 18, borderRadius: 8, background: '#40db9a', color: '#fff', border: 'none', cursor: 'pointer', minWidth: 220 }}>

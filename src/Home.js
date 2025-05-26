@@ -24,7 +24,7 @@ const Home = () => {
 
   const logout = () => {
     keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
+      redirectUri: config.LOGOUT_REDIRECT_URI
     });
   };
 

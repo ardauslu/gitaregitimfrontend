@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
   keycloak.init({
     onLoad: "check-sso",
-    redirectUri: "http://localhost:3000/home"
+    redirectUri: "https://au.bishokudev.com/home"
   })
   .then(authenticated => {
     setIsAuthenticated(keycloak.authenticated);
@@ -34,13 +34,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     keycloak.login({
-      redirectUri: "http://localhost:3000/home"
+      redirectUri: "https://au.bishokudev.com/home"
     });
   };
 
   const logout = () => {
     keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
+      redirectUri: "https://au.bishokudev.com/login"
     });
   };
 

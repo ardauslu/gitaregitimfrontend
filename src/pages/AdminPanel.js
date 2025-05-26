@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./AdminPanel.css";
 import Header from "../components/Header";
-import Subheader from "../components/Subheader"; // Subheader bileşenini içe aktar
-import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
+import Subheader from "../components/Subheader";
+import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
 import keycloak from "../keycloak";
+
 const AdminPanel = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { isAuthenticated } = useAuth(); // useAuth'tan isAuthenticated alın
+  const { isAuthenticated, logout: keycloakLogout } = useAuth();
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
-    useEffect(() => {
-      if (!isAuthenticated) {
-        navigate("/login"); // Kullanıcı giriş yapmamışsa giriş sayfasına yönlendir
-      }
-    }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
+
   // Rezervasyonları API'den çek
   useEffect(() => {
     const fetchReservations = async () => {
@@ -109,15 +116,8 @@ const AdminPanel = () => {
       const data = await response.json();
       return data; // Zoom toplantısı bilgileri
     } catch (err) {
-      console.error("Zoom toplantısı oluşturma hatası:", err);
       throw err;
     }
-  };
-
-  const logout = () => {
-    keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
-    });
   };
 
   if (loading) {

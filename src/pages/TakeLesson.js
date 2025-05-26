@@ -16,6 +16,7 @@ const TakeLesson = () => {
   const [lessonTime, setLessonTime] = useState('');
   const [reservationDone, setReservationDone] = useState(false);
   const [zoomLink, setZoomLink] = useState(''); // Zoom toplantı linki
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { isAuthenticated, logout: authLogout } = useAuth(); // useAuth'tan isAuthenticated ve logout alın
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
@@ -27,7 +28,7 @@ const TakeLesson = () => {
   
   const logout = () => {
     keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
+      redirectUri: config.LOGOUT_REDIRECT_URI
     });
   }
 
@@ -36,7 +37,7 @@ const TakeLesson = () => {
       alert('Lütfen tüm alanları doldurun.');
       return;
     }
-
+    setIsSubmitting(true);
     try {
       // Keycloak token kullan
       const token = keycloak.token;
@@ -75,6 +76,8 @@ const TakeLesson = () => {
     } catch (error) {
       console.error('Hata:', error);
       alert('Rezervasyon kaydedilemedi. Lütfen tekrar deneyin.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -169,7 +172,7 @@ const TakeLesson = () => {
               />
             </div>
 
-            <button type="button" className="submit-btn" onClick={handleReservation}>
+            <button type="button" className="submit-btn" onClick={handleReservation} disabled={isSubmitting}>
             {language === "tr" ? "Rezervasyonu Tamamla" : "Complete Reservation"}
           </button>
         </form>

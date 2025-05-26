@@ -14,25 +14,61 @@ const VideoPlayer = ({ videoUrl }) => {
   const [videoSrc, setVideoSrc] = useState('');
 
   useEffect(() => {
-    if (videoUrl) {
-      const src = `http://localhost:5004/results/${videoUrl}?t=${Date.now()}`;
-      setVideoSrc(src);
-    }
-  }, [videoUrl]);
+    let objectUrl = null;
+    console.log('[DEBUG] VideoPlayer received videoUrl:', videoUrl);
+    const fetchVideo = async () => {
+      if (!videoUrl) return;
+      // If videoUrl is a full URL (http/https), use directly
+      if (videoUrl.startsWith('http')) {
+        setVideoSrc(videoUrl);
+        return;
+      }
+      // If videoUrl already contains /results/ or /api/videos/results/, use as is
+      if (videoUrl.startsWith('/results/') || videoUrl.startsWith('/api/videos/results/')) {
+        setVideoSrc(videoUrl);
+        return;
+      }
+      // Default: fetch from backend
+      const apiUrl = `${config.API_BASE_URL}/api/videos/results/${encodeURIComponent(videoUrl)}?t=${Date.now()}`;
+      console.log('[DEBUG] Fetching video from:', apiUrl);
+      try {
+        const token = keycloak.token;
+        const response = await fetch(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error('Video fetch failed');
+        const blob = await response.blob();
+        objectUrl = URL.createObjectURL(blob);
+        setVideoSrc(objectUrl);
+      } catch (err) {
+        console.error('[DEBUG] Video fetch error:', err);
+        setVideoSrc('');
+      }
+    };
+    fetchVideo();
+    return () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [videoUrl]); // Remove keycloak?.token from deps
+
+  if (!videoUrl) {
+    return <div>Lütfen analiz edilen bir video seçin.</div>;
+  }
 
   if (!videoSrc) {
-    return <div>Loading video... / Video yükleniyor...</div>;
+    return <div>Video yükleniyor...</div>;
   }
 
   return (
     <div>
       <video
         controls
-        autoPlay
         style={{ width: '100%', maxHeight: '500px' }}
-        key={videoSrc}  // Force re-render when source changes
+        key={videoSrc}
+        src={videoSrc}
       >
-        <source src={videoSrc} type="video/mp4" />
         Your browser does not support HTML5 video. / Tarayıcınız HTML5 video desteklemiyor.
       </video>
       <div style={{ marginTop: '10px' }}>
@@ -129,9 +165,18 @@ const SpeedAnalysis = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5004/analyze/youtube', {
-        youtube_url: youtubeUrl
-      });
+      const token = keycloak.token;
+      const response = await axios.post(
+        'https://au.bishokudev.com/analyze/youtube',
+        {
+          youtube_url: youtubeUrl
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
       setResults(response.data);
     } catch (err) {
       setError(err.response?.data?.error || t.errorGeneral);
@@ -154,7 +199,7 @@ const SpeedAnalysis = () => {
 
   const logout = () => {
     keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
+      redirectUri: config.LOGOUT_REDIRECT_URI
     });
   };
 

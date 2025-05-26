@@ -1,10 +1,11 @@
 import React from "react";
 import keycloak from "./keycloak";
+import config from "./config";
 
 const Signup = () => {
   const handleKeycloakRegister = () => {
     keycloak.register({
-      redirectUri: "http://localhost:3000/home"
+      redirectUri: config.REGISTER_REDIRECT_URI
     });
   };
 

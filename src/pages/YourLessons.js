@@ -83,7 +83,7 @@ const YourLessons = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const navigate = useNavigate();
-  const { logout, isAuthenticated, loading } = useAuth();
+  const { logout: keycloakLogout, isAuthenticated, loading } = useAuth();
 
   // Token'ı keycloak.token'dan alacağız
 
@@ -172,6 +172,20 @@ const YourLessons = () => {
       fetchVideos(); // Videoları getir
     }
   }, [isAuthenticated, loading, navigate, fetchUserProfile, fetchVideos]);
+
+  useEffect(() => {
+    if (!isAuthenticated && !loading) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, loading, navigate]);
+
+  const logout = useCallback(() => {
+    keycloakLogout({ redirectUri: config.LOGOUT_REDIRECT_URI });
+  }, [keycloakLogout]);
+
+  if (loading) {
+    return <div>Yükleniyor...</div>;
+  }
 
   const showNotification = (message, isError = false) => {
     setNotification({ message, isError });
@@ -320,8 +334,26 @@ const YourLessons = () => {
   ])].filter(Boolean);
 
   const renderVideoPlayer = (video) => {
-    const embedUrl = getEmbedUrl(video.url);
+    // MinIO'dan gelen videoları backend API üzerinden oynat
+    // Eğer video.url bir dosya adıysa (ör: .mp4 ile bitiyorsa ve http/https içermiyorsa), backend'den çek
+    const isMinioFile = video.url &&
+      (video.url.endsWith('.mp4') || video.url.endsWith('.webm') || video.url.endsWith('.mov')) &&
+      !video.url.startsWith('http');
 
+    if (isMinioFile) {
+      // MinIO dosyası ise backend API'den stream et
+      const apiUrl = `${config.API_BASE_URL}/api/videos/results/${encodeURIComponent(video.url)}`;
+      return (
+        <div className="video-embed">
+          <video controls className="video-tag">
+            <source src={apiUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      );
+    }
+
+    const embedUrl = getEmbedUrl(video.url);
     if (embedUrl.includes('youtube.com/embed') || embedUrl.includes('vimeo.com')) {
       return (
         <div className="video-embed">
@@ -336,6 +368,7 @@ const YourLessons = () => {
         </div>
       );
     } else {
+      // Diğer doğrudan video URL'leri (ör: http ile başlayan mp4)
       return (
         <div className="video-embed">
           <video controls className="video-tag">
@@ -347,15 +380,9 @@ const YourLessons = () => {
     }
   };
 
-  const handleLogout = () => {
-    keycloak.logout({
-      redirectUri: "http://localhost:3000/login"
-    });
-  };
-
   return (
     <div>
-      <Header language={language} setLanguage={setLanguage} logout={handleLogout} />
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
 
     <div className="your-lessons-page">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import chatgptImage from "./assets/chatgpt.png";
 import keycloak from "./keycloak.js";
+import config from "./config";
 import "./Login.css";
 
 const Login = () => {
@@ -8,14 +9,14 @@ const Login = () => {
 
   const handleKeycloakLogin = () => {
     keycloak.login({
-      redirectUri: "http://localhost:3000/home",
+      redirectUri: config.LOGIN_REDIRECT_URI,
       locale: language
     });
   };
 
   const handleKeycloakRegister = () => {
     keycloak.register({
-      redirectUri: "http://localhost:3000/home",
+     redirectUri: config.REGISTER_REDIRECT_URI,
       locale: language
     });
   };

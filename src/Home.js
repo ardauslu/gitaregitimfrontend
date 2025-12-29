@@ -121,7 +121,7 @@ const Home = () => {
                 <video
                   ref={el => videoRefs.current[0] = el}
                   className="home-small-video"
-                  src={require("./assets/homescreen.mp4")}
+                  src={require("./assets/metronom.mp4")}
                   loop
                   muted
                   playsInline
@@ -130,10 +130,10 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Riff Generator Video */}
+            {/* Lesson Video */}
             <div className="home-small-video-title-wrapper">
               <div className="home-video-title" style={{marginBottom: '6px'}}>
-                <span>{language === "tr" ? "Riff Generator" : "Riff Generator"}</span>
+                <span>{language === "tr" ? "Lesson" : "Lesson"}</span>
               </div>
             </div>
             <div className="home-small-video-wrapper">
@@ -145,7 +145,7 @@ const Home = () => {
                 <video
                   ref={el => videoRefs.current[1] = el}
                   className="home-small-video"
-                  src={require("./assets/riff.mp4")}
+                  src={require("./assets/lesson.mp4")}
                   loop
                   muted
                   playsInline
@@ -154,10 +154,10 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Zoom Lesson Video */}
+            {/* Tuner Video */}
             <div className="home-small-video-title-wrapper">
               <div className="home-video-title" style={{marginBottom: '6px'}}>
-                <span>{language === "tr" ? "Zoom Dersi" : "Zoom Lesson"}</span>
+                <span>{language === "tr" ? "Tuner" : "Tuner"}</span>
               </div>
             </div>
             <div className="home-small-video-wrapper">
@@ -169,7 +169,7 @@ const Home = () => {
                 <video
                   ref={el => videoRefs.current[2] = el}
                   className="home-small-video"
-                  src={require("./assets/zoom.mp4")}
+                  src={require("./assets/tuner.mp4")}
                   loop
                   muted
                   playsInline

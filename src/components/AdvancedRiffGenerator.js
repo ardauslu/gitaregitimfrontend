@@ -5,6 +5,7 @@ import './AdvancedRiffGenerator.css';
 import notesImage from '../assets/notes.png'; // Görseli içe aktarın
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import gifImage from '../assets/gif.png';
@@ -409,197 +410,107 @@ const AdvancedRiffGenerator = () => {
 
   const generateAdvancedChordProgression = () => {
     const scale = Scale.get(`${selectedKey} ${scaleType}`);
-    if (!scale.notes || scale.notes.length < 3) {
-      // Handle scales with fewer notes (like pentatonic/blues)
-      return generateSpecialScaleProgression(scaleType);
-    }
-
-    // All possible chord types with their characteristics
-    const chordTypes = [
-      // Basic triads
-      { symbol: '', name: 'maj', extensions: '', color: '#4CAF50', tension: 0 },
-      { symbol: 'm', name: 'min', extensions: '', color: '#9C27B0', tension: 1 },
-      { symbol: 'dim', name: 'dim', extensions: '', color: '#607D8B', tension: 2 },
-      { symbol: 'aug', name: 'aug', extensions: '', color: '#FF9800', tension: 2 },
-      
-      // Seventh chords
-      { symbol: 'maj7', name: 'maj7', extensions: '', color: '#4CAF50', tension: 1 },
-      { symbol: '7', name: 'dom7', extensions: '', color: '#F44336', tension: 3 },
-      { symbol: 'm7', name: 'min7', extensions: '', color: '#9C27B0', tension: 2 },
-      { symbol: 'm7b5', name: 'half-dim', extensions: '', color: '#607D8B', tension: 3 },
-      { symbol: 'dim7', name: 'dim7', extensions: '', color: '#795548', tension: 4 },
-      
-      // Extended chords
-      { symbol: '6', name: '6', extensions: '', color: '#4CAF50', tension: 1 },
-      { symbol: 'm6', name: 'min6', extensions: '', color: '#9C27B0', tension: 2 },
-      { symbol: '9', name: '9', extensions: '', color: '#F44336', tension: 3 },
-      { symbol: 'maj9', name: 'maj9', extensions: '', color: '#4CAF50', tension: 2 },
-      { symbol: 'm9', name: 'min9', extensions: '', color: '#9C27B0', tension: 3 },
-      { symbol: '11', name: '11', extensions: '', color: '#F44336', tension: 4 },
-      { symbol: 'maj11', name: 'maj11', extensions: '', color: '#4CAF50', tension: 3 },
-      { symbol: 'm11', name: 'min11', extensions: '', color: '#9C27B0', tension: 4 },
-      { symbol: '13', name: '13', extensions: '', color: '#F44336', tension: 4 },
-      
-      // Altered chords
-      { symbol: '7b9', name: '7♭9', extensions: '', color: '#F44336', tension: 5 },
-      { symbol: '7#9', name: '7♯9', extensions: '', color: '#F44336', tension: 5 },
-      { symbol: '7b5', name: '7♭5', extensions: '', color: '#F44336', tension: 5 },
-      { symbol: '7#5', name: '7♯5', extensions: '', color: '#F44336', tension: 5 },
-      
-      // Suspended chords
-      { symbol: 'sus2', name: 'sus2', extensions: '', color: '#FFC107', tension: 1 },
-      { symbol: 'sus4', name: 'sus4', extensions: '', color: '#FFC107', tension: 1 },
-      
-      // Added tone chords
-      { symbol: 'add9', name: 'add9', extensions: '', color: '#4CAF50', tension: 2 },
-      { symbol: 'madd9', name: 'madd9', extensions: '', color: '#9C27B0', tension: 3 }
-    ];
-  
-    // Common progression templates with variations
-    const progressionTemplates = [
-      // Basic progressions
-      { degrees: [0, 3, 4], variations: [5, 2], cadence: 'authentic' },
-      { degrees: [0, 5, 3, 4], variations: [2, 6], cadence: 'plagal' },
-      { degrees: [0, 4, 5, 3], variations: [1, 6], cadence: 'authentic' },
-      
-      // Jazz progressions
-      { degrees: [0, 5, 3, 6], variations: [2, 4], cadence: 'jazz' },
-      { degrees: [0, 2, 5, 1], variations: [3, 6], cadence: 'jazz' },
-      
-      // Blues progressions
-      { degrees: [0, 0, 0, 0, 3, 3, 0, 0, 4, 3, 0, 4], variations: [], cadence: 'blues' },
-      
-      // Modal progressions
-      { degrees: [0, 4, 1, 5], variations: [2, 3], cadence: 'modal' },
-      { degrees: [0, 3, 4, 2], variations: [1, 5], cadence: 'modal' },
-      
-      // Chromatic progressions
-      { degrees: [0, 1, 2, 3], variations: [4, 5], cadence: 'chromatic' },
-      { degrees: [0, 6, 5, 4], variations: [3, 2], cadence: 'chromatic' }
-    ];
-  
-    // Select a random progression template
-    const template = progressionTemplates[Math.floor(Math.random() * progressionTemplates.length)];
     
-    // Generate the progression with variations
-    const progression = template.degrees.map((degree, index) => {
-      // Add some variation (30% chance)
-      const useVariation = Math.random() < 0.3 && template.variations.length > 0;
-      const finalDegree = useVariation ? 
-        template.variations[Math.floor(Math.random() * template.variations.length)] : 
-        degree;
+    // Popüler akor ilerleyişleri
+    const commonProgressions = [
+      // Pop/Rock
+      [0, 3, 5, 4],    // I-IV-vi-V (çok popüler)
+      [0, 5, 3, 4],    // I-vi-IV-V
+      [0, 4, 0, 4],    // I-V-I-V
+      [0, 3, 4],       // I-IV-V
       
-      // Determine chord type based on degree and scale type
-      let chordType;
-      if (finalDegree === 0) {
-        // Tonic - more likely to be major or maj7
-        chordType = Math.random() < 0.7 ? 
-          chordTypes.find(t => t.symbol === 'maj7') : 
-          chordTypes[Math.floor(Math.random() * 4)];
-      } else if (finalDegree === 4) {
-        // Dominant - more likely to be 7 or 9
-        chordType = Math.random() < 0.6 ? 
-          chordTypes.find(t => t.symbol === '7') : 
-          chordTypes[Math.floor(Math.random() * 8) + 5];
-      } else if (finalDegree === 5) {
-        // Submediant - more likely to be minor
-        chordType = Math.random() < 0.7 ? 
-          chordTypes.find(t => t.symbol === 'm7') : 
-          chordTypes[Math.floor(Math.random() * 4) + 1];
+      // Jazz
+      [0, 5, 1, 4],    // I-vi-ii-V
+      [1, 4, 0],       // ii-V-I
+      
+      // Blues
+      [0, 0, 0, 0, 3, 3, 0, 0, 4, 3, 0, 4],  // 12-bar blues
+      
+      // Modal
+      [0, 6, 3, 4],    // I-bVII-IV-V
+      [0, 1, 3, 4]     // I-II-IV-V
+    ];
+    
+    // Rastgele bir ilerleyiş seç
+    const selectedDegrees = commonProgressions[Math.floor(Math.random() * commonProgressions.length)];
+    
+    // Her derece için akor oluştur
+    const progression = selectedDegrees.map((degree, index) => {
+      const scaleNotes = scale.notes || ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+      const root = scaleNotes[degree % scaleNotes.length] || 'C';
+      
+      // Akor tipini belirle (basit)
+      let chordSymbol = '';
+      let chordColor = '#4CAF50';
+      
+      if (scaleType.includes('minor')) {
+        // Minör skala
+        if (degree === 0 || degree === 3 || degree === 4) {
+          chordSymbol = 'm';
+          chordColor = '#9C27B0';
+        } else if (degree === 2 || degree === 5 || degree === 6) {
+          chordSymbol = '';
+          chordColor = '#4CAF50';
+        }
       } else {
-        // Other degrees - random but weighted by tension
-        const tension = [0, 2, 4, 1, 3, 2, 4][finalDegree % 7];
-        const possibleTypes = chordTypes.filter(t => t.tension <= tension + 1);
-        chordType = possibleTypes[Math.floor(Math.random() * possibleTypes.length)];
+        // Majör skala
+        if (degree === 0 || degree === 3 || degree === 4) {
+          chordSymbol = '';
+          chordColor = '#4CAF50';
+        } else if (degree === 1 || degree === 2 || degree === 5) {
+          chordSymbol = 'm';
+          chordColor = '#9C27B0';
+        }
       }
       
-      const root = scale.notes[finalDegree % scale.notes.length];
-      const chord = Chord.get(root + chordType.symbol);
-      
-      // 20% chance to add extensions
-      let extensions = '';
-      if (Math.random() < 0.2) {
-        const possibleExtensions = ['9', '11', '13', 'b9', '#9', 'b5', '#5'];
-        extensions = possibleExtensions[Math.floor(Math.random() * possibleExtensions.length)];
+      // Bazen 7'li akor ekle
+      if (Math.random() < 0.3 && index !== selectedDegrees.length - 1) {
+        if (degree === 4) {
+          chordSymbol += '7';
+          chordColor = '#F44336';
+        } else if (chordSymbol === 'm') {
+          chordSymbol = 'm7';
+        } else {
+          chordSymbol = 'maj7';
+        }
       }
+      
+      const chordName = root + chordSymbol;
+      const chord = Chord.get(chordName);
+      const notes = chord.notes && chord.notes.length > 0 ? 
+        chord.notes.map(n => n.replace(/\d+$/, '')) : 
+        [root, getSafeThird(root, chordSymbol), getSafeFifth(root)];
       
       return {
-        symbol: getRomanNumeral(finalDegree, scaleType),
-        name: chord.symbol + extensions,
-        fullName: root + chordType.symbol + extensions,
-        romanNumeral: getRomanNumeral(finalDegree, scaleType),
-        type: chordType.name,
-        extensions,
-        notes: chord.notes.map(n => n.replace(/\d+$/, '')),
-        color: chordType.color,
-        degree: finalDegree,
-        tension: chordType.tension
+        symbol: chordName,
+        name: chordName,
+        fullName: chordName,
+        romanNumeral: getRomanNumeral(degree, scaleType),
+        type: chordSymbol || 'maj',
+        extensions: '',
+        notes: notes,
+        color: chordColor,
+        degree: degree
       };
     });
-  
-    // 30% chance to add secondary dominants
-    if (Math.random() < 0.3) {
-      for (let i = 1; i < progression.length; i++) {
-        if (Math.random() < 0.4) {
-          const targetDegree = progression[i].degree;
-          const secondaryDominant = {
-            degree: (targetDegree - 1) % 7,
-            symbol: 'V',
-            type: 'dom7',
-            resolvesTo: targetDegree
-          };
-          
-          const root = scale.notes[secondaryDominant.degree % scale.notes.length];
-          const chord = Chord.get(root + '7');
-          
-          progression.splice(i, 0, {
-            symbol: 'V/' + progression[i].symbol,
-            name: chord.symbol,
-            fullName: root + '7',
-            romanNumeral: 'V/' + progression[i].symbol,
-            type: 'secondary dominant',
-            extensions: '',
-            notes: chord.notes.map(n => n.replace(/\d+$/, '')),
-            color: '#F44336',
-            degree: secondaryDominant.degree,
-            tension: 4
-          });
-          i++; // Skip the next chord
-        }
-      }
-    }
-  
-    // 20% chance to add modal mixture
-    if (Math.random() < 0.2) {
-      const mixtureIndex = Math.floor(Math.random() * (progression.length - 1)) + 1;
-      const originalChord = progression[mixtureIndex];
-      
-      // Borrow from parallel mode
-      const parallelType = scaleType.includes('minor') ? 'major' : 'harmonic minor';
-      const parallelScale = Scale.get(`${selectedKey} ${parallelType}`).notes;
-      
-      if (parallelScale && parallelScale.length > 0) {
-        const root = parallelScale[originalChord.degree % parallelScale.length];
-        const chordType = originalChord.type.includes('min') ? 
-          chordTypes.find(t => t.symbol === '') : 
-          chordTypes.find(t => t.symbol === 'm');
-        
-        if (chordType) {
-          const chord = Chord.get(root + chordType.symbol);
-          progression[mixtureIndex] = {
-            ...originalChord,
-            name: chord.symbol,
-            fullName: root + chordType.symbol,
-            romanNumeral: originalChord.symbol + ' (♭)',
-            type: 'modal mixture',
-            notes: chord.notes.map(n => n.replace(/\d+$/, '')),
-            color: '#FF5722'
-          };
-        }
-      }
-    }
-  
+    
     return progression;
+  };
+  
+  // Yardımcı fonksiyonlar
+  const getSafeThird = (root, type) => {
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const rootIndex = notes.indexOf(root);
+    if (rootIndex === -1) return 'E';
+    const interval = type.includes('m') ? 3 : 4;
+    return notes[(rootIndex + interval) % 12];
+  };
+  
+  const getSafeFifth = (root) => {
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const rootIndex = notes.indexOf(root);
+    if (rootIndex === -1) return 'G';
+    return notes[(rootIndex + 7) % 12];
   };
 
 
@@ -770,16 +681,24 @@ const AdvancedRiffGenerator = () => {
 
   const circleOfFifths = createCircleOfFifths();
 
-  return (<div>
-   <Header language={language} setLanguage={setLanguage} logout={logout} />
-         <Subheader language={language} />
-      <div className="advanced-riff-generator-page">
-      <div className="main-panel">
-        <h1>
-            {language === "tr"
-              ? "Gelişmiş Riff Üretici"
-              : "Advanced Riff Generator"}
-          </h1>
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Header language={language} setLanguage={setLanguage} logout={logout} />
+      <Subheader language={language} />
+      <div className="riff-generator-content" style={{ flex: 1 }}>
+        <div className="riff-generator-page">
+          <header className="riff-generator-header">
+            <h1>
+              {language === "tr"
+                ? "Gelişmiş Riff Üretici"
+                : "Advanced Riff Generator"}
+            </h1>
+            <p>
+              {language === "tr"
+                ? "Riff ve akor ilerleyişleri oluşturun, farklı skalalar ve tonlarla deneyin."
+                : "Generate riffs and chord progressions, experiment with different scales and keys."}
+            </p>
+          </header>
           <div className="action-buttons">
           </div>
           <div className="controls">
@@ -955,10 +874,9 @@ const AdvancedRiffGenerator = () => {
           <img src={gifImage} alt="Guitar Animation" className="notes-image" />
         </div>
         </div>
-        
-        
       </div>
-      </div>
+      <Footer />
+    </div>
   );
 };
 

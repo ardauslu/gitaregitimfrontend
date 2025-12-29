@@ -1,72 +1,72 @@
 [
   {
-    "title_tr": "Ders 1: Modlar ve Uygulamaları",
-    "title_en": "Lesson 1: Modes and Their Applications",
+    "title_tr": "Ders 1: Sweep Picking - Majör Arpej",
+    "title_en": "Lesson 1: Sweep Picking - Major Arpeggio",
     "url": "https://youtu.be/ustalik1",
-    "description_tr": "Bu derste müzikteki modları ve bunların nasıl kullanılacağını öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn the modes in music and how to apply them."
+    "description_tr": "3 telli majör arpej için sweep picking tekniği çalışması.",
+    "description_en": "Sweep picking technique practice for 3-string major arpeggios."
   },
   {
-    "title_tr": "Ders 2: Gelişmiş Sololar ve İfade Teknikleri",
-    "title_en": "Lesson 2: Advanced Solos and Expression Techniques",
+    "title_tr": "Ders 2: Sweep Picking - Minör Arpej",
+    "title_en": "Lesson 2: Sweep Picking - Minor Arpeggio",
     "url": "https://youtu.be/ustalik2",
-    "description_tr": "Bu derste gelişmiş solo teknikleri ve müzikal ifade becerilerini geliştireceksiniz.",
-    "description_en": "In this lesson, you will improve your advanced solo techniques and musical expression."
+    "description_tr": "3 telli minör arpej için sweep picking tekniği çalışması.",
+    "description_en": "Sweep picking technique practice for 3-string minor arpeggios."
   },
   {
-    "title_tr": "Ders 3: Arpejlerle Harmonik Zenginlik",
-    "title_en": "Lesson 3: Harmonic Depth with Arpeggios",
+    "title_tr": "Ders 3: Alternate Picking - Hız Egzersizleri",
+    "title_en": "Lesson 3: Alternate Picking - Speed Exercises",
     "url": "https://youtu.be/ustalik3",
-    "description_tr": "Bu derste arpejlerle armonik derinlik yaratmayı keşfedeceksiniz.",
-    "description_en": "In this lesson, you will explore how to create harmonic depth using arpeggios."
+    "description_tr": "İleri seviye alternate picking hız ve akıcılık çalışması.",
+    "description_en": "Advanced alternate picking speed and fluidity practice."
   },
   {
-    "title_tr": "Ders 4: Poliritmik Gitar Çalışmaları",
-    "title_en": "Lesson 4: Polyrhythmic Guitar Studies",
+    "title_tr": "Ders 4: Tapping Tekniği - Temel",
+    "title_en": "Lesson 4: Tapping Technique - Basics",
     "url": "https://youtu.be/ustalik4",
-    "description_tr": "Bu derste poliritm kavramını gitar üzerinde uygulamalı olarak öğreneceksiniz.",
-    "description_en": "In this lesson, you will practically learn the concept of polyrhythms on the guitar."
+    "description_tr": "İki el tapping tekniği için temel egzersizler.",
+    "description_en": "Basic exercises for two-hand tapping technique."
   },
   {
-    "title_tr": "Ders 5: Doğaçlama Üzerine İleri Seviye Yaklaşımlar",
-    "title_en": "Lesson 5: Advanced Approaches to Improvisation",
+    "title_tr": "Ders 5: Tapping Tekniği - İleri Seviye",
+    "title_en": "Lesson 5: Tapping Technique - Advanced",
     "url": "https://youtu.be/ustalik5",
-    "description_tr": "Bu derste doğaçlamada kullanılan ileri teknikleri ve yaklaşımları ele alacağız.",
-    "description_en": "In this lesson, we will cover advanced techniques and approaches to improvisation."
+    "description_tr": "Karmaşık tapping kombinasyonları ve arpej uygulamaları.",
+    "description_en": "Complex tapping combinations and arpeggio applications."
   },
   {
-    "title_tr": "Ders 6: Hızlı Çalma İçin Egzersizler",
-    "title_en": "Lesson 6: Exercises for Speed and Precision",
+    "title_tr": "Ders 6: Modal Çalım - Dorian Modu",
+    "title_en": "Lesson 6: Modal Playing - Dorian Mode",
     "url": "https://youtu.be/ustalik6",
-    "description_tr": "Bu derste hız ve hassasiyet geliştirmeye yönelik egzersizler yapacaksınız.",
-    "description_en": "In this lesson, you will do exercises aimed at improving speed and precision."
+    "description_tr": "Dorian mod ölçeği ile fraz ve solo çalımı.",
+    "description_en": "Phrasing and solo playing with Dorian mode scale."
   },
   {
-    "title_tr": "Ders 7: Kendi Stilini Geliştirme",
-    "title_en": "Lesson 7: Developing Your Own Style",
+    "title_tr": "Ders 7: Modal Çalım - Phrygian Modu",
+    "title_en": "Lesson 7: Modal Playing - Phrygian Mode",
     "url": "https://youtu.be/ustalik7",
-    "description_tr": "Bu derste teknikleri kişiselleştirerek kendi gitar stilinizi oluşturacaksınız.",
-    "description_en": "In this lesson, you will personalize techniques to develop your own guitar style."
+    "description_tr": "Phrygian mod ölçeği ile fraz ve solo çalımı.",
+    "description_en": "Phrasing and solo playing with Phrygian mode scale."
   },
   {
-    "title_tr": "Ders 8: Gelişmiş Harmoni Teorisi",
-    "title_en": "Lesson 8: Advanced Harmony Theory",
+    "title_tr": "Ders 8: Hibrit Picking Tekniği",
+    "title_en": "Lesson 8: Hybrid Picking Technique",
     "url": "https://youtu.be/ustalik8",
-    "description_tr": "Bu derste armoni teorisini ileri seviyede ele alacağız.",
-    "description_en": "In this lesson, we will study harmony theory at an advanced level."
+    "description_tr": "Pena ve parmak kombinasyonu ile hibrit picking çalışması.",
+    "description_en": "Hybrid picking practice combining pick and fingers."
   },
   {
-    "title_tr": "Ders 9: Karmaşık Zaman İmzalarıyla Çalışma",
-    "title_en": "Lesson 9: Working with Complex Time Signatures",
+    "title_tr": "Ders 9: Shred Solo Teknikleri",
+    "title_en": "Lesson 9: Shred Solo Techniques",
     "url": "https://youtu.be/ustalik9",
-    "description_tr": "Bu derste 5/4, 7/8 gibi karmaşık zaman imzalarıyla pratik yapacağız.",
-    "description_en": "In this lesson, we will practice using complex time signatures like 5/4 and 7/8."
+    "description_tr": "Yüksek tempoda teknik solo çalımı ve fraz çalışması.",
+    "description_en": "High-tempo technical solo playing and phrasing practice."
   },
   {
-    "title_tr": "Ders 10: Sahnede Ustalık ve Performans Psikolojisi",
-    "title_en": "Lesson 10: Mastery on Stage and Performance Psychology",
+    "title_tr": "Ders 10: Ustalık Solo Performansı",
+    "title_en": "Lesson 10: Master Solo Performance",
     "url": "https://youtu.be/ustalik10",
-    "description_tr": "Bu derste sahne hakimiyeti ve performans sırasında zihin kontrolü üzerine çalışacağız.",
-    "description_en": "In this lesson, we will focus on stage mastery and mental control during performance."
+    "description_tr": "Tüm ileri teknikleri birleştiren kapsamlı solo performansı.",
+    "description_en": "Comprehensive solo performance combining all advanced techniques."
   }
 ]

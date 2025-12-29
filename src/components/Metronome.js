@@ -3,6 +3,7 @@ import { FaPlay, FaStop } from 'react-icons/fa';
 import './Metronome.css';
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -222,11 +223,11 @@ const Metronome = () => {
   const t = translations[language]; // Çeviri metinlerini seç
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header language={language} logout={logout} />
       <Subheader language={language} />
       
-      <div className="metronome-container">
+      <div className="metronome-container" style={{ flex: 1 }}>
         <h1 className="metronome-title">{t.title}</h1>
 
         {/* Ana BPM Display */}
@@ -336,6 +337,7 @@ const Metronome = () => {
           <span className="volume-percentage">{Math.round(volume * 100)}%</span>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

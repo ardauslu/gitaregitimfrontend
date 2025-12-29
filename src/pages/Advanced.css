@@ -1,18 +1,17 @@
 /* Genel Sayfa Stili */
-.page {
-    padding: 160px 20px 40px 20px;
-    min-height: 100vh;
+.advanced-page {
+    padding: 140px 20px 20px 20px;
     background: var(--bg-primary);
     font-family: 'Roboto', sans-serif;
   }
   
   /* Başlık ve Açıklama */
-  .page-header {
+  .advanced-header {
     text-align: center;
     margin-bottom: 40px;
   }
   
-  .page-header h1 {
+  .advanced-header h1 {
     font-size: 2.5rem;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -22,7 +21,7 @@
     font-weight: 700;
   }
   
-  .page-header p {
+  .advanced-header p {
     font-size: 1.2rem;
     color: var(--text-secondary);
   }
@@ -30,9 +29,9 @@
   /* Video Grid */
   .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    max-width: 1400px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    max-width: 1600px;
     margin: 0 auto;
   }
   
@@ -89,47 +88,37 @@
     line-height: 1.6;
   }
 
-  /* Genel Sayfa Stili */
-.advanced-page {
-  padding: 40px 20px;
-  min-height: 100vh;
-  background: var(--bg-primary);
-  font-family: 'Roboto', sans-serif;
-}
+  .advanced-content {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .advanced-content h1 {
+    font-size: 2.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+  
+  .advanced-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
 
-/* Başlık ve Açıklama */
-.advanced-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.advanced-header h1 {
-  font-size: 2.5rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 15px;
-  font-weight: 700;
-}
-
-.advanced-header p {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-}
-
-/* Video Listesi */
+  /* Video Listesi */
 .video-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  margin-top: 30px;
-  max-width: 1400px;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 15px;
+  margin-top: 20px;
+  max-width: 1800px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Video Kartı */
+/* Video Öğesi */
 .video-item {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
@@ -147,7 +136,6 @@
   border-color: var(--border-color-hover);
 }
 
-/* Video Başlık */
 .video-item h3 {
   font-size: 1.2rem;
   margin: 15px;
@@ -156,7 +144,6 @@
   text-align: center;
 }
 
-/* Video Açıklama */
 .video-item p {
   font-size: 1rem;
   margin: 0 15px 15px 15px;
@@ -181,7 +168,6 @@
 }
 
 @media (max-width: 768px) {
-  .page-header h1,
   .advanced-header h1 {
     font-size: 2rem;
   }

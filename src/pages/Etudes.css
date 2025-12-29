@@ -2,7 +2,6 @@
 
 .etudes-content {
   padding: 180px 20px 40px 20px;
-  min-height: 100vh;
   background: var(--bg-primary);
   font-family: "Roboto", sans-serif;
 }

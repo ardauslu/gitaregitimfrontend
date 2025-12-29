@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import guitarRiff from "../assets/guitar-riff.mp3";
+import Footer from "./Footer";
 
 const ToneLab = () => {
   const [distortion, setDistortion] = useState(0.5);
@@ -163,6 +164,7 @@ const ToneLab = () => {
       <button onClick={playGuitarWithEffects} disabled={!isLoaded}>
         {isLoaded ? "Gitar Çal" : "Yükleniyor..."}
       </button>
+      <Footer />
     </div>
   );
 };

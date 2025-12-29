@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import ReactPlayer from "react-player";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -50,10 +51,10 @@ const Intermediate = () => {
   }, [keycloakLogout]);
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-      <div className="intermediate-content">
+      <div className="intermediate-content" style={{ flex: 1 }}>
         <div className="intermediate-page">
           <header className="intermediate-header">
             <h1>
@@ -77,7 +78,7 @@ const Intermediate = () => {
                   url={video.url}
                   controls={true}
                   width="100%"
-                  height="150px"
+                  height="120px"
                   className="video-player"
                 />
                 <h3>{language === "tr" ? video.title_tr : video.title_en}</h3>
@@ -87,6 +88,7 @@ const Intermediate = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import config from "../config";
 import keycloak from "../keycloak";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import "./Security.css";
 
 const Security = () => {
@@ -35,10 +36,10 @@ const Security = () => {
   }
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-      <div className="security-page">
+      <div className="security-page" style={{ flex: 1 }}>
         <div className="security-container">
           <h1 className="security-title">
             {language === "tr" ? "Hesap Güvenliği" : "Account Security"}
@@ -55,6 +56,7 @@ const Security = () => {
           {error && <div className="security-error">{error}</div>}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

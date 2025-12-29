@@ -5,6 +5,7 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
 import keycloak from "../keycloak";
@@ -370,6 +371,7 @@ return (
         )}
       </div>
     </div>
+    <Footer />
   </div>
 );
 

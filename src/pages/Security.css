@@ -1,6 +1,5 @@
 /* Security Page - Modern Design */
 .security-page {
-  min-height: 100vh;
   background: var(--bg-primary);
   display: flex;
   align-items: center;

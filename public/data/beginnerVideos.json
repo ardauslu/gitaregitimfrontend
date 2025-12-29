@@ -1,72 +1,72 @@
 [
   {
-    "title_tr": "Ders 1: Gitarı Tanıyalım",
-    "title_en": "Lesson 1: Meet Your Guitar",
+    "title_tr": "Ders 1: Açık Teller - Temel Ritim",
+    "title_en": "Lesson 1: Open Strings - Basic Rhythm",
     "url": "https://youtu.be/example1",
-    "description_tr": "Bu derste gitarın bölümlerini, türlerini ve temel ekipmanları tanıyacaksınız.",
-    "description_en": "In this lesson, you'll get familiar with the parts of the guitar, types of guitars, and essential gear."
+    "description_tr": "Açık tellerde temel pena tutma ve ritim egzersizleri.",
+    "description_en": "Basic pick holding and rhythm exercises on open strings."
   },
   {
-    "title_tr": "Ders 2: Tutuş ve Duruş",
-    "title_en": "Lesson 2: Holding the Guitar",
+    "title_tr": "Ders 2: Sol El Parmak Egzersizleri",
+    "title_en": "Lesson 2: Left Hand Finger Exercises",
     "url": "https://youtu.be/example2",
-    "description_tr": "Bu derste gitarı nasıl doğru şekilde tutmanız gerektiğini öğreneceksiniz.",
-    "description_en": "This lesson teaches you how to hold the guitar correctly and maintain good posture."
+    "description_tr": "Kromatik egzersizler ve parmak esnekliği çalışmaları.",
+    "description_en": "Chromatic exercises and finger flexibility practice."
   },
   {
-    "title_tr": "Ders 3: Sağ El Teknikleri ve Ritim",
-    "title_en": "Lesson 3: Right Hand Basics and Rhythm",
+    "title_tr": "Ders 3: E Majör Akoru",
+    "title_en": "Lesson 3: E Major Chord",
     "url": "https://youtu.be/example3",
-    "description_tr": "Bu derste pena kullanımı, açık tel ritim egzersizleri ve temel vuruş teknikleri yer alıyor.",
-    "description_en": "This lesson covers pick usage, open string rhythm practice, and basic strumming techniques."
+    "description_tr": "E majör akoru parmak pozisyonu ve çalım tekniği.",
+    "description_en": "E major chord finger position and playing technique."
   },
   {
-    "title_tr": "Ders 4: Sol El Parmak Alıştırmaları",
-    "title_en": "Lesson 4: Left Hand Finger Exercises",
+    "title_tr": "Ders 4: A Majör Akoru",
+    "title_en": "Lesson 4: A Major Chord",
     "url": "https://youtu.be/example4",
-    "description_tr": "Bu derste sol el parmaklarının esnekliğini ve pozisyon farkındalığını geliştireceksiniz.",
-    "description_en": "This lesson helps develop left-hand flexibility and awareness of finger positions."
+    "description_tr": "A majör akoru parmak pozisyonu ve çalım tekniği.",
+    "description_en": "A major chord finger position and playing technique."
   },
   {
-    "title_tr": "Ders 5: İlk Akorlar",
-    "title_en": "Lesson 5: Your First Chords",
+    "title_tr": "Ders 5: D Majör Akoru",
+    "title_en": "Lesson 5: D Major Chord",
     "url": "https://youtu.be/example5",
-    "description_tr": "Emaj, Amaj ve Dmaj gibi açık akorlarla tanışacaksınız.",
-    "description_en": "You will learn open chords like E major, A major, and D major."
+    "description_tr": "D majör akoru parmak pozisyonu ve çalım tekniği.",
+    "description_en": "D major chord finger position and playing technique."
   },
   {
-    "title_tr": "Ders 6: Akor Geçişleri",
-    "title_en": "Lesson 6: Chord Transitions",
+    "title_tr": "Ders 6: E-A Akor Geçişi",
+    "title_en": "Lesson 6: E-A Chord Transition",
     "url": "https://youtu.be/example6",
-    "description_tr": "Bu derste farklı akorlar arasında geçiş yapmayı pratik edeceksiniz.",
-    "description_en": "In this lesson, you'll practice transitioning between different chords smoothly."
+    "description_tr": "E ve A majör akorları arasında akıcı geçiş egzersizleri.",
+    "description_en": "Smooth transition exercises between E and A major chords."
   },
   {
-    "title_tr": "Ders 7: İlk Şarkım",
-    "title_en": "Lesson 7: Your First Song",
+    "title_tr": "Ders 7: A-D Akor Geçişi",
+    "title_en": "Lesson 7: A-D Chord Transition",
     "url": "https://youtu.be/example7",
-    "description_tr": "Öğrendiğiniz akorlarla basit bir şarkı çalacaksınız.",
-    "description_en": "You'll play a simple song using the chords you've learned."
+    "description_tr": "A ve D majör akorları arasında akıcı geçiş egzersizleri.",
+    "description_en": "Smooth transition exercises between A and D major chords."
   },
   {
-    "title_tr": "Ders 8: Temel Ritim Kalıpları",
-    "title_en": "Lesson 8: Basic Strumming Patterns",
+    "title_tr": "Ders 8: 4/4 Ritim Kalıbı",
+    "title_en": "Lesson 8: 4/4 Rhythm Pattern",
     "url": "https://youtu.be/example8",
-    "description_tr": "Farklı zaman ölçülerinde (4/4, 3/4) ritim kalıpları öğreneceksiniz.",
-    "description_en": "You'll learn basic rhythm patterns in time signatures like 4/4 and 3/4."
+    "description_tr": "Öğrenilen akorlarla 4/4'lük temel ritim kalıbı çalışması.",
+    "description_en": "Basic 4/4 rhythm pattern practice with learned chords."
   },
   {
-    "title_tr": "Ders 9: Akor Döngüsü Egzersizleri",
-    "title_en": "Lesson 9: Chord Progression Exercises",
+    "title_tr": "Ders 9: İlk Şarkı - I-IV-V Döngüsü",
+    "title_en": "Lesson 9: First Song - I-IV-V Progression",
     "url": "https://youtu.be/example9",
-    "description_tr": "Bu derste I-IV-V gibi temel akor döngüleriyle çalım pratiği yapacağız.",
-    "description_en": "You'll practice basic chord progressions like I-IV-V in this lesson."
+    "description_tr": "E-A-D akorlarıyla basit şarkı çalımı.",
+    "description_en": "Simple song playing with E-A-D chords."
   },
   {
-    "title_tr": "Ders 10: Mini Performans",
-    "title_en": "Lesson 10: Mini Performance",
+    "title_tr": "Ders 10: Kapanış Performansı",
+    "title_en": "Lesson 10: Final Performance",
     "url": "https://youtu.be/example10",
-    "description_tr": "Öğrendiklerinizi sergileyeceğiniz kısa bir kapanış performansı.",
-    "description_en": "A short performance to showcase everything you've learned so far."
+    "description_tr": "Öğrenilen tekniklerin tümünü içeren performans çalımı.",
+    "description_en": "Performance piece incorporating all learned techniques."
   }
 ]

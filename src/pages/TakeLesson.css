@@ -1,7 +1,6 @@
 /* Sayfa genel stili */
 .take-lesson-page {
   background: var(--bg-primary);
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./AboutMe.css"; // CSS dosyasını import edin
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -62,6 +63,7 @@ const AboutMe = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

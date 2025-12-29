@@ -3,6 +3,7 @@ import './Tuner.css';
 import { useLanguage } from '../contexts/LanguageContext';
 import Header from './Header';
 import Subheader from './Subheader';
+import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
@@ -875,6 +876,7 @@ const Tuner = () => {
         )}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

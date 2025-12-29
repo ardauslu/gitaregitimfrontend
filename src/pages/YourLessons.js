@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './YourLessons.css';
 import Subheader from '../components/Subheader';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { motion, AnimatePresence } from "framer-motion";
@@ -611,6 +612,7 @@ const YourLessons = () => {
         )}
       </div>
     </div>
+    <Footer />
     </div>
 
   );

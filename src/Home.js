@@ -6,6 +6,7 @@ import unnamed1 from "./assets/gemini1.jpg";
 import unnamed2 from "./assets/gemini2.jpg";
 import Subheader from "./components/Subheader";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { useAuth } from "./AuthContext";
 import config from "./config";
 import { useLanguage } from "./contexts/LanguageContext";
@@ -180,6 +181,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

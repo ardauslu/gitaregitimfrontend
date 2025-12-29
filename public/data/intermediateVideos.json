@@ -1,72 +1,72 @@
 [
   {
-    "title_tr": "Ders 1: Orta Seviye Akorlar",
-    "title_en": "Lesson 1: Intermediate Chords",
+    "title_tr": "Ders 1: Barre Akorlar - F ve Fm",
+    "title_en": "Lesson 1: Barre Chords - F and Fm",
     "url": "https://youtu.be/example1",
-    "description_tr": "Bu derste orta seviye akorları öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn intermediate chords."
+    "description_tr": "F majör ve F minör barre akorları parmak pozisyonu ve çalım.",
+    "description_en": "F major and F minor barre chord finger positions and playing."
   },
   {
-    "title_tr": "Ders 2: Barre Akorları",
-    "title_en": "Lesson 2: Barre Chords",
+    "title_tr": "Ders 2: Barre Akorlar - B ve Bm",
+    "title_en": "Lesson 2: Barre Chords - B and Bm",
     "url": "https://youtu.be/example2",
-    "description_tr": "Bu derste barre akorlarını çalmayı öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn how to play barre chords."
+    "description_tr": "B majör ve B minör barre akorları parmak pozisyonu ve çalım.",
+    "description_en": "B major and B minor barre chord finger positions and playing."
   },
   {
-    "title_tr": "Ders 3: İleri Ritm Teknikleri",
-    "title_en": "Lesson 3: Advanced Rhythm Techniques",
+    "title_tr": "Ders 3: Power Chord Riffle",
+    "title_en": "Lesson 3: Power Chord Riffs",
     "url": "https://youtu.be/example3",
-    "description_tr": "Bu derste ileri ritm tekniklerini keşfedeceksiniz.",
-    "description_en": "In this lesson, you will explore advanced rhythm techniques."
+    "description_tr": "Power chord ile temel rock riff çalımları.",
+    "description_en": "Basic rock riff playing with power chords."
   },
   {
-    "title_tr": "Ders 4: Solo Çalışmaları",
-    "title_en": "Lesson 4: Solo Practices",
+    "title_tr": "Ders 4: Minör Pentatonik Ölçek - 1. Pozisyon",
+    "title_en": "Lesson 4: Minor Pentatonic Scale - Position 1",
     "url": "https://youtu.be/example4",
-    "description_tr": "Bu derste solo çalma tekniklerini geliştireceksiniz.",
-    "description_en": "In this lesson, you will improve your solo playing techniques."
+    "description_tr": "A minör pentatonik ölçeğin 1. pozisyon parmak çalışması.",
+    "description_en": "A minor pentatonic scale position 1 finger work."
   },
   {
-    "title_tr": "Ders 5: Pentatonik Ölçeklere Giriş",
-    "title_en": "Lesson 5: Introduction to Pentatonic Scales",
+    "title_tr": "Ders 5: Minör Pentatonik Ölçek - 2. Pozisyon",
+    "title_en": "Lesson 5: Minor Pentatonic Scale - Position 2",
     "url": "https://youtu.be/example5",
-    "description_tr": "Bu derste pentatonik dizilere giriş yapacaksınız.",
-    "description_en": "In this lesson, you will be introduced to pentatonic scales."
+    "description_tr": "A minör pentatonik ölçeğin 2. pozisyon parmak çalışması.",
+    "description_en": "A minor pentatonic scale position 2 finger work."
   },
   {
-    "title_tr": "Ders 6: Power Akorlar ve Riff Yazımı",
-    "title_en": "Lesson 6: Power Chords and Writing Riffs",
+    "title_tr": "Ders 6: Basit Solo Çalımı - Blues",
+    "title_en": "Lesson 6: Simple Solo Playing - Blues",
     "url": "https://youtu.be/example6",
-    "description_tr": "Bu derste power akorlar ve riff yazımı üzerinde çalışacaksınız.",
-    "description_en": "In this lesson, you will work on power chords and writing riffs."
+    "description_tr": "Pentatonik ölçek kullanarak basit blues solo çalımı.",
+    "description_en": "Simple blues solo playing using pentatonic scale."
   },
   {
-    "title_tr": "Ders 7: Gitarla Melodi Oluşturma",
-    "title_en": "Lesson 7: Creating Melodies with Guitar",
+    "title_tr": "Ders 7: Palm Muting Tekniği",
+    "title_en": "Lesson 7: Palm Muting Technique",
     "url": "https://youtu.be/example7",
-    "description_tr": "Bu derste gitarla basit melodiler oluşturmayı öğreneceksiniz.",
-    "description_en": "In this lesson, you will learn to create simple melodies with guitar."
+    "description_tr": "Ritim gitarında palm muting tekniği çalışması.",
+    "description_en": "Palm muting technique practice for rhythm guitar."
   },
   {
-    "title_tr": "Ders 8: Alternatif Akort Sistemleri",
-    "title_en": "Lesson 8: Alternative Tunings",
+    "title_tr": "Ders 8: Hammer-On ve Pull-Off",
+    "title_en": "Lesson 8: Hammer-On and Pull-Off",
     "url": "https://youtu.be/example8",
-    "description_tr": "Bu derste farklı akort sistemlerini keşfedeceksiniz.",
-    "description_en": "In this lesson, you will explore alternative tuning systems."
+    "description_tr": "Legato tekniği: Hammer-on ve pull-off egzersizleri.",
+    "description_en": "Legato technique: Hammer-on and pull-off exercises."
   },
   {
-    "title_tr": "Ders 9: Dinleyerek Çalma Pratikleri",
-    "title_en": "Lesson 9: Ear Training and Play-by-Ear",
+    "title_tr": "Ders 9: Bending Tekniği",
+    "title_en": "Lesson 9: String Bending Technique",
     "url": "https://youtu.be/example9",
-    "description_tr": "Bu derste kulağa göre çalma ve işitme gelişimi üzerine çalışacağız.",
-    "description_en": "In this lesson, we will focus on ear training and playing by ear."
+    "description_tr": "Tel bükme (bending) tekniği ve ton kontrolü çalışması.",
+    "description_en": "String bending technique and pitch control practice."
   },
   {
-    "title_tr": "Ders 10: Kendi Besteni Yap",
-    "title_en": "Lesson 10: Compose Your Own Piece",
+    "title_tr": "Ders 10: Rock Solo Performansı",
+    "title_en": "Lesson 10: Rock Solo Performance",
     "url": "https://youtu.be/example10",
-    "description_tr": "Bu derste öğrendiklerinizi kullanarak kendi kısa bestenizi oluşturacaksınız.",
-    "description_en": "In this lesson, you will use what you've learned to compose your own short piece."
+    "description_tr": "Öğrenilen teknikleri kullanarak rock solo çalımı.",
+    "description_en": "Rock solo performance using all learned techniques."
   }
 ]

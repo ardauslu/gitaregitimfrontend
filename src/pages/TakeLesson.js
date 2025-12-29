@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './TakeLesson.css';
 import Subheader from '../components/Subheader';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useAuth } from "../AuthContext"; // AuthContext'ten logout fonksiyonunu alın
 import { useNavigate } from "react-router-dom";
 import config from "../config";
@@ -95,11 +96,11 @@ const TakeLesson = () => {
     }
   };
 
-  return (<div>
+  return (<div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
      <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
   
-    <div className="take-lesson-page">
+    <div className="take-lesson-page" style={{ flex: 1 }}>
      
       <div className="lesson-container lesson-white-frame">
         <h2 className="take-lesson-header">
@@ -193,6 +194,7 @@ const TakeLesson = () => {
       )}
     </div>
   </div>
+  <Footer />
   </div>
   );
 

@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import "./Etudes.css";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import Footer from "../components/Footer";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -104,10 +105,10 @@ const Etudes = () => {
 	}, [keycloakLogout]);
 
 	return (
-		<div>
+		<div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 			<Header language={language} setLanguage={setLanguage} logout={logout} />
 			<Subheader language={language} />
-			<div className="etudes-content">
+			<div className="etudes-content" style={{ flex: 1 }}>
 				<header className="etudes-header">
 					<h1>{translations[language].title}</h1>
 					<p>{translations[language].description}</p>
@@ -137,6 +138,7 @@ const Etudes = () => {
 					))}
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

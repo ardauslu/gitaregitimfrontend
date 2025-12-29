@@ -59,20 +59,6 @@ const Subheader = memo(() => {
           : []),
       ],
     },
-    {
-      title: language === "tr" ? "Cover Yarışması" : "Cover Contest",
-      options: [
-        { name: language === "tr" ? "Katıl" : "Join", path: "/join-contest" },
-        { name: language === "tr" ? "Sonuçlar" : "Results", path: "/contest-results" },
-      ],
-    },
-    {
-      title: language === "tr" ? "Ayarlar" : "Settings",
-      options: [
-        { name: language === "tr" ? "Dil Seçimi" : "Language", path: "/language" },
-        { name: language === "tr" ? "Güvenlik" : "Security", path: "/security" },
-      ],
-    },
   ], [language, isAdmin]); // Sadece language veya isAdmin değiştiğinde yeniden hesapla
 
   const handleMouseEnter = (index, event) => {
@@ -104,6 +90,15 @@ const Subheader = memo(() => {
         style={{ cursor: "pointer" }}
       >
         {language === "tr" ? "Profil" : "Profile"}
+      </a>
+
+      {/* Şifre Değiştir */}
+      <a
+        onClick={() => navigate("/security")}
+        className="sub-header-home"
+        style={{ cursor: "pointer" }}
+      >
+        {language === "tr" ? "Şifre Değiştir" : "Change Password"}
       </a>
 
       {/* Diğer Menü Öğeleri */}

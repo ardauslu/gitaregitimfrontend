@@ -5,9 +5,9 @@ import config from "../config";
 import keycloak from "../keycloak";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import "./Security.css";
 
 const Security = () => {
-  const [redirectUrl, setRedirectUrl] = useState("");
   const [error, setError] = useState("");
   const { isAuthenticated, logout: keycloakLogout } = useAuth();
   const { language, setLanguage } = useLanguage();
@@ -15,33 +15,13 @@ const Security = () => {
   const handleChangePassword = async () => {
     setError("");
     try {
-      const response = await fetch(`${config.API_BASE_URL}/api/users/change-password-redirect`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${keycloak.token}`,
-        },
-      });
-      if (!response.ok) throw new Error("Redirect alınamadı");
-      const data = await response.json();
-      if (data.url) {
-        let finalUrl = data.url;
-
-        // Şifre değiştirme linkini localhost'a çevir
-        try {
-          const urlObj = new URL(data.url);
-          // Hostu localhost:8080 yap (backend'in varsayılan portu)
-          urlObj.host = "localhost:8080";
-          finalUrl = urlObj.toString();
-        } catch (e) {
-          // URL parse edilemezse, mevcut data.url'i kullanmaya devam et
-        }
-
-        setRedirectUrl(finalUrl);
-        window.open(finalUrl, "_blank");
-      } else {
-        setError(language === "tr" ? "Yönlendirme linki alınamadı." : "Redirect link not found.");
-      }
+      // Direkt Keycloak account console URL'ini kullan
+      const keycloakAccountUrl = "http://localhost:8081/realms/guitar-education/account/";
+      
+      console.log("Keycloak Account URL:", keycloakAccountUrl);
+      window.open(keycloakAccountUrl, "_blank");
     } catch (err) {
+      console.error("Hata:", err);
       setError(language === "tr" ? "Bir hata oluştu." : "An error occurred.");
     }
   };
@@ -58,18 +38,22 @@ const Security = () => {
     <div>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-      <div className="security-page" style={{ padding: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <button onClick={handleChangePassword} style={{ padding: 16, fontSize: 18, borderRadius: 8, background: '#40db9a', color: '#fff', border: 'none', cursor: 'pointer', minWidth: 220 }}>
-          {language === "tr" ? "Şifre Değiştir" : "Change Password"}
-        </button>
-        {error && <div style={{ color: "red", marginTop: 16 }}>{error}</div>}
-        {redirectUrl && (
-          <div style={{ marginTop: 16 }}>
-            <a href={redirectUrl} target="_blank" rel="noopener noreferrer">
-              {language === "tr" ? "Şifre değiştirme sayfası için tıklayın." : "Click here for password change page."}
-            </a>
-          </div>
-        )}
+      <div className="security-page">
+        <div className="security-container">
+          <h1 className="security-title">
+            {language === "tr" ? "Hesap Güvenliği" : "Account Security"}
+          </h1>
+          <p className="security-description">
+            {language === "tr" 
+              ? "Şifrenizi değiştirmek için aşağıdaki butona tıklayın" 
+              : "Click the button below to change your password"}
+          </p>
+          <button onClick={handleChangePassword} className="security-button">
+            <i className="fas fa-key"></i>
+            {language === "tr" ? "Şifre Değiştir" : "Change Password"}
+          </button>
+          {error && <div className="security-error">{error}</div>}
+        </div>
       </div>
     </div>
   );

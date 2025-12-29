@@ -24,7 +24,7 @@
 
 .warning-text {
   flex: 1;
-  color: white;
+  color: var(--text-primary);
 }
 
 .warning-text strong {
@@ -44,7 +44,7 @@
 .warning-close {
   background: rgba(255, 255, 255, 0.2);
   border: none;
-  color: white;
+  color: var(--text-primary);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -73,53 +73,59 @@
   }
 }
 
+/* Tuner Content Wrapper */
+.tuner-content {
+  background: var(--bg-primary);
+}
+
 .tuner-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: white;
-  padding: 2rem;
-  font-family: 'Arial', sans-serif;
+  padding: 140px 20px 20px 20px;
+  background: var(--bg-primary);
+  font-family: 'Roboto', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tuner-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 40px;
 }
 
 .tuner-header h1 {
   font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin-bottom: 15px;
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 700;
 }
 
 .tuner-header p {
-  color: #9ca3af;
-  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
 }
 
 .tuner-main {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 25px;
 }
 
 .tuning-selector {
   width: 100%;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  gap: 12px;
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .input-source-selector,
@@ -127,38 +133,28 @@
 .channel-selector,
 .audio-mode-selector {
   width: 100%;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  gap: 12px;
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.audio-mode-selector {
-  background: rgba(251, 191, 36, 0.1);
-  border: 2px solid rgba(251, 191, 36, 0.3);
-}
-
-.channel-selector {
-  background: rgba(96, 165, 250, 0.1);
-  border: 2px solid rgba(96, 165, 250, 0.3);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .gain-control {
   width: 100%;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(102, 126, 234, 0.1);
+  gap: 12px;
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 2px solid rgba(102, 126, 234, 0.3);
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .gain-slider-container {
@@ -225,7 +221,7 @@
 .gain-control label {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .tuning-dropdown:disabled {
@@ -237,9 +233,9 @@
   padding: 0.8rem 1rem;
   font-size: 1rem;
   border-radius: 10px;
-  border: 2px solid rgba(102, 126, 234, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
@@ -256,8 +252,8 @@
 }
 
 .tuning-dropdown option {
-  background: #1a1a2e;
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   padding: 0.5rem;
 }
 
@@ -270,8 +266,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  color: var(--text-primary);
+  box-shadow: 0 10px 30px var(--border-color);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -296,13 +292,13 @@
 }
 
 .tuner-display {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
   width: 100%;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--card-bg);
 }
 
 .current-note {
@@ -338,11 +334,11 @@
 
 .tuner-gauge {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--card-bg);
 }
 
 .gauge-labels {
@@ -356,7 +352,7 @@
 .gauge-track {
   position: relative;
   height: 40px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   border-radius: 20px;
   margin: 1rem 0;
   overflow: visible;
@@ -396,17 +392,17 @@
 
 .strings-reference {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--card-bg);
 }
 
 .strings-reference h3 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .strings-grid {
@@ -416,7 +412,7 @@
 }
 
 .string-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   padding: 1rem;
   border-radius: 10px;
   display: flex;
@@ -427,7 +423,7 @@
 }
 
 .string-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
   transform: translateY(-2px);
 }
 
@@ -439,7 +435,7 @@
 
 .string-name {
   font-weight: bold;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .string-freq {
@@ -479,3 +475,4 @@
     font-size: 1.2rem;
   }
 }
+

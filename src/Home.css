@@ -219,7 +219,7 @@ body.dark-theme .home-video-title {
 }
 
 body.light-theme .home-video-title {
-  color: #1a202c !important;
+  color: #ffffff !important;
 }
 
 @media (max-width: 768px) {
@@ -304,11 +304,11 @@ body.light-theme .home-video-title {
 }
 
 body.dark-theme .home-video-title {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 body.light-theme .home-video-title {
-  color: #1a202c;
+  color: #ffffff !important;
 }
 
 .home-small-video-title-wrapper {
@@ -365,5 +365,9 @@ body.light-theme .home-video-title {
     padding: 8px 4px;
     height: auto;
   }
+}
+
+.home-video-title-text {
+  color: #ffffff !important;
 }
 

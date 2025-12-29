@@ -109,8 +109,8 @@ const Home = () => {
             
             {/* Metronom Video */}
             <div className="home-small-video-title-wrapper">
-              <div className="home-video-title" style={{marginBottom: '6px'}}>
-                <span>{language === "tr" ? "Metronom" : "Metronome"}</span>
+              <div className="home-video-title" style={{marginBottom: '6px', color: '#ffffff'}}>
+                <span className="home-video-title-text" style={{color: '#ffffff'}}>{language === "tr" ? "Metronom" : "Metronome"}</span>
               </div>
             </div>
             <div className="home-small-video-wrapper">
@@ -133,8 +133,8 @@ const Home = () => {
             
             {/* Lesson Video */}
             <div className="home-small-video-title-wrapper">
-              <div className="home-video-title" style={{marginBottom: '6px'}}>
-                <span>{language === "tr" ? "Lesson" : "Lesson"}</span>
+              <div className="home-video-title" style={{marginBottom: '6px', color: '#ffffff'}}>
+                <span className="home-video-title-text" style={{color: '#ffffff'}}>{language === "tr" ? "Lesson" : "Lesson"}</span>
               </div>
             </div>
             <div className="home-small-video-wrapper">
@@ -157,8 +157,8 @@ const Home = () => {
             
             {/* Tuner Video */}
             <div className="home-small-video-title-wrapper">
-              <div className="home-video-title" style={{marginBottom: '6px'}}>
-                <span>{language === "tr" ? "Tuner" : "Tuner"}</span>
+              <div className="home-video-title" style={{marginBottom: '6px', color: '#ffffff'}}>
+                <span className="home-video-title-text" style={{color: '#ffffff'}}>{language === "tr" ? "Tuner" : "Tuner"}</span>
               </div>
             </div>
             <div className="home-small-video-wrapper">

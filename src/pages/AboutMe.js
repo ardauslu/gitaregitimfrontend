@@ -36,30 +36,32 @@ const AboutMe = () => {
   const t = translations[language];
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header language={language} setLanguage={setLanguage} logout={logout} />
       <Subheader language={language} />
-      <div className="aboutme-bg-video-container">
-        <video
-          className="aboutme-bg-background-video"
-          src={require("../assets/guitaranime.mp4")}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-        <div className="aboutme-bg-content">
-          <div className="aboutme-white-frame">
-            <motion.div
-              className="about-me-page"
-              initial={{ opacity: 0, x: "100vw" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "-100vw" }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="about-me-title">{t.title}</h1>
-              <p className="about-me-text">{t.content}</p>
-            </motion.div>
+      <div className="aboutme-content" style={{ flex: 1 }}>
+        <div className="aboutme-bg-video-container">
+          <video
+            className="aboutme-bg-background-video"
+            src={require("../assets/guitaranime.mp4")}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="aboutme-bg-inner">
+            <div className="aboutme-white-frame">
+              <motion.div
+                className="about-me-page"
+                initial={{ opacity: 0, x: "100vw" }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "-100vw" }}
+                transition={{ duration: 0.5 }}
+              >
+                <h1 className="about-me-title">{t.title}</h1>
+                <p className="about-me-text">{t.content}</p>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

@@ -634,42 +634,43 @@ const Tuner = () => {
   };
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header />
       <Subheader />
       
-      {showBrowserWarning && (
-        <div className="browser-warning">
-          <div className="warning-content">
-            <span className="warning-icon">⚠️</span>
-            <div className="warning-text">
-              <strong>
-                {language === 'tr' 
-                  ? 'Tarayıcı Uyumluluk Uyarısı' 
-                  : 'Browser Compatibility Warning'}
-              </strong>
-              <p>
-                {language === 'tr'
-                  ? 'Native Instruments audio interface\'iniz Chrome ile tam uyumlu çalışmayabilir. Daha iyi performans için Microsoft Edge veya Firefox kullanmanızı öneririz.'
-                  : 'Your Native Instruments audio interface may not work properly with Chrome. For better performance, we recommend using Microsoft Edge or Firefox.'}
-              </p>
+      <div className="tuner-content" style={{ flex: 1 }}>
+        {showBrowserWarning && (
+          <div className="browser-warning">
+            <div className="warning-content">
+              <span className="warning-icon">⚠️</span>
+              <div className="warning-text">
+                <strong>
+                  {language === 'tr' 
+                    ? 'Tarayıcı Uyumluluk Uyarısı' 
+                    : 'Browser Compatibility Warning'}
+                </strong>
+                <p>
+                  {language === 'tr'
+                    ? 'Native Instruments audio interface\'iniz Chrome ile tam uyumlu çalışmayabilir. Daha iyi performans için Microsoft Edge veya Firefox kullanmanızı öneririz.'
+                    : 'Your Native Instruments audio interface may not work properly with Chrome. For better performance, we recommend using Microsoft Edge or Firefox.'}
+                </p>
+              </div>
+              <button className="warning-close" onClick={() => setShowBrowserWarning(false)}>
+                ✕
+              </button>
             </div>
-            <button className="warning-close" onClick={() => setShowBrowserWarning(false)}>
-              ✕
-            </button>
           </div>
-        </div>
-      )}
-      
-      <div className="tuner-container">
-        <div className="tuner-header">
-          <h1>{language === 'tr' ? 'Gitar Akort Cihazı' : 'Guitar Tuner'}</h1>
-          <p>{language === 'tr' 
-            ? 'Mikrofonunuzu açın ve gitar telini çalın' 
-            : 'Enable your microphone and play a guitar string'}</p>
-        </div>
+        )}
+        
+        <div className="tuner-container">
+          <div className="tuner-header">
+            <h1>{language === 'tr' ? 'Gitar Akort Cihazı' : 'Guitar Tuner'}</h1>
+            <p>{language === 'tr' 
+              ? 'Mikrofonunuzu açın ve gitar telini çalın' 
+              : 'Enable your microphone and play a guitar string'}</p>
+          </div>
 
-        <div className="tuner-main">
+          <div className="tuner-main">
           {/* Giriş Kaynağı Seçimi */}
           <div className="input-source-selector">
             <label>{language === 'tr' ? 'Ses Girişi Tipi:' : 'Audio Input Type:'}</label>
@@ -875,9 +876,10 @@ const Tuner = () => {
           </>
         )}
         </div>
+        </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

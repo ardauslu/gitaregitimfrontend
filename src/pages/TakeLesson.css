@@ -1,39 +1,43 @@
 /* Sayfa genel stili */
 .take-lesson-page {
-  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradyan arka plan */
+  background: var(--bg-primary);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 /* Ders konteyneri */
 .lesson-container {
   max-width: 600px;
   margin: 30px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1); /* Yarı saydam arka plan */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px); /* Arka plan bulanıklığı */
-  color: #fff; /* Yazı rengi beyaz */
+  padding: 30px;
+  border-radius: 24px;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
 }
 
 /* Beyaz çerçeve */
 .lesson-white-frame {
   background: #fff !important;
   color: #222 !important;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  border: 2px solid #f3f3f3;
-  padding: 28px 24px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  border: 1px solid #f0f0f0;
+  padding: 32px 28px;
 }
 
 .lesson-white-frame .take-lesson-header {
-  color: #1e3c72 !important;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-shadow: none;
 }
 
@@ -46,31 +50,34 @@
 
 .lesson-white-frame input:focus,
 .lesson-white-frame select:focus {
-  border-color: #1e3c72;
-  box-shadow: 0 0 0 2px #1e3c7222;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .lesson-white-frame .submit-btn {
-  background: #1e3c72;
+  background: var(--gradient-primary);
   color: #fff;
 }
 
 .lesson-white-frame .submit-btn:hover {
-  background: #2a5298;
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
 .lesson-white-frame .success-message {
-  color: #1e3c72;
+  color: #667eea;
 }
 
 /* Başlık */
 .take-lesson-header {
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 30px;
-  color: #ffcc00; /* Sarı başlık */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Form alanı */
@@ -85,45 +92,70 @@
 
 label {
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: 500;
+  display: block;
+  color: var(--text-secondary);
 }
 
 input, select {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
   width: 100%;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.2); /* Yarı saydam giriş alanı */
-  color: #fff;
+  background: var(--input-bg);
+  color: var(--text-primary);
   transition: all 0.3s ease;
 }
 
 input:focus, select:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
   outline: none;
 }
 
 /* Buton */
 .submit-btn {
-  padding: 12px;
-  background-color: #4CAF50;
+  padding: 14px;
+  background: var(--gradient-primary);
   color: white;
   font-size: 16px;
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
 .submit-btn:hover {
-  background-color: #45a049;
-  transform: translateY(-2px); /* Hover sırasında hafif yukarı hareket */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
 .submit-btn:active {
-  transform: translateY(0); /* Tıklama sırasında eski konuma dön */
+  transform: translateY(0);
+}
+
+.success-message {
+  text-align: center;
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  border-radius: 12px;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .lesson-container {
+    padding: 20px;
+  }
+  
+  .take-lesson-header {
+    font-size: 1.5rem;
+  }
 }

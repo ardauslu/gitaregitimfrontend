@@ -6,15 +6,30 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   // Keycloak init sadece bir kez çağrılır
   useEffect(() => {
   keycloak.init({
     onLoad: "check-sso",
-    redirectUri: "https://au.bishokudev.com/home"
+    checkLoginIframe: false,
+    pkceMethod: 'S256',
+    flow: 'standard'
   })
   .then(authenticated => {
-    setIsAuthenticated(keycloak.authenticated);
+    console.log("Keycloak authenticated:", authenticated);
+    console.log("Keycloak.authenticated:", keycloak.authenticated);
+    console.log("Keycloak token:", keycloak.token);
+    
+    if (authenticated) {
+      setIsAuthenticated(true);
+      setUser({
+        username: keycloak.tokenParsed?.preferred_username,
+        email: keycloak.tokenParsed?.email
+      });
+    } else {
+      setIsAuthenticated(false);
+    }
     setLoading(false);
   })
   .catch(error => {
@@ -34,18 +49,18 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     keycloak.login({
-      redirectUri: "https://au.bishokudev.com/home"
+      redirectUri: window.location.origin + "/home"
     });
   };
 
   const logout = () => {
     keycloak.logout({
-      redirectUri: "https://au.bishokudev.com/login"
+      redirectUri: window.location.origin + "/login"
     });
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout, user, keycloak }}>
       {children}
     </AuthContext.Provider>
   );

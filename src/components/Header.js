@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import "./Header.css";
 import logo from "../assets/logo.png";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 import keycloak from "../keycloak";
-const Header = ({ logout }) => {
+
+const Header = memo(({ logout }) => {
   const [profileImage, setProfileImage] = useState(""); // Profil resmi için state
   const [username, setUsername] = useState(""); // Kullanıcı adı için state
   const [isLoading, setIsLoading] = useState(true); // Yükleme durumu için state
   const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -73,7 +76,7 @@ const Header = ({ logout }) => {
         )}
       </div>
 
-      {/* Sağ Bölüm: Kullanıcı Adı, Dil Butonu ve Çıkış Butonu */}
+      {/* Sağ Bölüm: Kullanıcı Adı, Tema, Dil Butonu ve Çıkış Butonu */}
       <div className="header-right">
         <span className="username">{username}</span>
         <button
@@ -82,12 +85,21 @@ const Header = ({ logout }) => {
         >
           {language === "tr" ? "EN" : "TR"}
         </button>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? (language === 'tr' ? 'Açık Tema' : 'Light Theme') : (language === 'tr' ? 'Koyu Tema' : 'Dark Theme')}
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
         <button className="logout-button" onClick={logout}>
           {language === "tr" ? "Çıkış Yap" : "Logout"}
         </button>
       </div>
     </div>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;

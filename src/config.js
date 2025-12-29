@@ -1,7 +1,7 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://au.bishokudev.com";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
 
-const LOGOUT_REDIRECT_URI = "https://au.bishokudev.com/login";
-const REGISTER_REDIRECT_URI = "https://au.bishokudev.com/home";
+const LOGOUT_REDIRECT_URI = "http://localhost:3000/login";
+const REGISTER_REDIRECT_URI = "http://localhost:3000/home";
 
 const config = {
   API_BASE_URL,

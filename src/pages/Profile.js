@@ -14,8 +14,6 @@ const useUserProfile = (token, setLoading, setError) => {
   const [userData, setUserData] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [instruments, setInstruments] = useState([]);
-  const [favoriteStyles, setFavoriteStyles] = useState([]);
   const [profileImage, setProfileImage] = useState(null);
 
   const fetchProfile = useCallback(async () => {
@@ -34,8 +32,6 @@ const useUserProfile = (token, setLoading, setError) => {
       setUserData(data);
       setFirstName(data.firstName || "");
       setLastName(data.lastName || "");
-      setInstruments(data.instruments || []);
-      setFavoriteStyles(data.favoriteStyles || []);
       setProfileImage(data.profileImage || null);
     } catch (err) {
       setError(err.message);
@@ -50,10 +46,6 @@ const useUserProfile = (token, setLoading, setError) => {
     setFirstName,
     lastName,
     setLastName,
-    instruments,
-    setInstruments,
-    favoriteStyles,
-    setFavoriteStyles,
     profileImage,
     setProfileImage,
     fetchProfile,
@@ -77,36 +69,10 @@ const Profile = () => {
     setFirstName,
     lastName,
     setLastName,
-    instruments,
-    setInstruments,
-    favoriteStyles,
-    setFavoriteStyles,
     profileImage,
     setProfileImage,
     fetchProfile,
   } = useUserProfile(keycloak.token, setLoading, setError);
-
-  const styleOptions = [
-    language === "tr" ? "Rock" : "Rock",
-    language === "tr" ? "Caz" : "Jazz",
-    language === "tr" ? "Blues" : "Blues",
-    language === "tr" ? "Metal" : "Metal",
-    language === "tr" ? "Pop" : "Pop",
-    language === "tr" ? "Klasik" : "Classical",
-    language === "tr" ? "Funk" : "Funk",
-    language === "tr" ? "Reggae" : "Reggae",
-  ]; // Tarz seçenekleri
-
-  const instrumentOptions = [
-    language === "tr" ? "Gitar" : "Guitar",
-    language === "tr" ? "Bas" : "Bass",
-    language === "tr" ? "Davul" : "Drums",
-    language === "tr" ? "Klavye" : "Keyboard",
-    language === "tr" ? "Keman" : "Violin",
-    language === "tr" ? "Saksafon" : "Saxophone",
-    language === "tr" ? "Flüt" : "Flute",
-    language === "tr" ? "Vokal" : "Vocals",
-  ]; // Enstrüman seçenekleri
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -179,8 +145,6 @@ const Profile = () => {
     if (
       !firstName ||
       !lastName ||
-      instruments.length === 0 ||
-      favoriteStyles.length === 0 ||
       !profileImage
     ) {
       alert(language === "tr" ? "Lütfen tüm alanları doldurun!" : "Please fill in all fields!");
@@ -197,8 +161,6 @@ const Profile = () => {
         body: JSON.stringify({
           firstName,
           lastName,
-          instruments,
-          favoriteStyles,
           profileImage,
         }),
       });
@@ -219,23 +181,6 @@ const Profile = () => {
   const handleCancel = () => {
     fetchProfile();
     setIsEditing(false);
-  };
-
-
-  const handleInstrumentToggle = (instrument) => {
-    setInstruments((prev) =>
-      prev.includes(instrument)
-        ? prev.filter((item) => item !== instrument) // Seçiliyse kaldır
-        : [...prev, instrument] // Seçili değilse ekle
-    );
-  };
-  
-  const handleStyleToggle = (style) => {
-    setFavoriteStyles((prev) =>
-      prev.includes(style)
-        ? prev.filter((item) => item !== style) // Seçiliyse kaldır
-        : [...prev, style] // Seçili değilse ekle
-    );
   };
 
   const logout = useCallback(() => {
@@ -273,22 +218,54 @@ return (
           )}
         </div>
 
-        {/* Keycloak'tan gelen bilgiler */}
+        {/* Keycloak'tan gelen bilgiler - Modern Card Design */}
         {keycloakProfile && (
-          <div className="profile-card">
-            <h3>{language === "tr" ? "Keycloak Bilgileri" : "Keycloak Info"}</h3>
-            <p>
-              <strong>{language === "tr" ? "Kullanıcı Adı:" : "Username:"}</strong> {keycloakProfile.username}
-            </p>
-            <p>
-              <strong>{language === "tr" ? "E-posta:" : "Email:"}</strong> {keycloakProfile.email}
-            </p>
-            <p>
-              <strong>{language === "tr" ? "Ad:" : "First Name:"}</strong> {keycloakProfile.firstName}
-            </p>
-            <p>
-              <strong>{language === "tr" ? "Soyad:" : "Last Name:"}</strong> {keycloakProfile.lastName}
-            </p>
+          <div className="reservations-section">
+            <h3 className="reservations-title">
+              <i className="fas fa-user-circle"></i>
+              {language === "tr" ? "Bilgiler" : "Information"}
+            </h3>
+            <div className="info-grid">
+              <div className="info-card">
+                <div className="info-icon">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="info-content">
+                  <span className="info-label">{language === "tr" ? "Kullanıcı Adı" : "Username"}</span>
+                  <span className="info-value">{keycloakProfile.username}</span>
+                </div>
+              </div>
+              
+              <div className="info-card">
+                <div className="info-icon">
+                  <i className="fas fa-envelope"></i>
+                </div>
+                <div className="info-content">
+                  <span className="info-label">{language === "tr" ? "E-posta" : "Email"}</span>
+                  <span className="info-value">{keycloakProfile.email}</span>
+                </div>
+              </div>
+              
+              <div className="info-card">
+                <div className="info-icon">
+                  <i className="fas fa-id-card"></i>
+                </div>
+                <div className="info-content">
+                  <span className="info-label">{language === "tr" ? "Ad" : "First Name"}</span>
+                  <span className="info-value">{keycloakProfile.firstName}</span>
+                </div>
+              </div>
+              
+              <div className="info-card">
+                <div className="info-icon">
+                  <i className="fas fa-id-badge"></i>
+                </div>
+                <div className="info-content">
+                  <span className="info-label">{language === "tr" ? "Soyad" : "Last Name"}</span>
+                  <span className="info-value">{keycloakProfile.lastName}</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -310,36 +287,6 @@ return (
                 onChange={(e) => setLastName(e.target.value)}
               />
             </label>
-            <label>
-              {language === "tr" ? "Enstrümanlar:" : "Instruments:"}
-              <ul className="custom-multi-select">
-                {instrumentOptions.map((instrument, index) => (
-                  <li
-                    key={index}
-                    className={instruments.includes(instrument) ? "selected" : ""}
-                    onClick={() => handleInstrumentToggle(instrument)}
-                  >
-                    {instrument}
-                    {instruments.includes(instrument) && <span className="tick">✔</span>}
-                  </li>
-                ))}
-              </ul>
-            </label>
-            <label>
-              {language === "tr" ? "Favori Tarzlar:" : "Favorite Styles:"}
-              <ul className="custom-multi-select">
-                {styleOptions.map((style, index) => (
-                  <li
-                    key={index}
-                    className={favoriteStyles.includes(style) ? "selected" : ""}
-                    onClick={() => handleStyleToggle(style)}
-                  >
-                    {style}
-                    {favoriteStyles.includes(style) && <span className="tick">✔</span>}
-                  </li>
-                ))}
-              </ul>
-            </label>
             <div className="profile-buttons">
               <button type="submit" className="save-button">
                 {language === "tr" ? "Kaydet" : "Save"}
@@ -351,70 +298,68 @@ return (
           </form>
         ) : (
           <>
-            <div className="profile-card">
-              <h3>{language === "tr" ? "Ad ve Soyad" : "Name and Surname"}</h3>
-              <p>
-                <strong>{language === "tr" ? "Ad:" : "First Name:"}</strong> {userData?.firstName || (language === "tr" ? "Belirtilmemiş" : "Not Specified")}
-              </p>
-              <p>
-                <strong>{language === "tr" ? "Soyad:" : "Last Name:"}</strong> {userData?.lastName || (language === "tr" ? "Belirtilmemiş" : "Not Specified")}
-              </p>
-            </div>
-
-            <div className="profile-card">
-              <h3>{language === "tr" ? "Enstrümanlar" : "Instruments"}</h3>
-              <ul className="profile-list">
-                {userData?.instruments?.length > 0
-                  ? userData.instruments.map((instrument, index) => (
-                      <li key={index}>{instrument}</li>
-                    ))
-                  : <li>{language === "tr" ? "Belirtilmemiş" : "Not Specified"}</li>}
-              </ul>
-            </div>
-
-            <div className="profile-card">
-              <h3>{language === "tr" ? "Favori Tarzlar" : "Favorite Styles"}</h3>
-              <ul className="profile-list">
-                {userData?.favoriteStyles?.length > 0
-                  ? userData.favoriteStyles.map((style, index) => (
-                      <li key={index}>{style}</li>
-                    ))
-                  : <li>{language === "tr" ? "Belirtilmemiş" : "Not Specified"}</li>}
-              </ul>
-            </div>
-
-            {/* Güncel Randevular Bölümü */}
+            {/* Güncel Randevular Bölümü - Modern Card Design */}
             {reservations && reservations.length > 0 && (
-              <div className="profile-card">
-                <h3>{language === 'tr' ? 'Güncel Randevular' : 'Upcoming Reservations'}</h3>
-                <table className="reservations-table" style={{width: '100%', color: '#fff', background: 'rgba(0,0,0,0.1)', borderRadius: '8px'}}>
-                  <thead>
-                    <tr>
-                      <th>{language === 'tr' ? 'Ders Tipi' : 'Lesson Type'}</th>
-                      <th>{language === 'tr' ? 'Tarih' : 'Date'}</th>
-                      <th>{language === 'tr' ? 'Saat' : 'Time'}</th>
-                      <th>{language === 'tr' ? 'Zoom Linki' : 'Zoom Link'}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reservations.map((r) => (
-                      <tr key={r._id}>
-                        <td>{r.lessonType}</td>
-                        <td>{r.lessonDate ? new Date(r.lessonDate).toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US') : '-'}</td>
-                        <td>{r.lessonTime}</td>
-                        <td>
-                          {r.zoomLink ? (
-                            <a href={r.zoomLink.startsWith('http') ? r.zoomLink : `https://${r.zoomLink}`} target="_blank" rel="noopener noreferrer" style={{color:'#40db9a'}}>
-                              {language === 'tr' ? 'Bağlantı' : 'Link'}
-                            </a>
-                          ) : (
-                            <span style={{ color: '#aaa' }}>{language === 'tr' ? 'Yok' : 'N/A'}</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="reservations-section">
+                <h3 className="reservations-title">
+                  <i className="fas fa-calendar-alt"></i>
+                  {language === 'tr' ? 'Güncel Randevular' : 'Upcoming Reservations'}
+                </h3>
+                <div className="reservations-grid">
+                  {reservations.map((r) => (
+                    <div key={r._id} className="reservation-card">
+                      <div className="reservation-header">
+                        <div className="lesson-type-badge">
+                          <i className="fas fa-guitar"></i>
+                          <span>{r.lessonType}</span>
+                        </div>
+                        {r.zoomLink && (
+                          <a 
+                            href={r.zoomLink.startsWith('http') ? r.zoomLink : `https://${r.zoomLink}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="zoom-link-badge"
+                          >
+                            <i className="fas fa-video"></i>
+                            {language === 'tr' ? 'Derse Katıl' : 'Join Lesson'}
+                          </a>
+                        )}
+                      </div>
+                      
+                      <div className="reservation-details">
+                        <div className="reservation-detail-item">
+                          <i className="fas fa-calendar"></i>
+                          <div>
+                            <span className="detail-label">{language === 'tr' ? 'Tarih' : 'Date'}</span>
+                            <span className="detail-value">
+                              {r.lessonDate ? new Date(r.lessonDate).toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              }) : '-'}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="reservation-detail-item">
+                          <i className="fas fa-clock"></i>
+                          <div>
+                            <span className="detail-label">{language === 'tr' ? 'Saat' : 'Time'}</span>
+                            <span className="detail-value">{r.lessonTime}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {!r.zoomLink && (
+                        <div className="no-zoom-notice">
+                          <i className="fas fa-info-circle"></i>
+                          <span>{language === 'tr' ? 'Zoom linki yakında gönderilecektir' : 'Zoom link will be sent soon'}</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 

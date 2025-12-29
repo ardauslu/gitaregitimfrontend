@@ -1,33 +1,55 @@
-/* Genel Header Stili */
+/* Modern Header Tasarımı */
 .header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 200px auto 1.5fr;
   align-items: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  gap: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
-/* Sol Bölüm: Hoşgeldiniz Mesajı */
+/* Koyu tema header */
+body.dark-theme .header {
+  background: linear-gradient(135deg, #4c51bf 0%, #553c9a 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Açık tema header */
+body.light-theme .header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Sol Bölüm: Site Başlığı */
 .header-left {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
 .header-left .welcome-message {
-  font-size: 1.2rem;
-  color: #f9f9f9;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
 }
 
-/* Orta Bölüm: Profil Resmi */
+/* Orta Bölüm: Profil (merkez) */
 .header-middle {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .header-middle .profile-image {
@@ -35,73 +57,65 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-/* Sağ Bölüm: Kullanıcı Adı */
+.header-middle .profile-image:hover {
+  transform: scale(1.1);
+}
+
+/* Sağ Bölüm: Kullanıcı Adı ve Butonlar */
 .header-right {
-  flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 10px;
+  padding-right: 40px;
 }
 
 .header-right .username {
-  font-size: 1rem;
-  color: #333;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.header-right .logout-button {
-  padding: 8px 15px;
-  background-color: #2575fc;
+  font-size: 0.85rem;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.header-right .logout-button:hover {
-  background-color: #1a5bbf;
+  font-weight: 600;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .profile-image {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ddd;
-}
-.language-toggle {
-  padding: 5px 10px;
-  background-color: #2575fc;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px; /* Kullanıcı adı ile dil butonu arasına mesafe */
-  margin-right: 10px; /* Dil butonu ile çıkış butonu arasına mesafe */
-  transition: background-color 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
-.language-toggle:hover {
-  background-color: #1a5bbf;
-}
-
+/* Modern Butonlar */
+.theme-toggle,
+.language-toggle,
 .logout-button {
-  padding: 8px 15px;
-  background-color: #2575fc;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
 }
 
+.theme-toggle:hover,
+.language-toggle:hover,
 .logout-button:hover {
-  background-color: #1a5bbf;
+  background-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Yükleme Animasyonu */
@@ -123,5 +137,93 @@
   }
   100% {
     background-position: -200% 0;
+  }
+}
+
+/* Responsive Tasarım */
+@media (max-width: 1024px) {
+  .header {
+    padding: 15px 30px;
+    gap: 15px;
+  }
+
+  .header-left .welcome-message {
+    font-size: 1.3rem;
+  }
+
+  .header-middle .profile-image,
+  .profile-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .header-right .username {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .theme-toggle,
+  .language-toggle,
+  .logout-button {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr;
+    padding: 15px 20px;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .header-left,
+  .header-right {
+    justify-content: center;
+  }
+
+  .header-left .welcome-message {
+    font-size: 1.2rem;
+  }
+
+  .header-middle .profile-image,
+  .profile-image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .header-right {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-right .username {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 12px 15px;
+  }
+
+  .header-left .welcome-message {
+    font-size: 1rem;
+  }
+
+  .header-middle .profile-image,
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-width: 2px;
+  }
+
+  .theme-toggle,
+  .language-toggle,
+  .logout-button {
+    font-size: 0.75rem;
+    padding: 5px 10px;
   }
 }

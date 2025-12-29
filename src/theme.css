@@ -1,0 +1,288 @@
+/* ==================== DARK THEME (Default) ==================== */
+body.dark-theme {
+  --bg-primary: linear-gradient(135deg, #130e29 0%, #0a0a0a 50%, #1a1a1a 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.03);
+  --bg-tertiary: rgba(255, 255, 255, 0.02);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-tertiary: rgba(255, 255, 255, 0.7);
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color-hover: rgba(255, 255, 255, 0.15);
+  
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
+  
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-bg-hover: rgba(255, 255, 255, 0.06);
+  
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --input-border: rgba(255, 255, 255, 0.15);
+  
+  --header-bg: linear-gradient(90deg, #6b5091, #040b13);
+  --subheader-bg: linear-gradient(135deg, #0a0111, #160a20);
+  --header-text: #ffffff;
+  --subheader-text: #0e0c0c;
+}
+
+/* ==================== LIGHT THEME ==================== */
+body.light-theme {
+  --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.9);
+  --bg-tertiary: rgba(245, 245, 245, 0.7);
+  
+  --text-primary: #1a202c;
+  --text-secondary: #2d3748;
+  --text-tertiary: #4a5568;
+  
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-hover: rgba(0, 0, 0, 0.2);
+  
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.15);
+  
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg-hover: rgba(255, 255, 255, 1);
+  
+  --input-bg: rgba(255, 255, 255, 0.9);
+  --input-border: rgba(0, 0, 0, 0.15);
+  
+  --header-bg: linear-gradient(90deg, #c4d4f0, #c2deff);
+  --subheader-bg: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  --header-text: #1a202c;
+  --subheader-text: #000000;
+}
+
+/* ==================== GLOBAL STYLES ==================== */
+body {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Header theming */
+.header {
+  background: var(--header-bg) !important;
+  color: var(--header-text) !important;
+}
+
+.header-left .welcome-message {
+  color: #ffffff !important; /* Her iki temada beyaz - arka planda animasyon var */
+}
+
+/* Light theme - Header sol taraftaki "Gitarlar ve Teoriler" yazısı siyah */
+body.light-theme .header-left .welcome-message {
+  color: #000000 !important;
+}
+
+.header-right .username {
+  color: var(--header-text) !important;
+}
+
+.header .language-toggle,
+.header .theme-toggle,
+.header .logout-button {
+  color: var(--header-text) !important;
+}
+
+/* Light theme - header buton arka planlarını aç */
+body.light-theme .header .theme-toggle,
+body.light-theme .header .language-toggle,
+body.light-theme .header .logout-button {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .header .theme-toggle:hover,
+body.light-theme .header .language-toggle:hover,
+body.light-theme .header .logout-button:hover {
+  background-color: #e2e8f0 !important; /* daha beyaza yakın hover tonu */
+}
+
+/* Subheader theming */
+.sub-header {
+  background: var(--subheader-bg) !important;
+}
+
+.sub-header-item,
+.sub-header-home {
+  color: var(--subheader-text) !important;
+}
+
+/* Anasayfa ve Profil linkleri için tema bazlı metin rengi */
+body.dark-theme .sub-header-home {
+  color: #ffffff !important;
+}
+
+body.light-theme .sub-header-home {
+  color: #000000 !important;
+}
+
+.sub-header-dropdown {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+.sub-header-dropdown a {
+  color: var(--text-primary) !important;
+}
+
+.sub-header-dropdown a:hover {
+  background: var(--card-bg-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Cards */
+.profile-card,
+.reservation-card,
+.metronome-container,
+.tuner-container,
+.profile-container {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.profile-card:hover,
+.reservation-card:hover {
+  background: var(--card-bg-hover) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6,
+.profile-card h3,
+.reservations-title {
+  color: var(--text-primary) !important;
+}
+
+p, span, li {
+  color: var(--text-secondary) !important;
+}
+
+/* Light theme specific text overrides */
+body.light-theme .video-info h2,
+body.light-theme .video-title,
+body.light-theme .page-header h1,
+body.light-theme .beginner-header h1,
+body.light-theme .intermediate-header h1,
+body.light-theme .advanced-header h1,
+body.light-theme .admin-panel h1,
+body.light-theme .lesson-title {
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .video-info p,
+body.light-theme .video-item p {
+  color: var(--text-secondary) !important;
+}
+
+/* Dark theme - arka plan koyu olduğu için beyaz yazılar */
+body.dark-theme .video-info h2,
+body.dark-theme .video-title,
+body.dark-theme .page-header h1,
+body.dark-theme .beginner-header h1,
+body.dark-theme .intermediate-header h1,
+body.dark-theme .advanced-header h1,
+body.dark-theme .admin-panel h1,
+body.dark-theme .lesson-title {
+  color: #ffffff !important;
+}
+
+body.dark-theme .video-info p,
+body.dark-theme .video-item p {
+  color: var(--text-secondary) !important;
+}
+
+/* Inputs */
+input, textarea, select {
+  background: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-primary) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+/* Specific light theme overrides */
+body.light-theme .metronome-container,
+body.light-theme .tuner-container {
+  backdrop-filter: blur(10px);
+}
+
+body.light-theme .bpm-display,
+body.light-theme .tuning-display {
+  background: var(--gradient-primary) !important;
+}
+
+/* Metronome text colors in light theme */
+body.light-theme .metronome-container h1,
+body.light-theme .metronome-container h2,
+body.light-theme .metronome-container h3,
+body.light-theme .metronome-container label,
+body.light-theme .metronome-container span,
+body.light-theme .metronome-container p {
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .tuner-container h1,
+body.light-theme .tuner-container h2,
+body.light-theme .tuner-container h3,
+body.light-theme .tuner-container label,
+body.light-theme .tuner-container span,
+body.light-theme .tuner-container p {
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .detail-value {
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .reservation-detail-item {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme .info-value {
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .info-label {
+  color: var(--text-secondary) !important;
+}
+
+/* Table theming */
+body.light-theme .reservations-table td {
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: var(--text-primary) !important;
+}
+
+body.light-theme .reservations-table tr:hover td {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme .reservations-table th {
+  color: #ffffff !important;
+}
+
+/* Animation */
+body.dark-theme,
+body.light-theme {
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

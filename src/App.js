@@ -15,9 +15,11 @@ import Profile from "./pages/Profile";
 import TakeLesson from "./pages/TakeLesson";
 import AdminPanel from "./pages/AdminPanel";
 import Metronome from "./components/Metronome";
+import Tuner from "./components/Tuner";
 import AboutMe from "./pages/AboutMe";
 import SpeedAnalysis from "./pages/SpeedAnalysis";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import keycloak from "./keycloak";
 import Security from "./pages/Security";
 
@@ -46,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/take-lesson" element={isAuthenticated ? <TakeLesson /> : <Navigate to="/login" />} />
         <Route path="/admin-panel" element={isAuthenticated ? <AdminPanel /> : <Navigate to="/login" />} />
         <Route path="/metronome" element={isAuthenticated ? <Metronome /> : <Navigate to="/login" />} />
+        <Route path="/tune" element={isAuthenticated ? <Tuner /> : <Navigate to="/login" />} />
         <Route path="/about-me" element={isAuthenticated ? <AboutMe /> : <Navigate to="/login" />} />
         <Route path="/speed-analysis" element={isAuthenticated ? <SpeedAnalysis /> : <Navigate to="/login" />} />
         <Route path="/security" element={isAuthenticated ? <Security /> : <Navigate to="/login" />} />
@@ -57,13 +60,15 @@ const AppRoutes = () => {
 const App = () => {
 
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <Router>
-          <AppRoutes />
-        </Router>
-      </AuthProvider>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 

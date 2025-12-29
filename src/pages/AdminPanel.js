@@ -111,11 +111,15 @@ const AdminPanel = () => {
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Zoom toplantısı oluşturulamadı");
+        console.error('Zoom API hatası:', errorData);
+        const errorMessage = errorData.message || errorData.error || "Zoom toplantısı oluşturulamadı";
+        throw new Error(errorMessage);
       }
       const data = await response.json();
+      console.log('Zoom meeting yanıtı:', data);
       return data; // Zoom toplantısı bilgileri
     } catch (err) {
+      console.error('Zoom meeting oluşturma hatası:', err);
       throw err;
     }
   };

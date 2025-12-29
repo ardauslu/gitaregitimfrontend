@@ -24,8 +24,20 @@ const Security = () => {
       if (!response.ok) throw new Error("Redirect alınamadı");
       const data = await response.json();
       if (data.url) {
-        setRedirectUrl(data.url);
-        window.open(data.url, "_blank");
+        let finalUrl = data.url;
+
+        // Şifre değiştirme linkini localhost'a çevir
+        try {
+          const urlObj = new URL(data.url);
+          // Hostu localhost:8080 yap (backend'in varsayılan portu)
+          urlObj.host = "localhost:8080";
+          finalUrl = urlObj.toString();
+        } catch (e) {
+          // URL parse edilemezse, mevcut data.url'i kullanmaya devam et
+        }
+
+        setRedirectUrl(finalUrl);
+        window.open(finalUrl, "_blank");
       } else {
         setError(language === "tr" ? "Yönlendirme linki alınamadı." : "Redirect link not found.");
       }

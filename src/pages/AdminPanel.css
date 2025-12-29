@@ -1,131 +1,150 @@
 /* Genel Admin Paneli Stili */
 .admin-panel {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 40px auto;
-    padding: 20px;
-    border-radius: 12px;
-    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb); /* İlk gradyan renkleri */
-    background-size: 300% 300%; /* Animasyon için genişletilmiş arka plan */
-    animation: gradientAnimation 6s ease infinite; /* Gradyan animasyonu */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    border-radius: 24px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
     font-family: 'Roboto', sans-serif;
-    overflow-x: auto; /* Yatay kaydırma çubuğu eklenir */
+    overflow-x: auto;
   }
   
   /* Başlık Stili */
   .admin-panel h1 {
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 35px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
   }
   
   /* Tablo Stili */
   .reservations-table {
     width: 100%;
     border-collapse: collapse;
-    border-radius: 10px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-secondary);
   }
   
   .reservations-table th,
   .reservations-table td {
-    padding: 15px;
+    padding: 16px;
     text-align: center;
     font-size: 14px;
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
   }
   
   .reservations-table th {
-    background-color: #4CAF50;
+    background: var(--gradient-primary);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
   }
   
-  .reservations-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .reservations-table tr:nth-child(odd) {
-    background-color: #ffffff;
+  .reservations-table tr {
+    background: var(--card-bg);
+    transition: all 0.3s ease;
   }
   
   .reservations-table tr:hover {
-    background-color: #4CAF50;
-    color: white;
+    background: var(--card-bg-hover);
     transform: scale(1.01);
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .reservations-table td {
+    color: var(--text-primary);
   }
   
   /* Link Stili */
   .reservations-table a {
-    color: #4285f4;
+    color: #667eea;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     transition: color 0.3s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
   }
   
   .reservations-table a:hover {
-    color: #357ae8;
-    text-decoration: underline;
-  }
-  
-  /* Gradyan Animasyonu */
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
   }
 
   .admin-white-frame {
     background: #fff !important;
     color: #222 !important;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    border: 2px solid #f3f3f3;
-    padding: 28px 24px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    border: 1px solid #f0f0f0;
+    padding: 32px 28px;
     margin-top: 40px;
   }
   
   .admin-white-frame h1 {
-    color: #1e3c72 !important;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: none;
   }
   
+  .admin-white-frame .reservations-table {
+    background: #f9f9f9;
+  }
+  
   .admin-white-frame .reservations-table th {
-    background-color: #1e3c72;
+    background: var(--gradient-primary);
     color: #fff;
   }
   
-  .admin-white-frame .reservations-table tr:nth-child(even) {
-    background-color: #f7f7f7;
-  }
-  
-  .admin-white-frame .reservations-table tr:nth-child(odd) {
-    background-color: #fff;
+  .admin-white-frame .reservations-table tr {
+    background: #fff;
   }
   
   .admin-white-frame .reservations-table tr:hover {
-    background-color: #2a5298;
-    color: #fff;
+    background: #f0f0f0;
+    color: #222;
+  }
+  
+  .admin-white-frame .reservations-table td {
+    color: #333;
   }
   
   .admin-white-frame .reservations-table a {
-    color: #4285f4;
+    color: #667eea;
   }
   
   .admin-white-frame .reservations-table a:hover {
-    color: #1e3c72;
+    color: #764ba2;
+    background: rgba(102, 126, 234, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .admin-panel {
+      padding: 20px 15px;
+      margin: 20px 10px;
+    }
+    
+    .admin-panel h1 {
+      font-size: 1.8rem;
+    }
+    
+    .reservations-table th,
+    .reservations-table td {
+      padding: 12px 8px;
+      font-size: 12px;
+    }
   }

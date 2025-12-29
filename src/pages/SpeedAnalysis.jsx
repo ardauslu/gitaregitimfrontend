@@ -167,7 +167,7 @@ const SpeedAnalysis = () => {
     try {
       const token = keycloak.token;
       const response = await axios.post(
-        'https://au.bishokudev.com/analyze/youtube',
+        `${config.API_BASE_URL}/analyze/youtube`,
         {
           youtube_url: youtubeUrl
         },

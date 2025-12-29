@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect, useState, memo, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Subheader.css";
-import { useEffect, useState } from "react";
 import config from "../config";
 import { useLanguage } from "../contexts/LanguageContext";
+import { useTheme } from "../contexts/ThemeContext";
 import keycloak from "../keycloak";
-const Subheader = () => {
+
+const Subheader = memo(() => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false); // Admin kontrolü için state
   const { language, setLanguage } = useLanguage();
+  const { theme } = useTheme();
+  const [dropdownPositions, setDropdownPositions] = useState({});
+  const itemRefs = useRef([]);
  
   useEffect(() => {
     // Keycloak rolünden admin kontrolü
@@ -22,8 +26,8 @@ const Subheader = () => {
     setLanguage((prev) => (prev === "tr" ? "en" : "tr"));
   };
 
-  // Menü öğeleri
-  const menuItems = [
+  // Menü öğeleri - useMemo ile optimize et
+  const menuItems = useMemo(() => [
     {
       title: language === "tr" ? "Elektro Gitar Dersleri" : "Electric Guitar Lessons",
       options: [
@@ -31,7 +35,6 @@ const Subheader = () => {
         { name: language === "tr" ? "Keşif Yolu" : "The Path of Discovery", path: "/intermediate" },
         { name: language === "tr" ? "Ustalık Zirvesi" : "The Summit of Mastery", path: "/advanced" },
         { name: language === "tr" ? "Teknik Bahçesi" : "The Technique Garden", path: "/etudes" },
-        { name: language === "tr" ? "Sizin Dersleriniz" : "Your Lessons", path: "/your-lessons" },
       ],
     },
     {
@@ -45,24 +48,15 @@ const Subheader = () => {
       title: language === "tr" ? "Riff Generator" : "Riff Generator",
       options: [
         { name: language === "tr" ? "Riff Oluştur" : "Generate Riff", path: "/riff-generator" },
-        { name: language === "tr" ? "Riff Kaydet" : "Save Riff", path: "/save-riff" },
       ],
     },
     {
       title: language === "tr" ? "Özel Ders" : "Private Lesson",
       options: [
-        { name: language === "tr" ? "Ders Konusu Yarat" : "Create Lesson Subject", path: "/lesson-subject" },
         { name: language === "tr" ? "Ders Al" : "Take Lesson", path: "/take-lesson" },
         ...(isAdmin
           ? [{ name: language === "tr" ? "Admin Paneli" : "Admin Panel", path: "/admin-panel" }]
-          : []), // Eğer admin ise "Admin Paneli" seçeneğini ekle
-      ],
-    },
-    {
-      title: language === "tr" ? "Çalım Analizleri" : "Playing Analysis",
-      options: [
-        { name: language === "tr" ? "Hız Analizi" : "Speed Analysis", path: "/speed-analysis" },
-        { name: language === "tr" ? "Doğruluk Analizi" : "Accuracy Analysis", path: "/accuracy-analysis" },
+          : []),
       ],
     },
     {
@@ -73,28 +67,24 @@ const Subheader = () => {
       ],
     },
     {
-      title: language === "tr" ? "Gitarist DNA Testi" : "Guitarist DNA Test",
-      options: [
-        { name: language === "tr" ? "Test Başlat" : "Start Test", path: "/start-dna-test" },
-        { name: language === "tr" ? "Sonuçlar" : "Results", path: "/dna-test-results" },
-      ],
-    },
-    {
-      title: language === "tr" ? "Gitar Haritası" : "Guitar Map",
-      options: [
-        { name: language === "tr" ? "Haritayı Gör" : "View Map", path: "/view-map" },
-        { name: language === "tr" ? "Haritayı Düzenle" : "Edit Map", path: "/edit-map" },
-      ],
-    },
-    {
       title: language === "tr" ? "Ayarlar" : "Settings",
       options: [
-        { name: language === "tr" ? "Profil" : "Profile", path: "/profile" },
         { name: language === "tr" ? "Dil Seçimi" : "Language", path: "/language" },
         { name: language === "tr" ? "Güvenlik" : "Security", path: "/security" },
       ],
     },
-  ];
+  ], [language, isAdmin]); // Sadece language veya isAdmin değiştiğinde yeniden hesapla
+
+  const handleMouseEnter = (index, event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setDropdownPositions(prev => ({
+      ...prev,
+      [index]: {
+        top: rect.bottom + 4,
+        left: rect.left
+      }
+    }));
+  };
 
   return (
     <div className="sub-header">
@@ -107,11 +97,30 @@ const Subheader = () => {
         {language === "tr" ? "Anasayfa" : "Home"}
       </a>
 
+      {/* Profil Bağlantısı */}
+      <a
+        onClick={() => navigate("/profile")}
+        className="sub-header-home"
+        style={{ cursor: "pointer" }}
+      >
+        {language === "tr" ? "Profil" : "Profile"}
+      </a>
+
       {/* Diğer Menü Öğeleri */}
       {menuItems.map((menu, index) => (
-        <div className="sub-header-item" key={index}>
+        <div 
+          className="sub-header-item" 
+          key={index}
+          onMouseEnter={(e) => handleMouseEnter(index, e)}
+        >
           <span>{menu.title}</span>
-          <div className="sub-header-dropdown">
+          <div 
+            className="sub-header-dropdown"
+            style={dropdownPositions[index] ? {
+              top: `${dropdownPositions[index].top}px`,
+              left: `${dropdownPositions[index].left}px`
+            } : {}}
+          >
             {menu.options.map((option, subIndex) => (
               <a
                 key={subIndex}
@@ -126,5 +135,7 @@ const Subheader = () => {
       ))}
     </div>
   );
-};
+});
+
+Subheader.displayName = 'Subheader';
 export default Subheader;

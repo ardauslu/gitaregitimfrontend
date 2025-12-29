@@ -67,15 +67,29 @@ const TakeLesson = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Rezervasyon kaydedilirken hata oluştu.');
+        console.error('Rezervasyon hatası:', errorData);
+        const errorMessage = errorData.message || errorData.error || 'Rezervasyon kaydedilirken hata oluştu.';
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
-      setZoomLink(data.reservation.zoomLink); // Zoom toplantı linkini kaydet
+      console.log('Rezervasyon yanıtı:', data);
+      
+      if (data.reservation && data.reservation.zoomLink) {
+        setZoomLink(data.reservation.zoomLink);
+      } else if (data.zoomLink) {
+        setZoomLink(data.zoomLink);
+      } else {
+        console.warn('Zoom linki oluşturulamadı, rezervasyon kaydedildi');
+        setZoomLink('Zoom linki yakında gönderilecektir');
+      }
       setReservationDone(true);
     } catch (error) {
-      console.error('Hata:', error);
-      alert('Rezervasyon kaydedilemedi. Lütfen tekrar deneyin.');
+      console.error('Rezervasyon hatası:', error);
+      const errorMessage = language === 'tr' 
+        ? `Rezervasyon hatası: ${error.message || 'Lütfen tekrar deneyin.'}` 
+        : `Reservation error: ${error.message || 'Please try again.'}`;
+      alert(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

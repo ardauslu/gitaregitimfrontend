@@ -1,8 +1,9 @@
-import Keycloak from "keycloak-js";
+import Keycloak from 'keycloak-js';
 
 const keycloak = new Keycloak({
-  url: "https://keycloak.bishokudev.com/",
-  realm: "guitar-education",
-  clientId: "gitar-backend",
+  url: 'http://localhost:8081',
+  realm: 'guitar-education',
+  clientId: 'guitar-education-client'
 });
+
 export default keycloak;
